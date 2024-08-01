@@ -38,8 +38,15 @@
                   });
                 },
                 onApprove: function(data, actions) {
-                  return actions.order.capture();
+                  return actions.order.capture().then(function(details) {
+                    // Successful capture! For dev/test, you can console.log order details.
+                    console.log(details);
+                    // ...
+                  });
                 },
+                onError: function(err) {
+                  console.log(err);
+                }
               }).render('#paypal-button-container');
             </script>
         </section>
@@ -47,13 +54,12 @@
             <h2>Grip Pack 12</h2>
             <p>A pack of 12 high-quality grips.</p>
             <p>Price: $25.00 AUD</p>
-            <div id="paypal-container-EBBF5LYT4QDNU"></div>
-            <script src="https://www.paypal.com/sdk/js?client-id=BAAx6_qqvKdowUbpLu9YqPtMKQB9pgo7U6HjLe4Q2a14wt4A2XRr1kc5h88Qf97NwLFWSt-vZJAybarYBc&components=hosted-buttons&disable-funding=venmo&currency=AUD"></script>
-            <script>
-              paypal.HostedButtons({
-                hostedButtonId: "EBBF5LYT4QDNU",
-              }).render("#paypal-container-EBBF5LYT4QDNU")
-            </script>
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="YOUR_HOSTED_BUTTON_ID_12PK">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buy_now_SM.gif" alt="PayPal - The safer, easier way to pay online">
+                <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
         </section>
     </main>
     <footer>
