@@ -15,22 +15,93 @@ body {
     min-height: 100vh;
 }
 
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 /* Header */
 header {
     background-color: #4CAF50;
     color: white;
-    padding: 20px;
-    text-align: center;
+    padding: 20px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-/* Main Content */
-main {
-    flex: 1;
+header .container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+header h1 {
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+}
+
+header h1 i {
+    margin-right: 10px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Section */
+#hero {
+    background: url('images/hero-bg.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    margin-bottom: 40px;
+}
+
+#hero .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#hero h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+#hero .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#hero .btn:hover {
+    background-color: #45a049;
 }
 
 /* Product Section */
@@ -39,8 +110,15 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+#products h2 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2em;
+    color: #333;
 }
 
 /* Product Card */
@@ -66,7 +144,7 @@ main {
     margin-bottom: 15px;
 }
 
-.product-card h2 {
+.product-card h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
 }
@@ -80,16 +158,32 @@ main {
     margin-bottom: 20px;
 }
 
-/* PayPal Button Container */
-#paypal-container-V39JDHCBPQZDY,
-#paypal-container-EBBF5LYT4QDNU {
-    margin-top: 10px;
-}
-
 /* Footer */
 footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+footer .social-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+footer .social-links li {
+    display: inline;
+}
+
+footer .social-links li a {
+    color: white;
+    font-size: 1.2em;
+}
+
+footer .social-links li a:hover {
+    color: #4CAF50;
 }
