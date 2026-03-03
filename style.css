@@ -177,6 +177,12 @@ a {
   text-decoration: none;
 }
 
+.logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
 .logo-mark {
   display: flex;
   align-items: center;
@@ -755,7 +761,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 5rem;
+}
+
+.about-visual-img {
+  width: 55%;
+  height: auto;
 }
 
 .about-copy {
