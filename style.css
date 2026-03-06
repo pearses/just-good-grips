@@ -308,6 +308,9 @@ a {
 .hero {
   position: relative;
   background: var(--black);
+  background-image: url('images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center 25%;
   color: var(--white);
   padding: 120px 24px 100px;
   overflow: hidden;
@@ -321,8 +324,8 @@ a {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,230,23,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 20% 80%, rgba(200,230,23,0.05) 0%, transparent 60%);
+    linear-gradient(rgba(0,0,0,0.68), rgba(0,0,0,0.58)),
+    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,230,23,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -703,7 +706,11 @@ a {
    ============================================== */
 .stores-section {
   padding: 80px 0;
-  background: var(--grey-50);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.90), rgba(255,255,255,0.90)),
+    url('images/grip-single.jpg');
+  background-size: cover;
+  background-position: center;
   border-top: 1px solid var(--grey-100);
   border-bottom: 1px solid var(--grey-100);
 }
@@ -878,11 +885,15 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
+
 .about-visual-img {
-  width: 55%;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .about-copy {
@@ -892,6 +903,7 @@ a {
 .about-copy .section-title {
   margin-bottom: 20px;
 }
+
 
 .about-copy p {
   font-size: 1rem;
@@ -918,6 +930,11 @@ a {
 
 .footer-logo .logo-text {
   color: var(--white);
+}
+
+.footer-logo-img {
+  height: 48px;
+  width: auto;
 }
 
 .footer-tagline {
