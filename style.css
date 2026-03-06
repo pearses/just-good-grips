@@ -944,6 +944,32 @@ a {
   margin-top: 12px;
 }
 
+.footer-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  transition: color var(--transition);
+}
+
+.social-link:hover {
+  color: var(--white);
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .footer-col-title {
   font-size: 0.75rem;
   font-weight: 700;
