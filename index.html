@@ -23,6 +23,7 @@
         <a href="#products" class="nav-link">Shop</a>
         <a href="#features" class="nav-link">Why JGG</a>
         <a href="#about" class="nav-link">About</a>
+        <a href="#stores" class="nav-link">Stores</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
@@ -39,6 +40,7 @@
       <a href="#products" class="mobile-nav-link">Shop</a>
       <a href="#features" class="mobile-nav-link">Why JGG</a>
       <a href="#about" class="mobile-nav-link">About</a>
+      <a href="#stores" class="mobile-nav-link">Stores</a>
       <a href="#contact" class="mobile-nav-link">Contact</a>
     </div>
   </header>
@@ -81,63 +83,18 @@
             <h2 class="section-title">Shop Grips</h2>
             <p class="section-sub">All prices in AUD. Secure checkout via Stripe.</p>
           </div>
-          <div class="product-count">2 products</div>
+          <div class="product-count">4 products · 1 available now</div>
         </div>
 
         <div class="product-grid">
 
-          <!-- ─── Product: 3 Pack ─── -->
-          <article class="product-card">
-            <div class="product-image-wrap">
-              <div class="product-image-inner">
-                <img
-                  src="images/grip-pack-3.jpg"
-                  alt="Just Good Grips – 3 Pack"
-                  class="product-image"
-                  loading="lazy"
-                  onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
-                >
-                <div class="product-image-placeholder" aria-hidden="true">
-                  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="120" height="80" fill="#F0F0F0"/>
-                    <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
-                    <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
-                  </svg>
-                </div>
-              </div>
-              <span class="product-badge">Starter Pack</span>
-            </div>
-            <div class="product-body">
-              <h3 class="product-name">Overgrip 3 Pack</h3>
-              <p class="product-desc">
-                Perfect for trialling or keeping a spare set on hand.
-                Tacky feel, moisture-absorbing, long-lasting.
-              </p>
-              <div class="product-footer">
-                <div class="product-pricing">
-                  <span class="product-price">$9.99</span>
-                  <span class="product-currency">AUD</span>
-                </div>
-                <!-- Replace YOUR_STRIPE_3_PACK_LINK with your actual Stripe Payment Link -->
-                <a
-                  href="YOUR_STRIPE_3_PACK_LINK"
-                  class="btn btn-buy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Buy Now
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <!-- ─── Product: 12 Pack ─── -->
+          <!-- ─── 12 Pack – White (Available) ─── -->
           <article class="product-card product-card--featured">
             <div class="product-image-wrap">
               <div class="product-image-inner">
                 <img
                   src="images/grip-pack-12.jpg"
-                  alt="Just Good Grips – 12 Pack"
+                  alt="Just Good Grips – 12 Pack White"
                   class="product-image"
                   loading="lazy"
                   onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
@@ -153,10 +110,14 @@
               <span class="product-badge product-badge--featured">Best Value</span>
             </div>
             <div class="product-body">
+              <div class="product-colour-row">
+                <span class="colour-dot colour-dot--white"></span>
+                <span class="product-colour-label">White</span>
+              </div>
               <h3 class="product-name">Overgrip 12 Pack</h3>
               <p class="product-desc">
                 The serious player's choice. Stock up and never be caught short.
-                Better value per grip than the 3 pack.
+                Better value per grip than buying individually.
               </p>
               <div class="product-footer">
                 <div class="product-pricing">
@@ -164,7 +125,6 @@
                   <span class="product-currency">AUD</span>
                   <span class="product-unit">($2.08 / grip)</span>
                 </div>
-                <!-- Replace YOUR_STRIPE_12_PACK_LINK with your actual Stripe Payment Link -->
                 <a
                   href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01"
                   class="btn btn-buy btn-buy--featured"
@@ -173,6 +133,127 @@
                 >
                   Buy Now
                 </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 12 Pack – Light Blue (Coming Soon) ─── -->
+          <article class="product-card product-card--coming-soon">
+            <div class="product-image-wrap">
+              <div class="product-image-inner">
+                <img
+                  src="images/grip-pack-12-blue.jpg"
+                  alt="Just Good Grips – 12 Pack Light Blue"
+                  class="product-image"
+                  loading="lazy"
+                  onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
+                >
+                <div class="product-image-placeholder" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="120" height="80" fill="#F0F0F0"/>
+                    <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
+                    <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
+                  </svg>
+                </div>
+              </div>
+              <span class="product-badge product-badge--coming-soon">Coming Soon</span>
+            </div>
+            <div class="product-body">
+              <div class="product-colour-row">
+                <span class="colour-dot colour-dot--blue"></span>
+                <span class="product-colour-label">Light Blue</span>
+              </div>
+              <h3 class="product-name">Overgrip 12 Pack</h3>
+              <p class="product-desc">
+                The same great grip in a fresh light blue colourway.
+                Dropping soon — stay tuned.
+              </p>
+              <div class="product-footer">
+                <div class="product-pricing">
+                  <span class="product-price">$25.00</span>
+                  <span class="product-currency">AUD</span>
+                  <span class="product-unit">($2.08 / grip)</span>
+                </div>
+                <button class="btn btn-coming-soon" disabled>Coming Soon</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 12 Pack – Light Pink (Coming Soon) ─── -->
+          <article class="product-card product-card--coming-soon">
+            <div class="product-image-wrap">
+              <div class="product-image-inner">
+                <img
+                  src="images/grip-pack-12-pink.jpg"
+                  alt="Just Good Grips – 12 Pack Light Pink"
+                  class="product-image"
+                  loading="lazy"
+                  onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
+                >
+                <div class="product-image-placeholder" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="120" height="80" fill="#F0F0F0"/>
+                    <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
+                    <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
+                  </svg>
+                </div>
+              </div>
+              <span class="product-badge product-badge--coming-soon">Coming Soon</span>
+            </div>
+            <div class="product-body">
+              <div class="product-colour-row">
+                <span class="colour-dot colour-dot--pink"></span>
+                <span class="product-colour-label">Light Pink</span>
+              </div>
+              <h3 class="product-name">Overgrip 12 Pack</h3>
+              <p class="product-desc">
+                A soft pink colourway for those who like a splash of colour on court.
+                Dropping soon — stay tuned.
+              </p>
+              <div class="product-footer">
+                <div class="product-pricing">
+                  <span class="product-price">$25.00</span>
+                  <span class="product-currency">AUD</span>
+                  <span class="product-unit">($2.08 / grip)</span>
+                </div>
+                <button class="btn btn-coming-soon" disabled>Coming Soon</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- ─── 60 Pack (Coming Soon) ─── -->
+          <article class="product-card product-card--coming-soon">
+            <div class="product-image-wrap">
+              <div class="product-image-inner">
+                <img
+                  src="images/grip-pack-60.jpg"
+                  alt="Just Good Grips – 60 Pack"
+                  class="product-image"
+                  loading="lazy"
+                  onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
+                >
+                <div class="product-image-placeholder" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="120" height="80" fill="#F0F0F0"/>
+                    <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
+                    <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
+                  </svg>
+                </div>
+              </div>
+              <span class="product-badge product-badge--coming-soon">Coming Soon</span>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">Overgrip 60 Pack</h3>
+              <p class="product-desc">
+                For clubs, coaches and high-volume players. The ultimate bulk option —
+                enough grips to last an entire season.
+              </p>
+              <div class="product-footer">
+                <div class="product-pricing">
+                  <span class="product-price">TBA</span>
+                  <span class="product-currency">AUD</span>
+                </div>
+                <button class="btn btn-coming-soon" disabled>Coming Soon</button>
               </div>
             </div>
           </article>
@@ -285,6 +366,45 @@
       </div>
     </section>
 
+    <!-- ===================== STORE LOCATIONS ===================== -->
+    <section class="stores-section" id="stores">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2 class="section-title">Find Us In Store</h2>
+          <p class="section-sub">Pick up Just Good Grips at a stockist near you.</p>
+        </div>
+        <div class="stores-layout">
+          <div class="stores-list">
+            <!-- Replace with your actual stockist details -->
+            <div class="store-card">
+              <p class="store-name">Store Name</p>
+              <p class="store-address">123 Example St, Sydney NSW 2000</p>
+            </div>
+            <div class="store-card">
+              <p class="store-name">Store Name</p>
+              <p class="store-address">456 Example Ave, Melbourne VIC 3000</p>
+            </div>
+            <div class="store-card">
+              <p class="store-name">Store Name</p>
+              <p class="store-address">789 Example Rd, Brisbane QLD 4000</p>
+            </div>
+          </div>
+          <div class="stores-map">
+            <!-- Replace the src value with your Google Maps embed URL.
+                 To get one: go to maps.google.com, search for a location or address,
+                 click Share > Embed a map, then copy the src value from the iframe snippet. -->
+            <iframe
+              src="YOUR_GOOGLE_MAPS_EMBED_URL"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Just Good Grips store locations"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ===================== FOOTER ===================== -->
@@ -299,8 +419,10 @@
 
       <div class="footer-col">
         <h5 class="footer-col-title">Shop</h5>
-        <a href="#products" class="footer-link">Overgrip 3 Pack</a>
-        <a href="#products" class="footer-link">Overgrip 12 Pack</a>
+        <a href="#products" class="footer-link">Overgrip 12 Pack – White</a>
+        <a href="#products" class="footer-link">Overgrip 12 Pack – Light Blue</a>
+        <a href="#products" class="footer-link">Overgrip 12 Pack – Light Pink</a>
+        <a href="#products" class="footer-link">Overgrip 60 Pack</a>
       </div>
 
       <div class="footer-col">
