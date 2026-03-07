@@ -68,17 +68,29 @@
     function activateThumb(btn) {
       const src = btn.dataset.src;
       const alt = btn.dataset.alt;
-      if (src) {
-        mainImg.src    = src;
-        mainImg.alt    = alt;
-        mainImg.hidden = false;
-        mainPlaceholder.hidden = true;
-      } else {
-        mainImg.hidden = true;
-        mainPlaceholder.hidden = false;
-      }
       thumbBtns.forEach(t => t.classList.remove('is-active'));
       btn.classList.add('is-active');
+
+      if (!src) {
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+          mainImg.hidden = true;
+          mainPlaceholder.hidden = false;
+        }, 220);
+        return;
+      }
+
+      mainPlaceholder.hidden = true;
+      mainImg.hidden = false;
+      mainImg.style.opacity = '0';
+
+      const preload = new Image();
+      preload.onload = preload.onerror = () => {
+        mainImg.src = src;
+        mainImg.alt = alt;
+        mainImg.style.opacity = '1';
+      };
+      preload.src = src;
     }
 
     openBtn.addEventListener('click', openModal);
