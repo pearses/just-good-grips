@@ -39,6 +39,62 @@
     });
   });
 
+  // ── PRODUCT MODAL ─────────────────────────────────────────────────────────
+  const modal          = document.getElementById('productModal');
+  const modalBackdrop  = document.getElementById('modalBackdrop');
+  const modalClose     = document.getElementById('modalClose');
+  const openBtn        = document.getElementById('openProductModal');
+  const mainImg        = document.getElementById('modalMainImg');
+  const mainPlaceholder = document.getElementById('modalMainPlaceholder');
+  const thumbsWrap     = document.getElementById('modalThumbs');
+
+  const openImgBtn = document.getElementById('openProductModalImg');
+
+  if (modal && openBtn) {
+    const thumbBtns = Array.from(thumbsWrap.querySelectorAll('.modal-thumb'));
+
+    function openModal() {
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      openBtn.focus();
+    }
+
+    function activateThumb(btn) {
+      const src = btn.dataset.src;
+      const alt = btn.dataset.alt;
+      if (src) {
+        mainImg.src    = src;
+        mainImg.alt    = alt;
+        mainImg.hidden = false;
+        mainPlaceholder.hidden = true;
+      } else {
+        mainImg.hidden = true;
+        mainPlaceholder.hidden = false;
+      }
+      thumbBtns.forEach(t => t.classList.remove('is-active'));
+      btn.classList.add('is-active');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    if (openImgBtn) openImgBtn.addEventListener('click', openModal);
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+    thumbBtns.forEach(btn => btn.addEventListener('click', () => activateThumb(btn)));
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+
+    // initialise first thumb as active
+    if (thumbBtns.length) activateThumb(thumbBtns[0]);
+  }
+
   // ── REVIEW CAROUSEL ───────────────────────────────────────────────────────
   const track    = document.getElementById('reviewTrack');
   const dotsWrap = document.getElementById('reviewDots');

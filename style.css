@@ -1136,6 +1136,293 @@ a {
   color: rgba(255,255,255,0.7);
 }
 
+/* ── Product image as modal trigger ── */
+.product-image-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.product-image-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background var(--transition);
+  pointer-events: none;
+}
+
+.product-image-btn:hover::after {
+  background: rgba(0,0,0,0.12);
+}
+
+/* ── View Details trigger ── */
+.view-details-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--black);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-bottom: 16px;
+  text-align: left;
+  transition: color var(--transition);
+}
+
+.view-details-btn:hover {
+  color: var(--grey-600);
+}
+
+/* ==============================================
+   PRODUCT MODAL
+   ============================================== */
+.product-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.product-modal[hidden] {
+  display: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal-panel {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 940px;
+  max-height: 92vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  background: rgba(0,0,0,0.07);
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.modal-close:hover { background: rgba(0,0,0,0.14); }
+.modal-close svg   { width: 15px; height: 15px; }
+
+/* ── Gallery pane ── */
+.modal-gallery {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--grey-50);
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  min-height: 460px;
+}
+
+.modal-main-img-wrap {
+  flex: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--grey-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.modal-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.18s ease;
+}
+
+.modal-main-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--grey-400);
+  padding: 40px;
+  text-align: center;
+}
+
+.modal-main-placeholder svg {
+  width: 40px;
+  height: 40px;
+}
+
+.modal-main-placeholder p {
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.modal-thumbs {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-thumb {
+  flex: 1;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--grey-100);
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color var(--transition), opacity var(--transition);
+}
+
+.modal-thumb:hover    { opacity: 0.85; }
+.modal-thumb.is-active { border-color: var(--black); }
+
+.modal-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-thumb--placeholder {
+  opacity: 0.5;
+}
+
+.modal-thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--grey-400);
+}
+
+.modal-thumb-placeholder svg { width: 18px; height: 18px; }
+
+/* ── Info pane ── */
+.modal-info {
+  padding: 36px 32px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-colour-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 10px;
+}
+
+.modal-colour-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--grey-400);
+}
+
+.modal-product-name {
+  font-size: 1.625rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  margin-bottom: 3px;
+  line-height: 1.1;
+}
+
+.modal-product-sub {
+  font-size: 0.8125rem;
+  color: var(--grey-400);
+  margin-bottom: 18px;
+}
+
+.modal-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--grey-100);
+}
+
+.modal-price          { font-size: 1.875rem; font-weight: 800; letter-spacing: -0.03em; color: var(--black); }
+.modal-price-currency { font-size: 0.875rem; font-weight: 600; color: var(--grey-400); }
+.modal-price-unit     { font-size: 0.8rem; color: var(--grey-400); }
+
+.modal-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 22px;
+}
+
+.modal-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.875rem;
+  color: var(--grey-600);
+  line-height: 1.5;
+}
+
+.modal-check {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.modal-specs {
+  background: var(--grey-50);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+
+.modal-spec { display: flex; flex-direction: column; gap: 2px; }
+.modal-spec-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-400); }
+.modal-spec-value { font-size: 0.875rem; font-weight: 600; color: var(--black); }
+
+.modal-buy-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 0.9375rem;
+  margin-top: auto;
+}
+
 /* ==============================================
    RESPONSIVE
    ============================================== */
@@ -1179,6 +1466,21 @@ a {
 
 /* ── Mobile (≤ 640px) ── */
 @media (max-width: 640px) {
+  .modal-panel {
+    grid-template-columns: 1fr;
+    max-height: 95vh;
+  }
+
+  .modal-gallery {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    min-height: auto;
+  }
+
+  .modal-main-img-wrap { min-height: 220px; }
+  .modal-info          { padding: 24px 20px 20px; }
+  .modal-product-name  { font-size: 1.375rem; }
+  .modal-price         { font-size: 1.5rem; }
+}
   .nav {
     display: none;
   }

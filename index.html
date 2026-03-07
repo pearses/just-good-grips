@@ -92,22 +92,24 @@
           <!-- ─── 12 Pack – White (Available) ─── -->
           <article class="product-card product-card--featured">
             <div class="product-image-wrap">
-              <div class="product-image-inner">
-                <img
-                  src="images/grip-pack-12-white.webp"
-                  alt="Just Good Grips – 12 Pack White"
-                  class="product-image"
-                  loading="lazy"
-                  onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
-                >
-                <div class="product-image-placeholder" aria-hidden="true">
-                  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="120" height="80" fill="#F0F0F0"/>
-                    <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
-                    <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
-                  </svg>
+              <button class="product-image-btn" id="openProductModalImg" aria-label="Quick view product details">
+                <div class="product-image-inner">
+                  <img
+                    src="images/grip-pack-12-white.webp"
+                    alt="Just Good Grips – 12 Pack White"
+                    class="product-image"
+                    loading="lazy"
+                    onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
+                  >
+                  <div class="product-image-placeholder" aria-hidden="true">
+                    <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="120" height="80" fill="#F0F0F0"/>
+                      <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
+                      <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
+                    </svg>
+                  </div>
                 </div>
-              </div>
+              </button>
               <span class="product-badge product-badge--featured">Best Value</span>
             </div>
             <div class="product-body">
@@ -120,6 +122,7 @@
                 The serious player's choice. Stock up and never be caught short.
                 Better value per grip than buying individually.
               </p>
+              <button class="view-details-btn" id="openProductModal">View Details →</button>
               <div class="product-footer">
                 <div class="product-pricing">
                   <span class="product-price">$29.99</span>
@@ -454,9 +457,6 @@ We believe every player should have the freedom to change grips as often as they
   <footer class="footer" id="contact">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <a href="/" class="logo footer-logo">
-          <img src="images/jgg-insta.png" alt="Just Good Grips" class="logo-img footer-logo-img">
-        </a>
         <p class="footer-tagline">Premium tennis overgrips.<br>Shipped directly from our warehouse closest to your location</p>
         <div class="footer-socials">
           <a href="https://www.instagram.com/justgoodgrips/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Just Good Grips on Instagram">
@@ -508,6 +508,106 @@ We believe every player should have the freedom to change grips as often as they
       </div>
     </div>
   </footer>
+
+  <!-- ===================== PRODUCT MODAL ===================== -->
+  <div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalProductName" hidden>
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-panel">
+
+      <button class="modal-close" id="modalClose" aria-label="Close product details">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- Gallery -->
+      <div class="modal-gallery">
+        <div class="modal-main-img-wrap">
+          <img id="modalMainImg" src="images/grip-pack-12-white.webp" alt="Overgrip 12 Pack – White" class="modal-main-img">
+          <div class="modal-main-placeholder" id="modalMainPlaceholder" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+            </svg>
+            <p>Action shot coming soon</p>
+          </div>
+        </div>
+        <div class="modal-thumbs" id="modalThumbs">
+          <button class="modal-thumb is-active" data-src="images/grip-pack-12-white.webp" data-alt="Overgrip 12 Pack - product shot" aria-label="Product shot">
+            <img src="images/grip-pack-12-white.webp" alt="">
+          </button>
+          <button class="modal-thumb" data-src="images/mockup-1-handing-grips.png" data-alt="mockup1" aria-label="Packaging">
+            <img src="images/mockup-1-handing-grips.png" alt="">
+          </button>
+          <button class="modal-thumb" data-src="images/mockup-2-handing-grips.png" data-alt="mockup2" aria-label="Single grip">
+            <img src="images/mockup-2-handing-grips.png" alt="">
+          </button>
+          <button class="modal-thumb" data-src="images/mockup-3-handing-grips.png" data-alt="mockup3" aria-label="Action shot - coming soon">
+            <img src="images/mockup-3-handing-grips.png" alt="">
+          </button>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="modal-info">
+        <div class="modal-colour-row">
+          <span class="colour-dot colour-dot--white"></span>
+          <span class="modal-colour-label">White</span>
+        </div>
+        <h2 class="modal-product-name" id="modalProductName">Overgrip 12 Pack</h2>
+        <p class="modal-product-sub">12 grips per pack · White</p>
+        <div class="modal-pricing">
+          <span class="modal-price">$29.99</span>
+          <span class="modal-price-currency">AUD</span>
+          <span class="modal-price-unit">($2.49 / grip)</span>
+        </div>
+        <ul class="modal-features">
+          <li>
+            <svg class="modal-check" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#c8e617"/><path d="M6 10l3 3 5-5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Superior tack from the very first wrap
+          </li>
+          <li>
+            <svg class="modal-check" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#c8e617"/><path d="M6 10l3 3 5-5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Moisture-absorbing micro-fibres for sweaty conditions
+          </li>
+          <li>
+            <svg class="modal-check" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#c8e617"/><path d="M6 10l3 3 5-5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Long-lasting feel — more sessions per grip
+          </li>
+          <li>
+            <svg class="modal-check" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" fill="#c8e617"/><path d="M6 10l3 3 5-5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Fits any standard racket handle
+          </li>
+        </ul>
+        <div class="modal-specs">
+          <div class="modal-spec">
+            <span class="modal-spec-label">Quantity</span>
+            <span class="modal-spec-value">12 grips</span>
+          </div>
+          <div class="modal-spec">
+            <span class="modal-spec-label">Colour</span>
+            <span class="modal-spec-value">White</span>
+          </div>
+          <div class="modal-spec">
+            <span class="modal-spec-label">Thickness</span>
+            <span class="modal-spec-value">0.6 mm</span>
+          </div>
+          <div class="modal-spec">
+            <span class="modal-spec-label">Length</span>
+            <span class="modal-spec-value">1100 mm</span>
+          </div>
+        </div>
+        <a
+          href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01"
+          class="btn btn-buy btn-buy--featured modal-buy-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Buy Now — $29.99 AUD
+        </a>
+      </div>
+
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
