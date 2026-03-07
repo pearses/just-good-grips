@@ -1,41 +1,35 @@
-/* Just Good Grips – site JS */
+/* Just Good Grips — site JS */
 
 (function () {
   'use strict';
 
   // ── Sticky header shadow ──────────────────────────────────────────────────
   const header = document.getElementById('header');
-
   if (header) {
-    const onScroll = () => {
-      header.classList.toggle('scrolled', window.scrollY > 8);
-    };
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
 
   // ── Mobile nav toggle ─────────────────────────────────────────────────────
-  const toggle   = document.getElementById('navToggle');
+  const navToggle = document.getElementById('navToggle');
   const mobileNav = document.getElementById('mobileNav');
-
-  if (toggle && mobileNav) {
-    toggle.addEventListener('click', () => {
-      const isOpen = mobileNav.classList.toggle('open');
-      toggle.classList.toggle('open', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
+  if (navToggle && mobileNav) {
+    navToggle.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      navToggle.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
     });
-
-    // Close on any mobile-nav link click
     mobileNav.querySelectorAll('.mobile-nav-link').forEach(link => {
       link.addEventListener('click', () => {
         mobileNav.classList.remove('open');
-        toggle.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
 
-  // ── Smooth-scroll nav links ───────────────────────────────────────────────
+  // ── Smooth scroll ─────────────────────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
       const target = document.querySelector(anchor.getAttribute('href'));
@@ -45,18 +39,74 @@
     });
   });
 
-  // ── Buy-Now placeholder guard ─────────────────────────────────────────────
-  // Warn in console if Stripe links haven't been updated yet.
-  document.querySelectorAll('.btn-buy').forEach(btn => {
-    const href = btn.getAttribute('href') || '';
-    if (href.startsWith('YOUR_STRIPE')) {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        // In production replace href with your Stripe Payment Link.
-        // e.g. https://buy.stripe.com/test_xxxx
-        alert('Stripe payment link not yet configured.\nReplace the href on this button with your Stripe Payment Link URL.');
-      });
-    }
+  // ── REVIEW CAROUSEL ───────────────────────────────────────────────────────
+  const track    = document.getElementById('reviewTrack');
+  const dotsWrap = document.getElementById('reviewDots');
+  const prevBtn  = document.getElementById('reviewPrev');
+  const nextBtn  = document.getElementById('reviewNext');
+
+  if (!track) return;
+
+  const cards     = Array.from(track.querySelectorAll('.review-card'));
+  const total     = cards.length;
+  let   current   = 0;
+  let   autoTimer = null;
+  const AUTO_MS   = 4800;
+  const SWIPE_MIN = 40;
+
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', `Review ${i + 1}`);
+    dot.addEventListener('click', () => { goTo(i); resetAuto(); });
+    dotsWrap.appendChild(dot);
   });
+
+  function goTo(index) {
+    current = ((index % total) + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsWrap.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === current);
+    });
+  }
+
+  function startAuto() { autoTimer = setInterval(() => goTo(current + 1), AUTO_MS); }
+  function stopAuto()  { clearInterval(autoTimer); autoTimer = null; }
+  function resetAuto() { stopAuto(); startAuto(); }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+  const outer = track.closest('.carousel-outer');
+  if (outer) {
+    outer.addEventListener('mouseenter', stopAuto);
+    outer.addEventListener('mouseleave', startAuto);
+    outer.addEventListener('focusin',    stopAuto);
+    outer.addEventListener('focusout',   startAuto);
+  }
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+    stopAuto();
+  }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > SWIPE_MIN && Math.abs(dx) > Math.abs(dy)) {
+      goTo(dx < 0 ? current + 1 : current - 1);
+    }
+    startAuto();
+  }, { passive: true });
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('reviews')?.contains(document.activeElement)) return;
+    if (e.key === 'ArrowLeft')  { goTo(current - 1); resetAuto(); }
+    if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
+  });
+
+  startAuto();
 
 })();
