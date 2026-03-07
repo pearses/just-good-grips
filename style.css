@@ -174,17 +174,17 @@ a   { text-decoration: none; color: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   background: var(--black);
   color: var(--green);
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   border-radius: var(--radius-sm);
 }
 .logo-text {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--black);
