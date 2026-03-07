@@ -1,156 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just Good Grips – Premium Tennis Overgrips</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Roboto:wght@400;500;700&display=swap">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Just Good Grips – Premium Tennis Overgrips</title>
+  <meta name="description" content="High-performance tennis overgrips engineered for feel, control and durability. Shipped directly from our warehouse closest to your location.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="banner">
-            <h1>Just Good Grips</h1>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-mark">JGG</span>
+        <span class="logo-text">Just Good Grips</span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#products" class="nav-link">Shop</a>
+        <a href="#reviews"  class="nav-link">Reviews</a>
+        <a href="#features" class="nav-link">Why JGG</a>
+        <a href="#about"    class="nav-link">About</a>
+        <a href="#contact"  class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#products" class="btn btn-outline">Shop All</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#products" class="mobile-nav-link">Shop</a>
+      <a href="#reviews"  class="mobile-nav-link">Reviews</a>
+      <a href="#features" class="mobile-nav-link">Why JGG</a>
+      <a href="#about"    class="mobile-nav-link">About</a>
+      <a href="#contact"  class="mobile-nav-link">Contact</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Premium Tennis Overgrips</p>
+        <h1 class="hero-heading">Grips That<br>Actually Work.</h1>
+        <p class="hero-body">High quality grips at a fair price, so you never feel guilty swapping them out.</p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary">Shop All Grips</a>
+          <a href="#features" class="btn btn-ghost">Why JGG ↓</a>
         </div>
-        <div class="container">
-            <h2><i class="fas fa-store"></i> Just Good Grips</h2>
-            <nav>
-                <ul>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#reviews">Reviews</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+      </div>
+      <div class="hero-badge">
+        <span>🇦🇺</span>
+        <span>Australian&nbsp;Owned</span>
+      </div>
+    </section>
+
+    <!-- ===================== ANNOUNCEMENT BAR ===================== -->
+    <div class="announce-bar">
+      🎾 Free shipping on orders over $40 AUD &nbsp;·&nbsp; Dispatched within 1–2 business days
+    </div>
+
+    <!-- ===================== PRODUCTS ===================== -->
+    <section class="products-section" id="products">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Shop Grips</h2>
+            <p class="section-sub">All prices in AUD. Secure checkout via Stripe.</p>
+          </div>
+          <div class="product-count">4 products · 1 available now</div>
         </div>
-    </header>
-    <main>
-        <section id="hero">
-            <div class="hero-content">
-                <h2>Premium Tennis Overgrips</h2>
-                <p>High quality grips at a fair price, so you never feel guilty swapping them out.</p>
-                <a href="#products" class="btn">Shop Now</a>
-            </div>
-        </section>
 
-        <section id="products" class="container">
-            <h2>Our Products</h2>
-            <div class="product-card">
-                <img src="images/grip-pack-12-white.webp" alt="Overgrip 12 Pack – White" onerror="this.style.display='none'">
-                <h3>Overgrip 12 Pack – White</h3>
-                <p>The serious player's choice. Stock up and never be caught short.</p>
-                <p class="price">$29.99 AUD &nbsp;·&nbsp; $2.49 / grip</p>
-                <a href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01" class="btn btn-stripe" target="_blank" rel="noopener noreferrer">Buy Now</a>
-            </div>
-            <div class="product-card product-card--soon">
-                <img src="images/grip-pack-12-light-blue.png" alt="Overgrip 12 Pack – Light Blue" onerror="this.style.display='none'">
-                <h3>Overgrip 12 Pack – Light Blue</h3>
-                <p>Same great grip in a fresh light blue colourway. Dropping soon.</p>
-                <p class="price">$29.99 AUD</p>
-                <button class="btn btn-soon" disabled>Coming Soon</button>
-            </div>
-            <div class="product-card product-card--soon">
-                <img src="images/grip-pack-12-light-pink.png" alt="Overgrip 12 Pack – Light Pink" onerror="this.style.display='none'">
-                <h3>Overgrip 12 Pack – Light Pink</h3>
-                <p>A soft pink colourway for those who like a splash of colour on court.</p>
-                <p class="price">$29.99 AUD</p>
-                <button class="btn btn-soon" disabled>Coming Soon</button>
-            </div>
-            <div class="product-card product-card--soon">
-                <img src="images/grip-pack-60.jpg" alt="Overgrip 60 Pack" onerror="this.style.display='none'">
-                <h3>Overgrip 60 Pack</h3>
-                <p>For clubs, coaches and high-volume players. The ultimate bulk option.</p>
-                <p class="price">TBA AUD</p>
-                <button class="btn btn-soon" disabled>Coming Soon</button>
-            </div>
-        </section>
+        <div class="product-grid">
 
-        <!-- ===================== REVIEWS CAROUSEL ===================== -->
-        <section id="reviews" class="reviews-section">
-            <div class="container">
-
-                <!-- Aggregate rating -->
-                <div class="reviews-agg">
-                    <h2 class="reviews-heading">Just Good Grips Players.</h2>
-                    <div class="stars stars--lg" aria-label="5 out of 5 stars">★★★★★</div>
-                    <p class="reviews-count">from 200+ happy players</p>
+          <!-- 12 Pack White (Available) -->
+          <article class="product-card product-card--featured">
+            <div class="product-image-wrap">
+              <div class="product-image-inner">
+                <img src="images/grip-pack-12-white.webp" alt="Just Good Grips 12 Pack White" class="product-image" loading="lazy" onerror="this.closest('.product-image-inner').classList.add('img-fallback')">
+                <div class="product-image-placeholder" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none"><rect width="120" height="80" fill="#F0F0F0"/><circle cx="60" cy="34" r="16" fill="#D0D0D0"/><path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/></svg>
                 </div>
-
-                <!-- Individual carousel -->
-                <div class="carousel-outer">
-                    <button class="carousel-arrow carousel-arrow--prev" id="reviewPrev" aria-label="Previous review">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                    </button>
-
-                    <div class="carousel-viewport">
-                        <div class="carousel-track" id="reviewTrack">
-
-                            <div class="review-card">
-                                <div class="stars">★★★★★</div>
-                                <p class="review-title">Game-changer for my serve</p>
-                                <p class="review-text">"The tack on these is unreal. I've tried every brand and nothing comes close for the price. Ordered the 12 pack and won't go back."</p>
-                                <p class="review-author">Alex M. — Club Player, Sydney</p>
-                                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-                            </div>
-
-                            <div class="review-card">
-                                <div class="stars">★★★★★</div>
-                                <p class="review-title">Lasts way longer than name brands</p>
-                                <p class="review-text">"Great tack out of the bag. Lasts way longer than the branded ones and costs half as much. My whole squad switched over."</p>
-                                <p class="review-author">Sarah K. — Recreational Player, Melbourne</p>
-                                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-                            </div>
-
-                            <div class="review-card">
-                                <div class="stars">★★★★★</div>
-                                <p class="review-title">The 12 pack is incredible value</p>
-                                <p class="review-text">"Ordered twice already. My students go through grips fast and this is the only brand I recommend now. Fast delivery too."</p>
-                                <p class="review-author">James T. — Tennis Coach, Brisbane</p>
-                                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-                            </div>
-
-                            <div class="review-card">
-                                <div class="stars">★★★★★</div>
-                                <p class="review-title">Perfect grip in any conditions</p>
-                                <p class="review-text">"Sweaty hands in summer used to ruin my game. These are the best I've used for moisture absorption. A total must-buy."</p>
-                                <p class="review-author">Priya L. — Competitive Club Player, Adelaide</p>
-                                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <button class="carousel-arrow carousel-arrow--next" id="reviewNext" aria-label="Next review">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
-
-                    <div class="carousel-dots" id="reviewDots"></div>
+              </div>
+              <span class="product-badge product-badge--featured">Best Value</span>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">Overgrip 12 Pack – White</h3>
+              <p class="product-desc">The serious player's choice. Stock up and never be caught short. Better value per grip than buying individually.</p>
+              <div class="product-footer">
+                <div class="product-pricing">
+                  <span class="product-price">$29.99</span>
+                  <span class="product-currency">AUD</span>
+                  <span class="product-unit">$2.49 / grip</span>
                 </div>
+                <a href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01" class="btn btn-buy btn-buy--featured" target="_blank" rel="noopener noreferrer">Buy Now</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 12 Pack Light Blue (Coming Soon) -->
+          <article class="product-card product-card--soon">
+            <div class="product-image-wrap">
+              <div class="product-image-inner">
+                <img src="images/grip-pack-12-light-blue.png" alt="Just Good Grips 12 Pack Light Blue" class="product-image" loading="lazy" onerror="this.closest('.product-image-inner').classList.add('img-fallback')">
+                <div class="product-image-placeholder" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none"><rect width="120" height="80" fill="#F0F0F0"/><circle cx="60" cy="34" r="16" fill="#D0D0D0"/><path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/></svg>
+                </div>
+              </div>
+              <span class="product-badge">Coming Soon</span>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">Overgrip 12 Pack – Light Blue</h3>
+              <p class="product-desc">The same great grip in a fresh light blue colourway. Dropping soon — stay tuned.</p>
+              <div class="product-footer">
+                <div class="product-pricing">
+                  <span class="product-price">$29.99</span>
+                  <span class="product-currency">AUD</span>
+                </div>
+                <button class="btn btn-buy" disabled style="opacity:.45;cursor:not-allowed;">Coming Soon</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 12 Pack Light Pink (Coming Soon) -->
+          <article class="product-card product-card--soon">
+            <div class="product-image-wrap">
+              <div class="product-image-inner">
+                <img src="images/grip-pack-12-light-pink.png" alt="Just Good Grips 12 Pack Light Pink" class="product-image" loading="lazy" onerror="this.closest('.product-image-inner').classList.add('img-fallback')">
+                <div class="product-image-placeholder" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none"><rect width="120" height="80" fill="#F0F0F0"/><circle cx="60" cy="34" r="16" fill="#D0D0D0"/><path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/></svg>
+                </div>
+              </div>
+              <span class="product-badge">Coming Soon</span>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">Overgrip 12 Pack – Light Pink</h3>
+              <p class="product-desc">A soft pink colourway for those who like a splash of colour on court. Dropping soon — stay tuned.</p>
+              <div class="product-footer">
+                <div class="product-pricing">
+                  <span class="product-price">$29.99</span>
+                  <span class="product-currency">AUD</span>
+                </div>
+                <button class="btn btn-buy" disabled style="opacity:.45;cursor:not-allowed;">Coming Soon</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- 60 Pack (Coming Soon) -->
+          <article class="product-card product-card--soon">
+            <div class="product-image-wrap">
+              <div class="product-image-inner">
+                <img src="images/grip-pack-60.jpg" alt="Just Good Grips 60 Pack" class="product-image" loading="lazy" onerror="this.closest('.product-image-inner').classList.add('img-fallback')">
+                <div class="product-image-placeholder" aria-hidden="true">
+                  <svg viewBox="0 0 120 80" fill="none"><rect width="120" height="80" fill="#F0F0F0"/><circle cx="60" cy="34" r="16" fill="#D0D0D0"/><path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/></svg>
+                </div>
+              </div>
+              <span class="product-badge">Coming Soon</span>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">Overgrip 60 Pack</h3>
+              <p class="product-desc">For clubs, coaches and high-volume players. The ultimate bulk option — enough grips to last an entire season.</p>
+              <div class="product-footer">
+                <div class="product-pricing">
+                  <span class="product-price">TBA</span>
+                  <span class="product-currency">AUD</span>
+                </div>
+                <button class="btn btn-buy" disabled style="opacity:.45;cursor:not-allowed;">Coming Soon</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="checkout-trust">
+          <svg class="trust-icon" viewBox="0 0 20 20" fill="none">
+            <path d="M10 1L2 5v5c0 4.418 3.134 8.553 8 9.5C17.866 18.553 21 14.418 21 10V5l-8-4z" stroke="#999" stroke-width="1.4" stroke-linejoin="round"/>
+            <path d="M7 10l2 2 4-4" stroke="#999" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Secure checkout powered by <strong>Stripe</strong>. Your payment details are never stored on our servers.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FEATURES ===================== -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2 class="section-title">Why Just Good Grips?</h2>
+          <p class="section-sub">Everything a grip needs. Nothing it doesn't.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <h4 class="feature-title">Superior Tack</h4>
+            <p class="feature-desc">Engineered for maximum grip without sticky residue. Feels perfect from first wrap to last session.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg></div>
+            <h4 class="feature-title">Moisture Control</h4>
+            <p class="feature-desc">Sweat-absorbing micro-fibres keep your racket secure during long rallies and hot conditions.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
+            <h4 class="feature-title">Long Lasting</h4>
+            <p class="feature-desc">Built to outlast the competition. More sessions per grip means better value over time.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <h4 class="feature-title">Shipping Worldwide</h4>
+            <p class="feature-desc">Dispatched within 1–2 business days. Australia, Germany and Japan. Free over $40.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REVIEWS CAROUSEL ===================== -->
+    <section class="reviews-section" id="reviews">
+      <div class="container">
+
+        <div class="reviews-agg">
+          <h2 class="reviews-heading">Just Good Grips Players.</h2>
+          <div class="stars stars--lg" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="reviews-count">from 200+ happy players</p>
+        </div>
+
+        <div class="carousel-outer">
+          <button class="carousel-arrow carousel-arrow--prev" id="reviewPrev" aria-label="Previous review">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="reviewTrack">
+
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-title">Game-changer for my serve</p>
+                <p class="review-text">"The tack on these is unreal. I've tried every brand and nothing comes close for the price. Ordered the 12 pack and won't go back."</p>
+                <p class="review-author">Alex M. — Club Player, Sydney</p>
+                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
+              </div>
+
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-title">Lasts way longer than name brands</p>
+                <p class="review-text">"Great tack out of the bag. Lasts way longer than the branded ones and costs half as much. My whole squad switched over."</p>
+                <p class="review-author">Sarah K. — Recreational Player, Melbourne</p>
+                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
+              </div>
+
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-title">The 12 pack is incredible value</p>
+                <p class="review-text">"Ordered twice already. My students go through grips fast and this is the only brand I recommend now. Fast delivery too."</p>
+                <p class="review-author">James T. — Tennis Coach, Brisbane</p>
+                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
+              </div>
+
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-title">Perfect grip in any conditions</p>
+                <p class="review-text">"Sweaty hands in summer used to ruin my game. These are the best I've used for moisture absorption. A total must-buy."</p>
+                <p class="review-author">Priya L. — Competitive Club Player, Adelaide</p>
+                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
+              </div>
 
             </div>
-        </section>
+          </div>
 
-        <section id="about" class="container about">
-            <h2>About Just Good Grips</h2>
-            <p>We got tired of paying premium prices for overgrips that fall apart after a couple of sessions. So we made our own. Just Good Grips is an Australian-owned brand dedicated to delivering performance grips at a price that actually makes sense.</p>
-            <p>No gimmicks. No celebrity endorsements. Just grips that work — every time, every session.</p>
-        </section>
-    </main>
+          <button class="carousel-arrow carousel-arrow--next" id="reviewNext" aria-label="Next review">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
 
-    <footer id="contact">
-        <div class="container">
-            <p>&copy; 2024 Just Good Grips Pty Ltd. All rights reserved.</p>
-            <p style="margin-top:8px;font-size:0.875rem;opacity:0.6;">Questions? <a href="mailto:justgoodgrips@gmail.com" style="color:#4CAF50;">justgoodgrips@gmail.com</a></p>
-            <ul class="social-links">
-                <li><a href="https://www.facebook.com/justgoodgrips" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/justgoodgrips/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a></li>
-            </ul>
+          <div class="carousel-dots" id="reviewDots"></div>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="about-section" id="about">
+      <div class="container about-grid">
+        <div class="about-visual">
+          <div class="about-visual-box">
+            <img src="images/photo-scott.jpg" alt="Scott Pearse, Founder" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" onerror="this.replaceWith(document.createTextNode('🎾'))">
+          </div>
+        </div>
+        <div class="about-copy">
+          <p class="section-tag">About Us</p>
+          <h2 class="section-title">Built by players.<br>For players.</h2>
+          <p>We got tired of paying premium prices for overgrips that fall apart after a couple of sessions. So we made our own. Just Good Grips is an Australian-owned brand dedicated to delivering performance grips at a price that actually makes sense.</p>
+          <p>No gimmicks. No celebrity endorsements. Just grips that work — every time, every session.</p>
+          <a href="#products" class="btn btn-primary" style="margin-top:24px;display:inline-flex;">Shop Now</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo footer-logo">
+          <span class="logo-mark">JGG</span>
+          <span class="logo-text">Just Good Grips</span>
+        </a>
+        <p class="footer-tagline">Premium tennis overgrips.<br>Shipped directly from our warehouse closest to you.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+          <a href="https://www.instagram.com/justgoodgrips/" style="font-size:.8125rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px;" target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @justgoodgrips
+          </a>
+          <a href="https://www.facebook.com/justgoodgrips" style="font-size:.8125rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px;" target="_blank" rel="noopener noreferrer">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            justgoodgrips
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-col-title">Shop</h5>
+        <a href="#products" class="footer-link">Overgrip 12 Pack – White</a>
+        <a href="#products" class="footer-link">Overgrip 12 Pack – Light Blue</a>
+        <a href="#products" class="footer-link">Overgrip 12 Pack – Light Pink</a>
+        <a href="#products" class="footer-link">Overgrip 60 Pack</a>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <a href="#about"    class="footer-link">About</a>
+        <a href="#features" class="footer-link">Why Just Good Grips</a>
+        <a href="#reviews"  class="footer-link">Reviews</a>
+      </div>
+
+      <div class="footer-col">
+        <h5 class="footer-col-title">Contact</h5>
+        <a href="mailto:justgoodgrips@gmail.com" class="footer-link">justgoodgrips@gmail.com</a>
+        <p class="footer-note">Mon–Fri, 9am–5pm ACST</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2024 Just Good Grips Pty Ltd. All rights reserved.</p>
+        <p class="footer-legal">Secure payments by Stripe &nbsp;·&nbsp; <a href="#" class="footer-legal-link">Privacy Policy</a> &nbsp;·&nbsp; <a href="#" class="footer-legal-link">Terms</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
