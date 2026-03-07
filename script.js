@@ -3,33 +3,6 @@
 (function () {
   'use strict';
 
-  // ── Sticky header shadow ──────────────────────────────────────────────────
-  const header = document.getElementById('header');
-  if (header) {
-    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  // ── Mobile nav toggle ─────────────────────────────────────────────────────
-  const navToggle = document.getElementById('navToggle');
-  const mobileNav = document.getElementById('mobileNav');
-
-  if (navToggle && mobileNav) {
-    navToggle.addEventListener('click', () => {
-      const open = mobileNav.classList.toggle('open');
-      navToggle.classList.toggle('open', open);
-      navToggle.setAttribute('aria-expanded', String(open));
-    });
-    mobileNav.querySelectorAll('.mobile-nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.remove('open');
-        navToggle.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
   // ── Smooth scroll ─────────────────────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
@@ -40,65 +13,42 @@
     });
   });
 
-  // ── Stripe link placeholder guard ─────────────────────────────────────────
-  document.querySelectorAll('[href^="YOUR_STRIPE"]').forEach(el => {
-    el.addEventListener('click', e => {
-      e.preventDefault();
-      alert(
-        'Stripe payment link not yet configured.\n' +
-        'Replace the href value with your Stripe Payment Link URL.\n' +
-        'Create one at: https://dashboard.stripe.com/payment-links'
-      );
-    });
-  });
-
   // ── REVIEW CAROUSEL ───────────────────────────────────────────────────────
-  const track      = document.getElementById('reviewTrack');
-  const dotsWrap   = document.getElementById('reviewDots');
-  const prevBtn    = document.getElementById('reviewPrev');
-  const nextBtn    = document.getElementById('reviewNext');
+  const track    = document.getElementById('reviewTrack');
+  const dotsWrap = document.getElementById('reviewDots');
+  const prevBtn  = document.getElementById('reviewPrev');
+  const nextBtn  = document.getElementById('reviewNext');
 
   if (!track) return; // bail if reviews section is absent
 
-  const cards       = Array.from(track.querySelectorAll('.review-card'));
-  const total       = cards.length;
-  let   current     = 0;
-  let   autoTimer   = null;
-  const AUTO_MS     = 4800;
-  const SWIPE_MIN   = 40;
+  const cards     = Array.from(track.querySelectorAll('.review-card'));
+  const total     = cards.length;
+  let   current   = 0;
+  let   autoTimer = null;
+  const AUTO_MS   = 4800;
+  const SWIPE_MIN = 40;
 
   // Build dot indicators
   cards.forEach((_, i) => {
     const dot = document.createElement('button');
-    dot.className    = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.className = 'carousel-dot' + (i === 0 ? ' is-active' : '');
     dot.setAttribute('aria-label', `Review ${i + 1}`);
     dot.addEventListener('click', () => { goTo(i); resetAuto(); });
     dotsWrap.appendChild(dot);
   });
 
-  // Navigate to a specific slide
   function goTo(index) {
     current = ((index % total) + total) % total;
     track.style.transform = `translateX(-${current * 100}%)`;
     dotsWrap.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === current);
+      dot.classList.toggle('is-active', i === current);
     });
   }
 
-  // Auto-advance
-  function startAuto() {
-    autoTimer = setInterval(() => goTo(current + 1), AUTO_MS);
-  }
-  function stopAuto() {
-    clearInterval(autoTimer);
-    autoTimer = null;
-  }
-  function resetAuto() {
-    stopAuto();
-    startAuto();
-  }
+  function startAuto() { autoTimer = setInterval(() => goTo(current + 1), AUTO_MS); }
+  function stopAuto()  { clearInterval(autoTimer); autoTimer = null; }
+  function resetAuto() { stopAuto(); startAuto(); }
 
-  // Arrow buttons
   if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
   if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
 
@@ -124,8 +74,6 @@
   track.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
-
-    // Only treat as horizontal swipe if dx dominates
     if (Math.abs(dx) > SWIPE_MIN && Math.abs(dx) > Math.abs(dy)) {
       goTo(dx < 0 ? current + 1 : current - 1);
     }
@@ -139,7 +87,6 @@
     if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
   });
 
-  // Kick off
   startAuto();
 
 })();
