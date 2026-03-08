@@ -148,7 +148,7 @@ a {
    ============================================== */
 .header {
   position: sticky;
-  top: 0;
+  top: 37px; /* height of announce-bar */
   z-index: 200;
   background: var(--white);
   border-bottom: 1px solid var(--grey-200);
@@ -389,10 +389,13 @@ a {
    ANNOUNCEMENT BAR
    ============================================== */
 .announce-bar {
+  position: sticky;
+  top: 0;
+  z-index: 201;
   background: var(--green);
   color: var(--black);
   text-align: center;
-  padding: 10px 24px;
+  padding: 9px 24px;
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -456,8 +459,8 @@ a {
 /* ── Product Grid (Wilson-style) ── */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 /* ── Product Card ── */
@@ -1432,6 +1435,11 @@ a {
 
 /* ── Tablet (≤ 960px) ── */
 @media (max-width: 960px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 28px;
