@@ -1487,10 +1487,15 @@ a {
     min-height: auto;
   }
 
-  .modal-main-img-wrap { aspect-ratio: 4 / 3; width: 100%; }
-  .modal-info          { padding: 24px 20px 20px; }
+  .modal-main-img-wrap { aspect-ratio: 16 / 9; width: 100%; }
+  .modal-gallery       { padding: 14px; gap: 8px; }
+  .modal-info          { padding: 18px 20px 20px; }
   .modal-product-name  { font-size: 1.375rem; }
+  .modal-product-sub   { margin-bottom: 10px; }
   .modal-price         { font-size: 1.5rem; }
+  .modal-pricing       { margin-bottom: 14px; padding-bottom: 14px; }
+  .modal-features      { gap: 6px; margin-bottom: 14px; }
+  .modal-specs         { margin-bottom: 14px; padding: 10px 14px; }
 
   .nav {
     display: none;
