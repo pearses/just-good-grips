@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Grip Plan — Just Good Grips</title>
+  <meta name="description" content="Answer a few quick questions and we'll recommend the perfect grip pack and restock schedule for your game.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Quiz page overrides ──────────────────────────────────────────── */
+    .quiz-hero {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 72px 24px 56px;
+    }
+    .quiz-hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+    .quiz-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .quiz-hero p {
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Quiz shell ───────────────────────────────────────────────────── */
+    .quiz-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* Progress bar */
+    .quiz-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+    }
+    .quiz-progress-bar {
+      flex: 1;
+      height: 4px;
+      background: #e5e5e5;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 99px;
+      transition: width 0.35s ease;
+    }
+    .quiz-progress-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #888;
+      white-space: nowrap;
+    }
+
+    /* Step container */
+    .quiz-step {
+      display: none;
+    }
+    .quiz-step.is-active {
+      display: block;
+    }
+
+    .quiz-step-heading {
+      font-size: clamp(1.25rem, 3vw, 1.625rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .quiz-step-sub {
+      font-size: 0.9375rem;
+      color: #555;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    /* Radio cards */
+    .quiz-options {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .quiz-options--2col {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 480px) {
+      .quiz-options--2col { grid-template-columns: 1fr; }
+    }
+
+    .quiz-option {
+      position: relative;
+    }
+    .quiz-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .quiz-option label {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 2px solid #e5e5e5;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      background: #fff;
+    }
+    .quiz-option label:hover {
+      border-color: #aaa;
+    }
+    .quiz-option input:checked + label {
+      border-color: var(--black);
+      background: #f5f5f5;
+    }
+    .quiz-option-icon {
+      font-size: 1.5rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .quiz-option-text strong {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2px;
+    }
+    .quiz-option-text span {
+      font-size: 0.8125rem;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* Nav buttons */
+    .quiz-nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .quiz-btn-back {
+      padding: 12px 20px;
+      border: 2px solid #e5e5e5;
+      border-radius: 6px;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #555;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .quiz-btn-back:hover { border-color: #aaa; color: var(--black); }
+    .quiz-btn-next {
+      flex: 1;
+      padding: 14px 24px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .quiz-btn-next:hover { background: #222; }
+    .quiz-btn-next:disabled { background: #ccc; cursor: default; }
+
+    /* Error hint */
+    .quiz-error {
+      display: none;
+      font-size: 0.8125rem;
+      color: #c0392b;
+      margin-top: -20px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .quiz-error.is-visible { display: block; }
+
+    /* ── Results screen ───────────────────────────────────────────────── */
+    .quiz-result {
+      display: none;
+    }
+    .quiz-result.is-active {
+      display: block;
+    }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: var(--black);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .result-heading {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+    .result-sub {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .result-card {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .result-card-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .result-card h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .result-card p {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .result-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 480px) {
+      .result-details { grid-template-columns: 1fr; }
+    }
+    .result-detail-box {
+      border: 2px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .result-detail-box .rdl {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .result-detail-box .rdv {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+    .result-detail-box .rds {
+      font-size: 0.8125rem;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .result-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .result-buy-btn {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--green);
+      color: var(--black);
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1.0625rem;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+    .result-buy-btn:hover { background: #b5d114; }
+    .result-retake-btn {
+      background: transparent;
+      border: 2px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 14px 24px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #555;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      text-align: center;
+    }
+    .result-retake-btn:hover { border-color: #aaa; color: var(--black); }
+
+    /* Spending helper */
+    .spend-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .spend-toggle-btn {
+      padding: 6px 14px;
+      border: 2px solid #e5e5e5;
+      border-radius: 99px;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      color: #555;
+    }
+    .spend-toggle-btn.is-active {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== ANNOUNCEMENT BAR ===================== -->
+  <div class="announce-bar">
+    <p>🎾 Free Shipping on All Orders — Use FREESHIP26&nbsp;&nbsp;</p>
+  </div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo" style="text-decoration:none;">
+        <img src="images/logo-black.svg" alt="Just Good Grips" class="logo-img">
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="index.html#products" class="nav-link">Shop</a>
+        <a href="index.html#reviews"  class="nav-link">Reviews</a>
+        <a href="index.html#features" class="nav-link">Why Just Good Grips</a>
+        <a href="index.html#about"    class="nav-link">About</a>
+        <a href="index.html#stores"   class="nav-link">Stores</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="index.html#products" class="btn btn-outline">Shop All</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index.html#products" class="mobile-nav-link">Shop</a>
+      <a href="index.html#reviews"  class="mobile-nav-link">Reviews</a>
+      <a href="index.html#features" class="mobile-nav-link">Why Just Good Grips</a>
+      <a href="index.html#about"    class="mobile-nav-link">About</a>
+      <a href="index.html#stores"   class="mobile-nav-link">Stores</a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <div class="quiz-hero">
+    <p class="quiz-hero-eyebrow">Grip Finder Quiz</p>
+    <h1>Find Your Perfect<br>Grip Plan</h1>
+    <p>Answer 4 quick questions and we'll recommend the right pack size and restock schedule for your game.</p>
+  </div>
+
+  <!-- ===================== QUIZ ===================== -->
+  <main>
+    <div class="quiz-wrap">
+
+      <!-- Progress bar -->
+      <div class="quiz-progress" id="quizProgress">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quizProgressFill" style="width: 25%"></div>
+        </div>
+        <span class="quiz-progress-label" id="quizProgressLabel">Step 1 of 4</span>
+      </div>
+
+      <!-- ── STEP 1: Player type ───────────────────────────────────────────── -->
+      <div class="quiz-step is-active" id="step1">
+        <h2 class="quiz-step-heading">How would you describe your tennis?</h2>
+        <p class="quiz-step-sub">Pick the option that best matches how you play.</p>
+
+        <div class="quiz-options">
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-beginner" value="beginner">
+            <label for="pt-beginner">
+              <span class="quiz-option-icon">🌱</span>
+              <span class="quiz-option-text">
+                <strong>Just Starting Out</strong>
+                <span>Getting lessons or playing casually for the first time.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-social" value="social">
+            <label for="pt-social">
+              <span class="quiz-option-icon">☕</span>
+              <span class="quiz-option-text">
+                <strong>Social Player</strong>
+                <span>Hitting with friends, no serious competition.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-club" value="club">
+            <label for="pt-club">
+              <span class="quiz-option-icon">🎾</span>
+              <span class="quiz-option-text">
+                <strong>Club / Pennant Player</strong>
+                <span>Competing in local fixtures or a club ladder.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-competitive" value="competitive">
+            <label for="pt-competitive">
+              <span class="quiz-option-icon">🏆</span>
+              <span class="quiz-option-text">
+                <strong>Competitive / Tournament</strong>
+                <span>Graded comp, ITF tournaments, or serious training.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-coach" value="coach">
+            <label for="pt-coach">
+              <span class="quiz-option-icon">📋</span>
+              <span class="quiz-option-text">
+                <strong>Coach / Pro</strong>
+                <span>On court every day, going through grips quickly.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <p class="quiz-error" id="err1">Please select an option to continue.</p>
+        <div class="quiz-nav">
+          <button class="quiz-btn-next" onclick="nextStep(1)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: Training frequency ───────────────────────────────────── -->
+      <div class="quiz-step" id="step2">
+        <h2 class="quiz-step-heading">How many times a week are you on court?</h2>
+        <p class="quiz-step-sub">Include all sessions — matches, training, hitting.</p>
+
+        <div class="quiz-options quiz-options--2col">
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-1" value="1">
+            <label for="fr-1">
+              <span class="quiz-option-icon">1️⃣</span>
+              <span class="quiz-option-text">
+                <strong>Once a week</strong>
+                <span>Occasional hit</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-2" value="2">
+            <label for="fr-2">
+              <span class="quiz-option-icon">2️⃣</span>
+              <span class="quiz-option-text">
+                <strong>Twice a week</strong>
+                <span>Regular player</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-3" value="3">
+            <label for="fr-3">
+              <span class="quiz-option-icon">3️⃣</span>
+              <span class="quiz-option-text">
+                <strong>3 times a week</strong>
+                <span>Committed player</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-4" value="4">
+            <label for="fr-4">
+              <span class="quiz-option-icon">4️⃣</span>
+              <span class="quiz-option-text">
+                <strong>4–5 times a week</strong>
+                <span>High-performance</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-6" value="6">
+            <label for="fr-6">
+              <span class="quiz-option-icon">🔥</span>
+              <span class="quiz-option-text">
+                <strong>6+ times a week</strong>
+                <span>Full-time / coaching</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <p class="quiz-error" id="err2">Please select an option to continue.</p>
+        <div class="quiz-nav">
+          <button class="quiz-btn-back" onclick="prevStep(2)">← Back</button>
+          <button class="quiz-btn-next" onclick="nextStep(2)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: Regrip habit ──────────────────────────────────────────── -->
+      <div class="quiz-step" id="step3">
+        <h2 class="quiz-step-heading">How do you like to use your overgrip?</h2>
+        <p class="quiz-step-sub">There's no right answer — it's all about your preference.</p>
+
+        <div class="quiz-options">
+          <div class="quiz-option">
+            <input type="radio" name="gripHabit" id="gh-every" value="every">
+            <label for="gh-every">
+              <span class="quiz-option-icon">✨</span>
+              <span class="quiz-option-text">
+                <strong>Fresh grip every session</strong>
+                <span>I love that new-grip feeling and always play my best.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="gripHabit" id="gh-few" value="few">
+            <label for="gh-few">
+              <span class="quiz-option-icon">⚖️</span>
+              <span class="quiz-option-text">
+                <strong>Every few sessions</strong>
+                <span>I change when it gets slippery or loses its feel.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="gripHabit" id="gh-long" value="long">
+            <label for="gh-long">
+              <span class="quiz-option-icon">💪</span>
+              <span class="quiz-option-text">
+                <strong>Make it last as long as possible</strong>
+                <span>I only replace when the grip is completely worn out.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <p class="quiz-error" id="err3">Please select an option to continue.</p>
+        <div class="quiz-nav">
+          <button class="quiz-btn-back" onclick="prevStep(3)">← Back</button>
+          <button class="quiz-btn-next" onclick="nextStep(3)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 4: Budget ────────────────────────────────────────────────── -->
+      <div class="quiz-step" id="step4">
+        <h2 class="quiz-step-heading">What do you expect to spend on grips?</h2>
+        <p class="quiz-step-sub">
+          At Just Good Grips, each overgrip is <strong>~$2</strong> — a fraction of what other brands charge.
+        </p>
+
+        <!-- Weekly / Monthly toggle -->
+        <div class="spend-toggle">
+          <button class="spend-toggle-btn is-active" id="toggleWeekly" onclick="setSpendMode('weekly')">Per week</button>
+          <button class="spend-toggle-btn" id="toggleMonthly" onclick="setSpendMode('monthly')">Per month</button>
+        </div>
+
+        <div class="quiz-options quiz-options--2col" id="budgetOptions">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+        <p class="quiz-error" id="err4">Please select an option to continue.</p>
+        <div class="quiz-nav">
+          <button class="quiz-btn-back" onclick="prevStep(4)">← Back</button>
+          <button class="quiz-btn-next" onclick="nextStep(4)">Get My Recommendation →</button>
+        </div>
+      </div>
+
+      <!-- ── RESULTS ─────────────────────────────────────────────────────── -->
+      <div class="quiz-result" id="quizResult">
+
+        <div class="result-badge">✓ Your Grip Plan</div>
+        <h2 class="result-heading" id="resultHeading">Recommended: 12-Pack White</h2>
+        <p class="result-sub" id="resultSub">Based on your answers, here's what we recommend.</p>
+
+        <div class="result-card">
+          <p class="result-card-label">Your Pack</p>
+          <h3 id="resultPackName">Just Good Grips 12-Pack — White</h3>
+          <p id="resultPackDesc">12 premium overgrips, enough to keep you fresh on court for months.</p>
+        </div>
+
+        <div class="result-details">
+          <div class="result-detail-box">
+            <p class="rdl">Restock Every</p>
+            <p class="rdv" id="resultRestock">8 weeks</p>
+            <p class="rds" id="resultRestockSub">Based on your training and grip habits</p>
+          </div>
+          <div class="result-detail-box">
+            <p class="rdl">Cost Per Grip</p>
+            <p class="rdv">~$2.00</p>
+            <p class="rds">vs $4–7 for leading brands</p>
+          </div>
+          <div class="result-detail-box">
+            <p class="rdl">Grips Per Month</p>
+            <p class="rdv" id="resultGripsPerMonth">4–6</p>
+            <p class="rds">estimated usage</p>
+          </div>
+          <div class="result-detail-box">
+            <p class="rdl">Annual Saving</p>
+            <p class="rdv" id="resultSaving">~$48–96</p>
+            <p class="rds">vs competitor overgrips at $4 each</p>
+          </div>
+        </div>
+
+        <!-- NOTE FOR OWNER: Update the href below with the correct Stripe link(s) for each pack -->
+        <div class="result-cta">
+          <a href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01" class="result-buy-btn" id="resultBuyBtn">
+            Buy Now — Just Good Grips
+          </a>
+          <button class="result-retake-btn" onclick="retakeQuiz()">Retake Quiz</button>
+        </div>
+
+        <!-- NOTE FOR OWNER: You can add a subscription/reminder section here once a subscription
+             product or mailing list is set up. For example:
+             "Set a reminder to reorder in X weeks" → email capture form or Stripe subscription link -->
+
+      </div>
+
+    </div><!-- /quiz-wrap -->
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="images/jgg-insta.png" alt="Just Good Grips" class="footer-logo">
+        <p class="footer-tagline">Premium tennis overgrips.<br>Australian owned.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/justgoodgrips/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/justgoodgrips" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="index.html#products">12-Pack White</a>
+        <a href="index.html#products">Coming Soon</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html#about">About</a>
+        <a href="index.html#stores">Find a Store</a>
+        <a href="subscription.html">Grip Finder</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <!-- NOTE FOR OWNER: Add contact email / social DMs below -->
+        <a href="https://www.instagram.com/justgoodgrips/">Instagram DM</a>
+        <a href="https://www.facebook.com/justgoodgrips">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Just Good Grips. All rights reserved. Australian owned & operated.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // ── Quiz logic ─────────────────────────────────────────────────────────────
+    (function () {
+      'use strict';
+
+      const TOTAL_STEPS = 4;
+      let currentStep = 1;
+      let spendMode = 'weekly';
+
+      // Budget option definitions
+      const budgetWeekly = [
+        { value: 'w-low',    label: 'Under $2',   sub: 'Under $9/month',  gripsPerWeek: 0.5 },
+        { value: 'w-mid',    label: '$2–$4',       sub: '$9–$17/month',    gripsPerWeek: 1.5 },
+        { value: 'w-high',   label: '$4–$6',       sub: '$17–$26/month',   gripsPerWeek: 2.5 },
+        { value: 'w-vhigh',  label: '$6+',         sub: '$26+/month',      gripsPerWeek: 4   },
+      ];
+      const budgetMonthly = [
+        { value: 'm-low',    label: 'Under $9',    sub: 'Under $2/week',   gripsPerWeek: 0.5 },
+        { value: 'm-mid',    label: '$9–$17',      sub: '$2–$4/week',      gripsPerWeek: 1.5 },
+        { value: 'm-high',   label: '$17–$26',     sub: '$4–$6/week',      gripsPerWeek: 2.5 },
+        { value: 'm-vhigh',  label: '$26+',        sub: '$6+/week',        gripsPerWeek: 4   },
+      ];
+
+      function renderBudgetOptions(mode) {
+        const options = mode === 'weekly' ? budgetWeekly : budgetMonthly;
+        const wrap = document.getElementById('budgetOptions');
+        const currentVal = getRadioVal('budget');
+        wrap.innerHTML = '';
+        options.forEach((opt, i) => {
+          // try to preserve checked state by matching gripsPerWeek value
+          const checked = currentVal && opt.gripsPerWeek === getBudgetGripsPerWeek(currentVal);
+          wrap.innerHTML += `
+            <div class="quiz-option">
+              <input type="radio" name="budget" id="bgt-${i}" value="${opt.value}" ${checked ? 'checked' : ''}>
+              <label for="bgt-${i}">
+                <span class="quiz-option-icon">${['💸','💵','💰','🏅'][i]}</span>
+                <span class="quiz-option-text">
+                  <strong>${opt.label}</strong>
+                  <span>${opt.sub}</span>
+                </span>
+              </label>
+            </div>`;
+        });
+      }
+
+      function getBudgetGripsPerWeek(value) {
+        const all = [...budgetWeekly, ...budgetMonthly];
+        const found = all.find(o => o.value === value);
+        return found ? found.gripsPerWeek : null;
+      }
+
+      window.setSpendMode = function (mode) {
+        spendMode = mode;
+        document.getElementById('toggleWeekly').classList.toggle('is-active', mode === 'weekly');
+        document.getElementById('toggleMonthly').classList.toggle('is-active', mode === 'monthly');
+        renderBudgetOptions(mode);
+      };
+
+      // Initialise budget options on load
+      renderBudgetOptions('weekly');
+
+      function getRadioVal(name) {
+        const el = document.querySelector(`input[name="${name}"]:checked`);
+        return el ? el.value : null;
+      }
+
+      function updateProgress(step) {
+        const pct = Math.round((step / TOTAL_STEPS) * 100);
+        document.getElementById('quizProgressFill').style.width = pct + '%';
+        document.getElementById('quizProgressLabel').textContent = `Step ${step} of ${TOTAL_STEPS}`;
+      }
+
+      function showStep(n) {
+        document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('is-active'));
+        document.querySelectorAll('.quiz-error').forEach(el => el.classList.remove('is-visible'));
+        const el = document.getElementById('step' + n);
+        if (el) el.classList.add('is-active');
+        currentStep = n;
+        updateProgress(n);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      window.nextStep = function (from) {
+        const radioNames = ['playerType', 'frequency', 'gripHabit', 'budget'];
+        const name = radioNames[from - 1];
+        if (!getRadioVal(name)) {
+          document.getElementById('err' + from).classList.add('is-visible');
+          return;
+        }
+        if (from < TOTAL_STEPS) {
+          showStep(from + 1);
+        } else {
+          showResult();
+        }
+      };
+
+      window.prevStep = function (from) {
+        showStep(from - 1);
+      };
+
+      // ── Recommendation engine ────────────────────────────────────────────────
+      function showResult() {
+        // Hide quiz steps & progress
+        document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('is-active'));
+        document.getElementById('quizProgress').style.display = 'none';
+        document.getElementById('quizResult').classList.add('is-active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        const playerType = getRadioVal('playerType');
+        const frequency  = parseInt(getRadioVal('frequency'), 10);
+        const gripHabit  = getRadioVal('gripHabit');
+        const budgetVal  = getRadioVal('budget');
+
+        // Grips used per session based on habit
+        const gripsPerSession = gripHabit === 'every' ? 1 : gripHabit === 'few' ? 0.4 : 0.2;
+        // Sessions per week
+        const sessionsPerWeek = frequency;
+        // Grips per month (4.33 weeks avg)
+        const gripsPerMonth = Math.round(gripsPerSession * sessionsPerWeek * 4.33);
+        const gripsPerMonthLow  = Math.max(1, gripsPerMonth - 1);
+        const gripsPerMonthHigh = gripsPerMonth + 2;
+
+        // Pack recommendation
+        // NOTE FOR OWNER: Add more pack options (60-pack, coloured packs) here as they launch.
+        // Currently only the 12-pack white has a live Stripe link.
+        let packName, packDesc, buyLink, packGrips;
+        if (gripsPerMonth >= 8 || playerType === 'coach') {
+          packName   = 'Just Good Grips 60-Pack — White';
+          packDesc   = '60 grips for high-volume players and coaches. Best value per grip.';
+          buyLink    = '#';  // NOTE FOR OWNER: Replace with 60-pack Stripe link when live
+          packGrips  = 60;
+        } else {
+          packName   = 'Just Good Grips 12-Pack — White';
+          packDesc   = '12 premium overgrips, perfectly sized for regular players.';
+          buyLink    = 'https://buy.stripe.com/8x214pfFt5b30rfehc83C01';
+          packGrips  = 12;
+        }
+
+        // Restock interval in weeks
+        const gripsPerWeekActual = gripsPerSession * sessionsPerWeek;
+        const restockWeeks = Math.round(packGrips / Math.max(gripsPerWeekActual, 0.25));
+        let restockStr;
+        if (restockWeeks <= 2) restockStr = 'Every 1–2 weeks';
+        else if (restockWeeks <= 4) restockStr = 'Every 3–4 weeks';
+        else if (restockWeeks <= 8) restockStr = 'Every 6–8 weeks';
+        else if (restockWeeks <= 16) restockStr = 'Every 2–4 months';
+        else restockStr = 'Every 4–6 months';
+
+        // Annual saving vs $4 competitor grips
+        const annualGrips = gripsPerMonth * 12;
+        const savingLow  = Math.round(annualGrips * (4 - 2));
+        const savingHigh = Math.round(annualGrips * (7 - 2));
+
+        // Player label
+        const playerLabels = {
+          beginner:    'Starter',
+          social:      'Social Player',
+          club:        'Club Player',
+          competitive: 'Competitive Player',
+          coach:       'Coach / Pro',
+        };
+
+        // Populate result
+        document.getElementById('resultHeading').textContent  = `Your plan: ${packName.split('—')[0].trim()}`;
+        document.getElementById('resultSub').textContent      =
+          `Perfect for a ${playerLabels[playerType] || 'player'} training ${sessionsPerWeek}× a week.`;
+        document.getElementById('resultPackName').textContent = packName;
+        document.getElementById('resultPackDesc').textContent = packDesc;
+        document.getElementById('resultRestock').textContent  = restockStr;
+        document.getElementById('resultRestockSub').textContent =
+          `~${gripsPerMonthLow}–${gripsPerMonthHigh} grips per month at your frequency`;
+        document.getElementById('resultGripsPerMonth').textContent =
+          `${gripsPerMonthLow}–${gripsPerMonthHigh}`;
+        document.getElementById('resultSaving').textContent   =
+          `~$${savingLow}–$${savingHigh}`;
+
+        const buyBtn = document.getElementById('resultBuyBtn');
+        if (buyLink === '#') {
+          buyBtn.textContent = 'Coming Soon — Join the Waitlist';
+          buyBtn.removeAttribute('href');
+          buyBtn.style.background = '#888';
+          buyBtn.style.cursor = 'default';
+        } else {
+          buyBtn.textContent = `Buy Now — ${packName.split('—')[0].trim()}`;
+          buyBtn.setAttribute('href', buyLink);
+        }
+      }
+
+      window.retakeQuiz = function () {
+        // Reset all radios
+        document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+        document.getElementById('quizResult').classList.remove('is-active');
+        document.getElementById('quizProgress').style.display = '';
+        renderBudgetOptions(spendMode);
+        showStep(1);
+      };
+
+    })();
+  </script>
+
+</body>
+</html>
