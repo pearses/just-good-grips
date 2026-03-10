@@ -502,6 +502,31 @@
     }
     .sub-customise-btn:hover { opacity: 0.65; }
 
+    /* Product image in purchase option cards */
+    .card-product-img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f5f5f5;
+      flex-shrink: 0;
+      padding: 6px;
+    }
+
+    /* Green per-grip saving tag below subscription price */
+    .price-saving-tag {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-top: 3px;
+      text-align: right;
+    }
+
+    /* Bulk card muted treatment while coming soon */
+    .buy-card--bulk {
+      opacity: 0.7;
+    }
+
     .sub-customiser {
       display: none;
       padding: 16px 0 2px;
@@ -854,13 +879,13 @@
           </div>
           <div class="result-stat">
             <p class="rs-label">Cost Per Grip</p>
-            <p class="rs-value">$2.50</p>
-            <p class="rs-sub">vs $4–$7 for others</p>
+            <p class="rs-value">$2.25</p>
+            <p class="rs-sub">sub · $2.50 one-time · $5–$6 elsewhere</p>
           </div>
           <div class="result-stat">
             <p class="rs-label">Est. Annual Saving</p>
             <p class="rs-value" id="resultSaving">—</p>
-            <p class="rs-sub">vs $4 competitor grips</p>
+            <p class="rs-sub">vs $5–$6 competitor grips</p>
           </div>
         </div>
 
@@ -878,18 +903,19 @@
           <div class="subscribe-card" id="subscribeCard">
             <span class="subscribe-card-badge">Recommended</span>
             <div class="subscribe-card-top">
+              <img src="images/grip-pack-12-white.webp" alt="Just Good Grips 12-Pack White" class="card-product-img">
               <div>
-                <p class="subscribe-card-label">Subscribe &amp; never run out</p>
-                <p class="subscribe-card-name" id="subPackName">12 grips</p>
+                <p class="subscribe-card-label">Subscribe &amp; save 10%</p>
+                <p class="subscribe-card-name" id="subPackName">1 pack of 12 grips</p>
                 <p class="subscribe-card-cadence" id="subCadence">Monthly (every 4 weeks)</p>
               </div>
               <div>
-                <!-- NOTE FOR OWNER: Update prices once Stripe subscription pricing is configured -->
                 <p class="subscribe-card-price" id="subPrice">~$—</p>
                 <p class="subscribe-card-price-sub">per delivery</p>
+                <p class="price-saving-tag" id="subPricePerGrip">$2.25/grip · save 10%</p>
               </div>
             </div>
-            <p class="subscribe-card-saving" id="subSavingNote">Set and forget — grips arrive before you run out.</p>
+            <p class="subscribe-card-saving" id="subSavingNote">Save 10% vs one-time — set and forget.</p>
 
             <!-- Customise toggle -->
             <div class="sub-customise-row">
@@ -901,11 +927,11 @@
             <div class="sub-customiser" id="subCustomiser">
               <p class="sub-customiser-label">Grips per order</p>
               <div class="sub-pills" id="subQtyPills">
-                <button class="sub-pill" data-qty="12"  onclick="setSubQty(12)">12 grips</button>
-                <button class="sub-pill" data-qty="24"  onclick="setSubQty(24)">24 grips</button>
-                <button class="sub-pill" data-qty="36"  onclick="setSubQty(36)">36 grips</button>
+                <button class="sub-pill" data-qty="12"  onclick="setSubQty(12)">1 × 12-pack</button>
+                <button class="sub-pill" data-qty="24"  onclick="setSubQty(24)">2 × 12-pack</button>
+                <button class="sub-pill" data-qty="36"  onclick="setSubQty(36)">3 × 12-pack</button>
                 <!-- NOTE FOR OWNER: Remove 'is-soon' class from the 60-grip button when the 60-pack launches -->
-                <button class="sub-pill is-soon" data-qty="60" onclick="setSubQty(60)">60 grips <span style="font-size:0.7rem;font-weight:700;letter-spacing:0.06em">(SOON)</span></button>
+                <button class="sub-pill is-soon" data-qty="60" onclick="setSubQty(60)">60-pack <span style="font-size:0.7rem;font-weight:700;letter-spacing:0.06em">(SOON)</span></button>
               </div>
 
               <p class="sub-customiser-label">Delivery frequency</p>
@@ -928,21 +954,38 @@
             </a>
           </div>
 
+          <!-- Bulk buy card (60-pack, coming soon) -->
+          <div class="buy-card buy-card--bulk">
+            <div class="buy-card-top">
+              <img src="images/grip-pack-12-white.webp" alt="Just Good Grips 60-Pack" class="card-product-img">
+              <div>
+                <p class="buy-card-label">Bulk buy — best value</p>
+                <p class="buy-card-name">60-Pack White</p>
+              </div>
+              <div>
+                <p class="buy-card-price">Coming Soon</p>
+                <p class="buy-card-price-sub">~$1.50–$1.80/grip</p>
+              </div>
+            </div>
+            <a class="cta-primary cta-primary--disabled">Buy Bulk — 60-Pack (Coming Soon)</a>
+          </div>
+
           <!-- One-time buy card -->
           <div class="buy-card" id="buyCard">
             <div class="buy-card-top">
+              <img src="images/grip-pack-12-white.webp" alt="Just Good Grips 12-Pack White" class="card-product-img">
               <div>
-                <p class="buy-card-label">One-time purchase</p>
-                <p class="buy-card-name" id="buyPackName">12-Pack White</p>
+                <p class="buy-card-label">One-time — no commitment</p>
+                <p class="buy-card-name" id="buyPackName">1 pack of 12 grips</p>
               </div>
               <div>
                 <p class="buy-card-price" id="buyPrice">$29.99</p>
-                <p class="buy-card-price-sub" id="buyPricePerGrip">$2.50 per grip</p>
+                <p class="buy-card-price-sub" id="buyPricePerGrip">$2.50/grip</p>
               </div>
             </div>
             <!-- NOTE FOR OWNER: Update href for each pack as they go live on Stripe -->
             <a href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01" class="cta-primary cta-primary--black" id="buyBtn" target="_blank" rel="noopener">
-              Buy Once — 12-Pack White
+              Buy Now — 12-Pack White
             </a>
           </div>
 
@@ -1005,6 +1048,14 @@
     // $29.99 / 12 grips = $2.4992 per grip, displayed as $2.50
     const PRICE_PER_GRIP = 29.99 / 12;
 
+    // 10% subscription discount → $26.99 per 12-pack → $2.25/grip
+    const SUB_DISCOUNT      = 0.10;
+    const SUB_PRICE_PER_GRIP = PRICE_PER_GRIP * (1 - SUB_DISCOUNT);
+
+    // Competitor reference prices (individual retail $5–$6/grip)
+    const COMPETITOR_LOW  = 5.00;
+    const COMPETITOR_HIGH = 6.00;
+
     // ── One-time purchase catalogue ────────────────────────────────────────
     // NOTE FOR OWNER: Update prices and buyLinks as new packs launch.
     const PACKS = {
@@ -1028,15 +1079,15 @@
     // To create: Stripe Dashboard → Products → Add a price (recurring, every N weeks)
     //            → Create Payment Link → copy URL here.
     const SUB_LINKS = {
-      '12-2':  '#',   // 12 grips, fortnightly  (every 2 weeks)
-      '12-4':  '#',   // 12 grips, monthly      (every 4 weeks)
-      '12-12': '#',   // 12 grips, quarterly    (every 12 weeks)
-      '24-2':  '#',   // 24 grips, fortnightly
-      '24-4':  '#',   // 24 grips, monthly
-      '24-12': '#',   // 24 grips, quarterly
-      '36-2':  '#',   // 36 grips, fortnightly
-      '36-4':  '#',   // 36 grips, monthly
-      '36-12': '#',   // 36 grips, quarterly
+      '12-2':  'https://buy.stripe.com/00wcN73WL46Z0rfgpk83C06',   // 12 grips, fortnightly  (every 2 weeks)
+      '12-4':  'https://buy.stripe.com/4gM9AV50P46Zgqdehc83C05',   // 12 grips, monthly      (every 4 weeks)
+      '12-12': 'https://buy.stripe.com/dRm14p9h5fPH8XL6OK83C0a',   // 12 grips, quarterly    (every 12 weeks)
+      '24-2':  'https://buy.stripe.com/6oUbJ3bpdavn7THa0W83C09',   // 24 grips, fortnightly
+      '24-4':  'https://buy.stripe.com/8x214pbpd32V2zn2yu83C08',   // 24 grips, monthly
+      '24-12': 'https://buy.stripe.com/eVqaEZ3WLeLD5Lz4GC83C07',   // 24 grips, quarterly
+      '36-2':  'https://buy.stripe.com/28E5kF64TdHzc9Xgpk83C03',   // 36 grips, fortnightly
+      '36-4':  'https://buy.stripe.com/eVqbJ31OD8nfb5T4GC83C04',   // 36 grips, monthly
+      '36-12': 'https://buy.stripe.com/bJe7sN1OD46Z4Hv0qm83C02',   // 36 grips, quarterly
       '60-4':  '#',   // 60 grips, monthly      (NOTE: 60-pack not yet live)
       '60-12': '#',   // 60 grips, quarterly
     };
@@ -1155,15 +1206,21 @@
 
     // ── Render subscribe card from current customSubQty / customSubFreq ────
     function renderSubCard() {
-      const pricePerDelivery = customSubQty * PRICE_PER_GRIP;
-      const freqLabel        = FREQ_LABELS[customSubFreq] || `Every ${customSubFreq} weeks`;
-      const linkKey          = `${customSubQty}-${customSubFreq}`;
-      const subLink          = SUB_LINKS[linkKey] || '#';
-      const isLive           = subLink !== '#';
+      const pricePerDelivery  = customSubQty * PRICE_PER_GRIP * (1 - SUB_DISCOUNT);
+      const savingPerDelivery = (customSubQty * PRICE_PER_GRIP - pricePerDelivery).toFixed(2);
+      const freqLabel         = FREQ_LABELS[customSubFreq] || `Every ${customSubFreq} weeks`;
+      const linkKey           = `${customSubQty}-${customSubFreq}`;
+      const subLink           = SUB_LINKS[linkKey] || '#';
+      const isLive            = subLink !== '#';
 
-      document.getElementById('subPackName').textContent = `${customSubQty} grips per delivery`;
-      document.getElementById('subCadence').textContent  = freqLabel;
-      document.getElementById('subPrice').textContent    = `~$${pricePerDelivery.toFixed(2)}`;
+      // Format qty as packs e.g. "1 pack of 12 grips", "2 packs of 12 grips"
+      const packs     = customSubQty / 12;
+      const packLabel = packs === 1 ? '1 pack of 12 grips' : `${packs} packs of 12 grips`;
+
+      document.getElementById('subPackName').textContent    = packLabel;
+      document.getElementById('subCadence').textContent     = freqLabel;
+      document.getElementById('subPrice').textContent       = `~$${pricePerDelivery.toFixed(2)}`;
+      document.getElementById('subPricePerGrip').textContent = `$${SUB_PRICE_PER_GRIP.toFixed(2)}/grip · save 10%`;
 
       // Helper note in customiser panel
       const gripsPerWeek  = customSubQty / customSubFreq;
@@ -1175,12 +1232,12 @@
 
       const savingNote = document.getElementById('subSavingNote');
       savingNote.textContent = isLive
-        ? `${customSubQty} grips, ${freqLabel.toLowerCase()}. Set it and forget it.`
-        : `${customSubQty} grips, ${freqLabel.toLowerCase()} — launching soon.`;
+        ? `Save $${savingPerDelivery} per delivery vs buying once — ${packLabel}, ${freqLabel.toLowerCase()}.`
+        : `Save 10% vs one-time — ${packLabel}, ${freqLabel.toLowerCase()} — launching soon.`;
 
       const subBtn = document.getElementById('subBuyBtn');
       if (isLive) {
-        subBtn.textContent = `Subscribe — ${customSubQty} grips, ${freqLabel.split(' ')[0]}`;
+        subBtn.textContent = `Subscribe — ${packLabel}, ${freqLabel.split(' ')[0]}`;
         subBtn.href        = subLink;
         subBtn.classList.remove('cta-primary--disabled');
       } else {
@@ -1216,12 +1273,11 @@
       const pack    = PACKS[packKey];
 
       // ── Savings vs competitors ─────────────────────────────────────────
-      // JGG: $29.99 / 12 = $2.4992 per grip
-      // Competitor low: $4/grip → saving $1.50/grip
-      // Competitor high: $7/grip → saving $4.50/grip
-      const annualGrips = gripsPerMonthExact * 12;
-      const savingVs4   = Math.round(annualGrips * (4.00 - PRICE_PER_GRIP));
-      const savingVs7   = Math.round(annualGrips * (7.00 - PRICE_PER_GRIP));
+      // JGG one-time: $29.99 / 12 = $2.4992 per grip
+      // Competitor individual retail: $5–$6/grip
+      const annualGrips  = gripsPerMonthExact * 12;
+      const savingVsLow  = Math.round(annualGrips * (COMPETITOR_LOW  - PRICE_PER_GRIP));
+      const savingVsHigh = Math.round(annualGrips * (COMPETITOR_HIGH - PRICE_PER_GRIP));
 
       // ── Auto-calculate sensible subscription defaults ──────────────────
       // Ideal qty = grips needed to cover the chosen frequency
@@ -1240,8 +1296,8 @@
 
       // ── Populate usage stats ───────────────────────────────────────────
       document.getElementById('resultGripsPerMonth').textContent     = `${gpmLow}–${gpmHigh}`;
-      document.getElementById('resultSaving').textContent            = `$${savingVs4}–$${savingVs7}`;
-      document.getElementById('resultSavingHighlight').textContent   = `$${savingVs4}–$${savingVs7}`;
+      document.getElementById('resultSaving').textContent            = `$${savingVsLow}–$${savingVsHigh}`;
+      document.getElementById('resultSavingHighlight').textContent   = `$${savingVsLow}–$${savingVsHigh}`;
 
       // ── Activate default customiser pills ─────────────────────────────
       document.querySelectorAll('#subQtyPills .sub-pill:not(.is-soon)').forEach(b => {
@@ -1255,14 +1311,17 @@
       renderSubCard();
 
       // ── One-time buy card ──────────────────────────────────────────────
-      document.getElementById('buyPackName').textContent = pack.name;
+      // Format as "1 pack of 12 grips" / "5 packs of 12 grips"
+      const buyPacks     = pack.grips / 12;
+      const buyPackLabel = buyPacks === 1 ? '1 pack of 12 grips' : `${buyPacks} packs of 12 grips`;
+      document.getElementById('buyPackName').textContent = buyPackLabel;
       const buyBtn = document.getElementById('buyBtn');
 
       if (pack.buyLink !== '#' && pack.price) {
         const pricePerGrip = pack.price / pack.grips;
         document.getElementById('buyPrice').textContent        = `$${pack.price.toFixed(2)}`;
-        document.getElementById('buyPricePerGrip').textContent = `$${pricePerGrip.toFixed(2)} per grip`;
-        buyBtn.textContent = `Buy Once — ${pack.name}`;
+        document.getElementById('buyPricePerGrip').textContent = `$${pricePerGrip.toFixed(2)}/grip`;
+        buyBtn.textContent = `Buy Now — ${pack.name}`;
         buyBtn.href        = pack.buyLink;
         buyBtn.classList.remove('cta-primary--disabled');
         buyBtn.classList.add('cta-primary--black');
