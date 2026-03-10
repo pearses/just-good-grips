@@ -1,5 +1,17 @@
 /* Just Good Grips — site JS */
 
+// ── Announcement bar copy button ───────────────────────────────────────────
+function copyCode(btn) {
+  navigator.clipboard.writeText('FREESHIP26').then(function () {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = 'FREESHIP26';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
 (function () {
   'use strict';
 
