@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Type of Tennis Player Are You? — Just Good Grips</title>
+  <meta name="description" content="Find your player type and get a personalised grip plan — including a subscription cadence that keeps you stocked without thinking about it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* ── Hero ─────────────────────────────────────────────────────────────── */
+    .quiz-hero {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 64px 24px 52px;
+    }
+    .quiz-hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+    .quiz-hero h1 {
+      font-size: clamp(1.875rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+    .quiz-hero p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ── Outer wrap ───────────────────────────────────────────────────────── */
+    .quiz-wrap {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 44px 24px 80px;
+    }
+
+    /* ── Progress ─────────────────────────────────────────────────────────── */
+    .quiz-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .quiz-progress-bar {
+      flex: 1;
+      height: 4px;
+      background: #e5e5e5;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 99px;
+      transition: width 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .quiz-progress-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #999;
+      white-space: nowrap;
+    }
+
+    /* ── Step ─────────────────────────────────────────────────────────────── */
+    .quiz-step { display: none; }
+    .quiz-step.is-active { display: block; animation: stepIn 0.22s ease; }
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .quiz-step-heading {
+      font-size: clamp(1.25rem, 3.5vw, 1.625rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--black);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .quiz-step-sub {
+      font-size: 0.9375rem;
+      color: #666;
+      margin-bottom: 24px;
+      line-height: 1.55;
+    }
+
+    /* ── Radio option cards ───────────────────────────────────────────────── */
+    .quiz-options {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .quiz-options--2col { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 480px) {
+      .quiz-options--2col { grid-template-columns: 1fr; }
+    }
+
+    .quiz-option { position: relative; }
+    .quiz-option input[type="radio"] {
+      position: absolute; opacity: 0; pointer-events: none;
+    }
+    .quiz-option label {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 16px;
+      border: 2px solid #e5e5e5;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      background: #fff;
+      user-select: none;
+    }
+    .quiz-option label:hover { border-color: #bbb; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .quiz-option input:checked + label {
+      border-color: var(--black);
+      background: #f7f7f7;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .quiz-option-icon {
+      font-size: 1.375rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .quiz-option-text strong {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2px;
+    }
+    .quiz-option-text span {
+      font-size: 0.8125rem;
+      color: #777;
+      line-height: 1.4;
+    }
+
+    /* ── Nav buttons ──────────────────────────────────────────────────────── */
+    .quiz-nav {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .quiz-btn-back {
+      padding: 13px 20px;
+      border: 2px solid #e5e5e5;
+      border-radius: 8px;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .quiz-btn-back:hover { border-color: #aaa; color: var(--black); }
+
+    .quiz-btn-next {
+      flex: 1;
+      padding: 14px 24px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .quiz-btn-next:hover { background: #1a1a1a; }
+
+    /* ── Error ────────────────────────────────────────────────────────────── */
+    .quiz-error {
+      display: none;
+      font-size: 0.8125rem;
+      color: #c0392b;
+      margin-top: -18px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+    .quiz-error.is-visible { display: block; }
+
+    /* ── Results ──────────────────────────────────────────────────────────── */
+    .quiz-result { display: none; }
+    .quiz-result.is-active { display: block; animation: stepIn 0.3s ease; }
+
+    /* Archetype reveal card */
+    .archetype-card {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .archetype-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--green);
+    }
+    .archetype-eyebrow {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .archetype-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      line-height: 1;
+      display: block;
+    }
+    .archetype-name {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+    .archetype-desc {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0;
+    }
+
+    /* Stats grid */
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 480px) {
+      .result-stats { grid-template-columns: 1fr 1fr; }
+    }
+    .result-stat {
+      border: 2px solid #ebebeb;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .result-stat .rs-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 5px;
+    }
+    .result-stat .rs-value {
+      font-size: 1.1875rem;
+      font-weight: 800;
+      color: var(--black);
+      line-height: 1.1;
+    }
+    .result-stat .rs-sub {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 3px;
+    }
+
+    /* Purchase options */
+    .purchase-heading {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .purchase-options {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    /* One-time buy */
+    .buy-card {
+      border: 2px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .buy-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+    .buy-card-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 4px;
+    }
+    .buy-card-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.2;
+    }
+    .buy-card-price {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--black);
+      white-space: nowrap;
+    }
+    .buy-card-price-sub {
+      font-size: 0.75rem;
+      color: #888;
+      margin-top: 1px;
+      text-align: right;
+    }
+
+    /* Subscribe card — featured */
+    .subscribe-card {
+      border: 2px solid var(--black);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      background: #fafafa;
+    }
+    .subscribe-card-badge {
+      position: absolute;
+      top: -1px; right: 16px;
+      background: var(--green);
+      color: var(--black);
+      font-size: 0.6875rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 0 0 8px 8px;
+    }
+    .subscribe-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 12px;
+    }
+    .subscribe-card-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .subscribe-card-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.2;
+    }
+    .subscribe-card-cadence {
+      font-size: 0.8125rem;
+      color: #555;
+      margin-top: 2px;
+    }
+    .subscribe-card-price {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--black);
+      white-space: nowrap;
+    }
+    .subscribe-card-price-sub {
+      font-size: 0.75rem;
+      color: #555;
+      margin-top: 1px;
+      text-align: right;
+    }
+    .subscribe-card-saving {
+      font-size: 0.8125rem;
+      color: #2e7d32;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    /* CTA buttons */
+    .cta-primary {
+      display: block;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background 0.15s, opacity 0.15s;
+      border: none;
+    }
+    .cta-primary--green {
+      background: var(--green);
+      color: var(--black);
+    }
+    .cta-primary--green:hover { background: #b5d114; }
+    .cta-primary--black {
+      background: var(--black);
+      color: var(--white);
+    }
+    .cta-primary--black:hover { background: #222; }
+    .cta-primary--disabled {
+      background: #ddd;
+      color: #999;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* Saving bar */
+    .result-saving-bar {
+      background: #f0f9f0;
+      border: 1.5px solid #c8e6c9;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 0.875rem;
+      color: #2e7d32;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .result-retake {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .result-retake button {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: #999;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .result-retake button:hover { color: var(--black); }
+
+    /* Coming soon note */
+    .coming-soon-note {
+      font-size: 0.8125rem;
+      color: #888;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* ── Subscription customiser ──────────────────────────────────────────── */
+    .sub-customise-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #d8d8d8;
+      margin-top: 14px;
+      padding-top: 12px;
+      gap: 8px;
+    }
+    .sub-customise-row span {
+      font-size: 0.8125rem;
+      color: #777;
+    }
+    .sub-customise-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--black);
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .sub-customise-btn:hover { opacity: 0.65; }
+
+    .sub-customiser {
+      display: none;
+      padding: 16px 0 2px;
+    }
+    .sub-customiser.is-open { display: block; }
+
+    .sub-customiser-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .sub-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .sub-pill {
+      padding: 8px 16px;
+      border: 2px solid #e5e5e5;
+      border-radius: 99px;
+      background: #fff;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #555;
+      cursor: pointer;
+      transition: border-color 0.14s, background 0.14s, color 0.14s;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .sub-pill:hover { border-color: #aaa; color: var(--black); }
+    .sub-pill.is-active {
+      border-color: var(--black);
+      background: var(--black);
+      color: #fff;
+    }
+    .sub-pill.is-soon {
+      opacity: 0.45;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .sub-customiser-note {
+      font-size: 0.8125rem;
+      color: #777;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== ANNOUNCEMENT BAR ===================== -->
+  <div class="announce-bar">
+    <p>🎾 Free Shipping on All Orders — Use FREESHIP26&nbsp;&nbsp;</p>
+  </div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo" style="text-decoration:none;">
+        <img src="images/logo-black.svg" alt="Just Good Grips" class="logo-img">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="index.html#products" class="nav-link">Shop</a>
+        <a href="index.html#reviews"  class="nav-link">Reviews</a>
+        <a href="index.html#features" class="nav-link">Why Just Good Grips</a>
+        <a href="index.html#about"    class="nav-link">About</a>
+        <a href="index.html#stores"   class="nav-link">Stores</a>
+      </nav>
+      <div class="header-actions">
+        <a href="index.html#products" class="btn btn-outline">Shop All</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index.html#products" class="mobile-nav-link">Shop</a>
+      <a href="index.html#reviews"  class="mobile-nav-link">Reviews</a>
+      <a href="index.html#features" class="mobile-nav-link">Why Just Good Grips</a>
+      <a href="index.html#about"    class="mobile-nav-link">About</a>
+      <a href="index.html#stores"   class="mobile-nav-link">Stores</a>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <div class="quiz-hero">
+    <p class="quiz-hero-eyebrow">Player Profile</p>
+    <h1>What Type of Tennis<br>Player Are You?</h1>
+    <p>Four quick questions to reveal your player profile — and the grip plan that fits your game perfectly.</p>
+  </div>
+
+  <!-- ===================== QUIZ ===================== -->
+  <main>
+    <div class="quiz-wrap">
+
+      <!-- Progress bar -->
+      <div class="quiz-progress" id="quizProgress">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quizProgressFill" style="width:25%"></div>
+        </div>
+        <span class="quiz-progress-label" id="quizProgressLabel">Question 1 of 4</span>
+      </div>
+
+      <!-- ── Q1: Player identity ─────────────────────────────────────────── -->
+      <div class="quiz-step is-active" id="step1">
+        <h2 class="quiz-step-heading">How would you describe yourself on court?</h2>
+        <p class="quiz-step-sub">Pick the one that resonates — there's no wrong answer.</p>
+        <div class="quiz-options">
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-beginner" value="beginner">
+            <label for="pt-beginner">
+              <span class="quiz-option-icon">🌱</span>
+              <span class="quiz-option-text">
+                <strong>Just Getting Started</strong>
+                <span>Learning the game, getting lessons, or picking it up again after a break.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-social" value="social">
+            <label for="pt-social">
+              <span class="quiz-option-icon">☀️</span>
+              <span class="quiz-option-text">
+                <strong>Social &amp; Recreational</strong>
+                <span>I play for the love of it — weekend hits, catch-ups with mates.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-club" value="club">
+            <label for="pt-club">
+              <span class="quiz-option-icon">🎾</span>
+              <span class="quiz-option-text">
+                <strong>Club &amp; Pennant Competitor</strong>
+                <span>I play fixtures, take my tennis seriously, and love match play.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-competitive" value="competitive">
+            <label for="pt-competitive">
+              <span class="quiz-option-icon">🏆</span>
+              <span class="quiz-option-text">
+                <strong>Competitive &amp; Tournament Player</strong>
+                <span>Graded comps, tournaments, training programmes — I'm serious about improving.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="playerType" id="pt-coach" value="coach">
+            <label for="pt-coach">
+              <span class="quiz-option-icon">📋</span>
+              <span class="quiz-option-text">
+                <strong>Coach or Full-Time Player</strong>
+                <span>Tennis is my job or near-daily pursuit. I go through gear fast.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <p class="quiz-error" id="err1">Please choose an option to continue.</p>
+        <div class="quiz-nav">
+          <button class="quiz-btn-next" onclick="nextStep(1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- ── Q2: Training frequency ──────────────────────────────────────── -->
+      <div class="quiz-step" id="step2">
+        <h2 class="quiz-step-heading">How many times a week are you on court?</h2>
+        <p class="quiz-step-sub">Count matches, training sessions, and social hits.</p>
+        <div class="quiz-options quiz-options--2col">
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-1" value="1">
+            <label for="fr-1">
+              <span class="quiz-option-icon">1️⃣</span>
+              <span class="quiz-option-text">
+                <strong>Once a week</strong>
+                <span>Occasional hit</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-2" value="2">
+            <label for="fr-2">
+              <span class="quiz-option-icon">2️⃣</span>
+              <span class="quiz-option-text">
+                <strong>Twice a week</strong>
+                <span>Regular player</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-3" value="3">
+            <label for="fr-3">
+              <span class="quiz-option-icon">3️⃣</span>
+              <span class="quiz-option-text">
+                <strong>3 times a week</strong>
+                <span>Committed player</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-45" value="4.5">
+            <label for="fr-45">
+              <span class="quiz-option-icon">4️⃣</span>
+              <span class="quiz-option-text">
+                <strong>4–5 times a week</strong>
+                <span>High-performance</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="frequency" id="fr-7" value="7">
+            <label for="fr-7">
+              <span class="quiz-option-icon">🔥</span>
+              <span class="quiz-option-text">
+                <strong>Daily (6–7 sessions)</strong>
+                <span>Full-time / coaching</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <p class="quiz-error" id="err2">Please choose an option to continue.</p>
+        <div class="quiz-nav">
+          <button class="quiz-btn-back" onclick="prevStep(2)">← Back</button>
+          <button class="quiz-btn-next" onclick="nextStep(2)">Next →</button>
+        </div>
+      </div>
+
+      <!-- ── Q3: Grip habit ──────────────────────────────────────────────── -->
+      <div class="quiz-step" id="step3">
+        <h2 class="quiz-step-heading">When do you replace your overgrip?</h2>
+        <p class="quiz-step-sub">Be honest — no judgement either way.</p>
+        <div class="quiz-options">
+          <div class="quiz-option">
+            <input type="radio" name="gripHabit" id="gh-every" value="every">
+            <label for="gh-every">
+              <span class="quiz-option-icon">✨</span>
+              <span class="quiz-option-text">
+                <strong>Every single session</strong>
+                <span>Fresh grip = fresh confidence. I wouldn't have it any other way.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="gripHabit" id="gh-few" value="few">
+            <label for="gh-few">
+              <span class="quiz-option-icon">🔄</span>
+              <span class="quiz-option-text">
+                <strong>Every 3–4 sessions</strong>
+                <span>When it starts to slip or lose its tackiness, it's time to change.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="gripHabit" id="gh-long" value="long">
+            <label for="gh-long">
+              <span class="quiz-option-icon">💪</span>
+              <span class="quiz-option-text">
+                <strong>Only when it's really worn out</strong>
+                <span>I get maximum life out of each grip — usually 8+ sessions.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <p class="quiz-error" id="err3">Please choose an option to continue.</p>
+        <div class="quiz-nav">
+          <button class="quiz-btn-back" onclick="prevStep(3)">← Back</button>
+          <button class="quiz-btn-next" onclick="nextStep(3)">Next →</button>
+        </div>
+      </div>
+
+      <!-- ── Q4: Grip feel preference ────────────────────────────────────── -->
+      <div class="quiz-step" id="step4">
+        <h2 class="quiz-step-heading">What matters most to you in an overgrip?</h2>
+        <p class="quiz-step-sub">This helps us describe your player profile.</p>
+        <div class="quiz-options">
+          <div class="quiz-option">
+            <input type="radio" name="gripFeel" id="gf-tacky" value="tacky">
+            <label for="gf-tacky">
+              <span class="quiz-option-icon">🤌</span>
+              <span class="quiz-option-text">
+                <strong>Tackiness &amp; feel</strong>
+                <span>I want to feel connected to the racquet at all times.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="gripFeel" id="gf-absorb" value="absorb">
+            <label for="gf-absorb">
+              <span class="quiz-option-icon">💧</span>
+              <span class="quiz-option-text">
+                <strong>Sweat absorption</strong>
+                <span>My hands sweat — I need a grip that stays secure even when wet.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="gripFeel" id="gf-durable" value="durable">
+            <label for="gf-durable">
+              <span class="quiz-option-icon">🛡️</span>
+              <span class="quiz-option-text">
+                <strong>Durability &amp; longevity</strong>
+                <span>I'd rather change less frequently and get maximum life from each grip.</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="gripFeel" id="gf-value" value="value">
+            <label for="gf-value">
+              <span class="quiz-option-icon">💚</span>
+              <span class="quiz-option-text">
+                <strong>Great quality at a fair price</strong>
+                <span>I don't want to overpay — I just need a reliable grip every time.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <p class="quiz-error" id="err4">Please choose an option to continue.</p>
+        <div class="quiz-nav">
+          <button class="quiz-btn-back" onclick="prevStep(4)">← Back</button>
+          <button class="quiz-btn-next" onclick="nextStep(4)">See My Player Profile →</button>
+        </div>
+      </div>
+
+      <!-- ── RESULTS ─────────────────────────────────────────────────────── -->
+      <div class="quiz-result" id="quizResult">
+
+        <!-- Archetype card -->
+        <div class="archetype-card">
+          <p class="archetype-eyebrow">Your Player Profile</p>
+          <span class="archetype-icon" id="resultIcon">🎾</span>
+          <h2 class="archetype-name" id="resultArchetypeName">The Club Contender</h2>
+          <p class="archetype-desc" id="resultArchetypeDesc">You take your tennis seriously and show up consistently. You expect your gear to keep up.</p>
+        </div>
+
+        <!-- Usage stats -->
+        <div class="result-stats">
+          <div class="result-stat">
+            <p class="rs-label">Grips / Month</p>
+            <p class="rs-value" id="resultGripsPerMonth">—</p>
+            <p class="rs-sub">estimated usage</p>
+          </div>
+          <div class="result-stat">
+            <p class="rs-label">Cost Per Grip</p>
+            <p class="rs-value">$2.50</p>
+            <p class="rs-sub">vs $4–$7 for others</p>
+          </div>
+          <div class="result-stat">
+            <p class="rs-label">Est. Annual Saving</p>
+            <p class="rs-value" id="resultSaving">—</p>
+            <p class="rs-sub">vs $4 competitor grips</p>
+          </div>
+        </div>
+
+        <!-- Saving highlight -->
+        <div class="result-saving-bar" id="resultSavingBar">
+          You could save <strong id="resultSavingHighlight">—</strong> per year switching to Just Good Grips.
+        </div>
+
+        <!-- Purchase options -->
+        <p class="purchase-heading">Your recommended grip plan</p>
+
+        <div class="purchase-options">
+
+          <!-- Subscribe card (featured) -->
+          <div class="subscribe-card" id="subscribeCard">
+            <span class="subscribe-card-badge">Recommended</span>
+            <div class="subscribe-card-top">
+              <div>
+                <p class="subscribe-card-label">Subscribe &amp; never run out</p>
+                <p class="subscribe-card-name" id="subPackName">12 grips</p>
+                <p class="subscribe-card-cadence" id="subCadence">Monthly (every 4 weeks)</p>
+              </div>
+              <div>
+                <!-- NOTE FOR OWNER: Update prices once Stripe subscription pricing is configured -->
+                <p class="subscribe-card-price" id="subPrice">~$—</p>
+                <p class="subscribe-card-price-sub">per delivery</p>
+              </div>
+            </div>
+            <p class="subscribe-card-saving" id="subSavingNote">Set and forget — grips arrive before you run out.</p>
+
+            <!-- Customise toggle -->
+            <div class="sub-customise-row">
+              <span>Recommended based on your answers</span>
+              <button class="sub-customise-btn" id="subCustomiseBtn" onclick="toggleCustomiser()">Customise ↓</button>
+            </div>
+
+            <!-- Customiser panel (hidden until toggled) -->
+            <div class="sub-customiser" id="subCustomiser">
+              <p class="sub-customiser-label">Grips per order</p>
+              <div class="sub-pills" id="subQtyPills">
+                <button class="sub-pill" data-qty="12"  onclick="setSubQty(12)">12 grips</button>
+                <button class="sub-pill" data-qty="24"  onclick="setSubQty(24)">24 grips</button>
+                <button class="sub-pill" data-qty="36"  onclick="setSubQty(36)">36 grips</button>
+                <!-- NOTE FOR OWNER: Remove 'is-soon' class from the 60-grip button when the 60-pack launches -->
+                <button class="sub-pill is-soon" data-qty="60" onclick="setSubQty(60)">60 grips <span style="font-size:0.7rem;font-weight:700;letter-spacing:0.06em">(SOON)</span></button>
+              </div>
+
+              <p class="sub-customiser-label">Delivery frequency</p>
+              <div class="sub-pills" id="subFreqPills">
+                <button class="sub-pill" data-freq="2"  onclick="setSubFreq(2)">Fortnightly</button>
+                <button class="sub-pill" data-freq="4"  onclick="setSubFreq(4)">Monthly</button>
+                <button class="sub-pill" data-freq="12" onclick="setSubFreq(12)">Quarterly</button>
+              </div>
+
+              <p class="sub-customiser-note" id="subCustomNote">
+                <!-- Filled by JS -->
+              </p>
+            </div>
+
+            <!-- NOTE FOR OWNER: When Stripe subscription links are ready, add them to the SUB_LINKS
+                 lookup table in the <script> below. Each entry maps "qty-freq" → Stripe Payment Link URL.
+                 Example: '12-4' → monthly 12-grip subscription link. -->
+            <a href="#" class="cta-primary cta-primary--green cta-primary--disabled" id="subBuyBtn" target="_blank" rel="noopener">
+              Subscribe — Coming Soon
+            </a>
+          </div>
+
+          <!-- One-time buy card -->
+          <div class="buy-card" id="buyCard">
+            <div class="buy-card-top">
+              <div>
+                <p class="buy-card-label">One-time purchase</p>
+                <p class="buy-card-name" id="buyPackName">12-Pack White</p>
+              </div>
+              <div>
+                <p class="buy-card-price" id="buyPrice">$29.99</p>
+                <p class="buy-card-price-sub" id="buyPricePerGrip">$2.50 per grip</p>
+              </div>
+            </div>
+            <!-- NOTE FOR OWNER: Update href for each pack as they go live on Stripe -->
+            <a href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01" class="cta-primary cta-primary--black" id="buyBtn" target="_blank" rel="noopener">
+              Buy Once — 12-Pack White
+            </a>
+          </div>
+
+        </div>
+
+        <div class="result-retake">
+          <button onclick="retakeQuiz()">Retake the quiz</button>
+        </div>
+
+      </div><!-- /quiz-result -->
+
+    </div><!-- /quiz-wrap -->
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="images/jgg-insta.png" alt="Just Good Grips" class="footer-logo">
+        <p class="footer-tagline">Premium tennis overgrips.<br>Australian owned.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/justgoodgrips/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/justgoodgrips" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="index.html#products">12-Pack White</a>
+        <a href="index.html#products">Coming Soon</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="index.html#about">About</a>
+        <a href="index.html#stores">Find a Store</a>
+        <a href="subscription.html">Player Profile Quiz</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="https://www.instagram.com/justgoodgrips/">Instagram DM</a>
+        <a href="https://www.facebook.com/justgoodgrips">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Just Good Grips. All rights reserved. Australian owned &amp; operated.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    const TOTAL_STEPS = 4;
+
+    // ── Price per grip ─────────────────────────────────────────────────────
+    // $29.99 / 12 grips = $2.4992 per grip, displayed as $2.50
+    const PRICE_PER_GRIP = 29.99 / 12;
+
+    // ── One-time purchase catalogue ────────────────────────────────────────
+    // NOTE FOR OWNER: Update prices and buyLinks as new packs launch.
+    const PACKS = {
+      '12-white': {
+        name:    '12-Pack — White',
+        grips:   12,
+        price:   29.99,
+        buyLink: 'https://buy.stripe.com/8x214pfFt5b30rfehc83C01',
+      },
+      '60-white': {
+        name:    '60-Pack — White',
+        grips:   60,
+        price:   null,   // NOTE FOR OWNER: Set price
+        buyLink: '#',    // NOTE FOR OWNER: Set Stripe one-time link
+      },
+    };
+
+    // ── Subscription link lookup ───────────────────────────────────────────
+    // NOTE FOR OWNER: Add Stripe subscription Payment Links here.
+    // Keys are "{grips}-{freq_weeks}" e.g. '12-4' = 12 grips, monthly.
+    // To create: Stripe Dashboard → Products → Add a price (recurring, every N weeks)
+    //            → Create Payment Link → copy URL here.
+    const SUB_LINKS = {
+      '12-2':  '#',   // 12 grips, fortnightly  (every 2 weeks)
+      '12-4':  '#',   // 12 grips, monthly      (every 4 weeks)
+      '12-12': '#',   // 12 grips, quarterly    (every 12 weeks)
+      '24-2':  '#',   // 24 grips, fortnightly
+      '24-4':  '#',   // 24 grips, monthly
+      '24-12': '#',   // 24 grips, quarterly
+      '36-2':  '#',   // 36 grips, fortnightly
+      '36-4':  '#',   // 36 grips, monthly
+      '36-12': '#',   // 36 grips, quarterly
+      '60-4':  '#',   // 60 grips, monthly      (NOTE: 60-pack not yet live)
+      '60-12': '#',   // 60 grips, quarterly
+    };
+
+    // ── Archetypes ─────────────────────────────────────────────────────────
+    const ARCHETYPES = {
+      beginner: {
+        icon: '🌱', name: 'The Rising Star',
+        desc: 'You\'re at the beginning of an exciting journey. Every session builds your game — and keeping a fresh grip means one less thing to think about while you focus on improving.',
+      },
+      social: {
+        icon: '☀️', name: 'The Weekend Warrior',
+        desc: 'Tennis is your escape. You\'re not there to grind — you\'re there to enjoy it. A reliable grip that\'s always ready means more time rallying, less time fussing.',
+      },
+      club: {
+        icon: '🎾', name: 'The Club Contender',
+        desc: 'You show up consistently and compete with intent. Your gear needs to match your commitment — and a fresh grip can be the difference between a clutch hold and a slip at the wrong moment.',
+      },
+      competitive: {
+        icon: '🏆', name: 'The Match Player',
+        desc: 'You train hard, you compete harder. Every edge matters — racquet head speed, footwork, and yes, grip feel. You\'re the type who notices when something\'s even slightly off.',
+      },
+      coach: {
+        icon: '📋', name: 'The Court Commander',
+        desc: 'Tennis is your world. You go through grips faster than anyone, and you know it. Stocking up in bulk at an honest price isn\'t a luxury — it\'s just smart.',
+      },
+    };
+
+    // ── Grip usage rates (grips per session) ──────────────────────────────
+    // "every" → 1 grip per session
+    // "few"   → 1 grip per 3.5 sessions (midpoint of 3–4 sessions)
+    // "long"  → 1 grip per 8 sessions
+    const GRIPS_PER_SESSION = { every: 1, few: 1 / 3.5, long: 1 / 8 };
+
+    // ── Customiser state ───────────────────────────────────────────────────
+    let customSubQty  = 12;   // grips per order
+    let customSubFreq = 4;    // delivery interval in weeks
+
+    // ── Helpers ────────────────────────────────────────────────────────────
+    function getRadioVal(name) {
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      return el ? el.value : null;
+    }
+
+    function updateProgress(step) {
+      const pct = Math.round((step / TOTAL_STEPS) * 100);
+      document.getElementById('quizProgressFill').style.width = pct + '%';
+      document.getElementById('quizProgressLabel').textContent = `Question ${step} of ${TOTAL_STEPS}`;
+    }
+
+    function showStep(n) {
+      document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('is-active'));
+      document.querySelectorAll('.quiz-error').forEach(el => el.classList.remove('is-visible'));
+      const el = document.getElementById('step' + n);
+      if (el) el.classList.add('is-active');
+      updateProgress(n);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Snap calculated weeks to the three available subscription frequencies
+    function snapToSubFreq(weeks) {
+      // Pick whichever of [2, 4, 12] is closest
+      return [2, 4, 12].reduce((prev, curr) =>
+        Math.abs(curr - weeks) < Math.abs(prev - weeks) ? curr : prev
+      );
+    }
+
+    // Snap grips needed to the closest available qty option
+    function snapToSubQty(grips) {
+      return [12, 24, 36, 60].reduce((prev, curr) =>
+        Math.abs(curr - grips) < Math.abs(prev - grips) ? curr : prev
+      );
+    }
+
+    const FREQ_LABELS = {
+      2:  'Fortnightly (every 2 weeks)',
+      4:  'Monthly (every 4 weeks)',
+      12: 'Quarterly (every 3 months)',
+    };
+
+    // ── Quiz navigation ────────────────────────────────────────────────────
+    window.nextStep = function (from) {
+      const radioNames = ['playerType', 'frequency', 'gripHabit', 'gripFeel'];
+      if (!getRadioVal(radioNames[from - 1])) {
+        document.getElementById('err' + from).classList.add('is-visible');
+        return;
+      }
+      from < TOTAL_STEPS ? showStep(from + 1) : showResult();
+    };
+
+    window.prevStep = function (from) { showStep(from - 1); };
+
+    // ── Customiser interactions ────────────────────────────────────────────
+    window.toggleCustomiser = function () {
+      const panel = document.getElementById('subCustomiser');
+      const btn   = document.getElementById('subCustomiseBtn');
+      const open  = panel.classList.toggle('is-open');
+      btn.textContent = open ? 'Collapse ↑' : 'Customise ↓';
+    };
+
+    window.setSubQty = function (qty) {
+      customSubQty = qty;
+      document.querySelectorAll('#subQtyPills .sub-pill:not(.is-soon)').forEach(b => {
+        b.classList.toggle('is-active', +b.dataset.qty === qty);
+      });
+      renderSubCard();
+    };
+
+    window.setSubFreq = function (freq) {
+      customSubFreq = freq;
+      document.querySelectorAll('#subFreqPills .sub-pill').forEach(b => {
+        b.classList.toggle('is-active', +b.dataset.freq === freq);
+      });
+      renderSubCard();
+    };
+
+    // ── Render subscribe card from current customSubQty / customSubFreq ────
+    function renderSubCard() {
+      const pricePerDelivery = customSubQty * PRICE_PER_GRIP;
+      const freqLabel        = FREQ_LABELS[customSubFreq] || `Every ${customSubFreq} weeks`;
+      const linkKey          = `${customSubQty}-${customSubFreq}`;
+      const subLink          = SUB_LINKS[linkKey] || '#';
+      const isLive           = subLink !== '#';
+
+      document.getElementById('subPackName').textContent = `${customSubQty} grips per delivery`;
+      document.getElementById('subCadence').textContent  = freqLabel;
+      document.getElementById('subPrice').textContent    = `~$${pricePerDelivery.toFixed(2)}`;
+
+      // Helper note in customiser panel
+      const gripsPerWeek  = customSubQty / customSubFreq;
+      const sessionsLabel = gripsPerWeek < 1
+        ? `roughly every ${Math.round(1 / gripsPerWeek)} sessions`
+        : `~${gripsPerWeek.toFixed(1)} grips per week`;
+      document.getElementById('subCustomNote').textContent =
+        `At this cadence you'll have ${sessionsLabel} available — adjust until it feels right.`;
+
+      const savingNote = document.getElementById('subSavingNote');
+      savingNote.textContent = isLive
+        ? `${customSubQty} grips, ${freqLabel.toLowerCase()}. Set it and forget it.`
+        : `${customSubQty} grips, ${freqLabel.toLowerCase()} — launching soon.`;
+
+      const subBtn = document.getElementById('subBuyBtn');
+      if (isLive) {
+        subBtn.textContent = `Subscribe — ${customSubQty} grips, ${freqLabel.split(' ')[0]}`;
+        subBtn.href        = subLink;
+        subBtn.classList.remove('cta-primary--disabled');
+      } else {
+        subBtn.textContent = 'Subscribe — Coming Soon';
+        subBtn.removeAttribute('href');
+        subBtn.classList.add('cta-primary--disabled');
+      }
+    }
+
+    // ── Recommendation engine ──────────────────────────────────────────────
+    function showResult() {
+      document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('is-active'));
+      document.getElementById('quizProgress').style.display = 'none';
+      document.getElementById('quizResult').classList.add('is-active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const playerType    = getRadioVal('playerType');
+      const sessionsPerWk = parseFloat(getRadioVal('frequency'));
+      const gripHabit     = getRadioVal('gripHabit');
+
+      // ── Core usage calculation ─────────────────────────────────────────
+      // Grips per week = grips consumed per session × sessions per week
+      const gripsPerWeek      = GRIPS_PER_SESSION[gripHabit] * sessionsPerWk;
+      // Grips per month using exact 52-week year: 52 ÷ 12 = 4.3333…
+      const gripsPerMonthExact = gripsPerWeek * (52 / 12);
+      const gpmMid  = Math.max(1, Math.round(gripsPerMonthExact));
+      const gpmLow  = Math.max(1, gpmMid - 1);
+      const gpmHigh = gpmMid + 1;
+
+      // ── Pack for one-time buy ──────────────────────────────────────────
+      // Recommend 60-pack for 8+ grips/month or coaches (reordering 12-pack monthly gets tedious)
+      const packKey = (gripsPerMonthExact >= 8 || playerType === 'coach') ? '60-white' : '12-white';
+      const pack    = PACKS[packKey];
+
+      // ── Savings vs competitors ─────────────────────────────────────────
+      // JGG: $29.99 / 12 = $2.4992 per grip
+      // Competitor low: $4/grip → saving $1.50/grip
+      // Competitor high: $7/grip → saving $4.50/grip
+      const annualGrips = gripsPerMonthExact * 12;
+      const savingVs4   = Math.round(annualGrips * (4.00 - PRICE_PER_GRIP));
+      const savingVs7   = Math.round(annualGrips * (7.00 - PRICE_PER_GRIP));
+
+      // ── Auto-calculate sensible subscription defaults ──────────────────
+      // Ideal qty = grips needed to cover the chosen frequency
+      // e.g. if player uses 3 grips/week and we deliver monthly (4 weeks) → 12 grips
+      // Snap to nearest available qty (12, 24, 36, 60)
+      const freqDefault       = snapToSubFreq(12 / Math.max(gripsPerWeek, 0.25)); // weeks a 12-pack lasts
+      const idealQty          = gripsPerWeek * freqDefault;
+      customSubFreq           = freqDefault;
+      customSubQty            = snapToSubQty(idealQty);
+
+      // ── Populate archetype ─────────────────────────────────────────────
+      const arch = ARCHETYPES[playerType];
+      document.getElementById('resultIcon').textContent          = arch.icon;
+      document.getElementById('resultArchetypeName').textContent = arch.name;
+      document.getElementById('resultArchetypeDesc').textContent = arch.desc;
+
+      // ── Populate usage stats ───────────────────────────────────────────
+      document.getElementById('resultGripsPerMonth').textContent     = `${gpmLow}–${gpmHigh}`;
+      document.getElementById('resultSaving').textContent            = `$${savingVs4}–$${savingVs7}`;
+      document.getElementById('resultSavingHighlight').textContent   = `$${savingVs4}–$${savingVs7}`;
+
+      // ── Activate default customiser pills ─────────────────────────────
+      document.querySelectorAll('#subQtyPills .sub-pill:not(.is-soon)').forEach(b => {
+        b.classList.toggle('is-active', +b.dataset.qty === customSubQty);
+      });
+      document.querySelectorAll('#subFreqPills .sub-pill').forEach(b => {
+        b.classList.toggle('is-active', +b.dataset.freq === customSubFreq);
+      });
+
+      // Render subscribe card with auto defaults
+      renderSubCard();
+
+      // ── One-time buy card ──────────────────────────────────────────────
+      document.getElementById('buyPackName').textContent = pack.name;
+      const buyBtn = document.getElementById('buyBtn');
+
+      if (pack.buyLink !== '#' && pack.price) {
+        const pricePerGrip = pack.price / pack.grips;
+        document.getElementById('buyPrice').textContent        = `$${pack.price.toFixed(2)}`;
+        document.getElementById('buyPricePerGrip').textContent = `$${pricePerGrip.toFixed(2)} per grip`;
+        buyBtn.textContent = `Buy Once — ${pack.name}`;
+        buyBtn.href        = pack.buyLink;
+        buyBtn.classList.remove('cta-primary--disabled');
+        buyBtn.classList.add('cta-primary--black');
+      } else {
+        document.getElementById('buyPrice').textContent        = 'Coming Soon';
+        document.getElementById('buyPricePerGrip').textContent = '';
+        buyBtn.textContent = 'Coming Soon';
+        buyBtn.removeAttribute('href');
+        buyBtn.classList.add('cta-primary--disabled');
+      }
+    }
+
+    window.retakeQuiz = function () {
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      // Collapse customiser if open
+      document.getElementById('subCustomiser').classList.remove('is-open');
+      document.getElementById('subCustomiseBtn').textContent = 'Customise ↓';
+      document.getElementById('quizResult').classList.remove('is-active');
+      document.getElementById('quizProgress').style.display = '';
+      showStep(1);
+    };
+
+  })();
+  </script>
+
+</body>
+</html>
