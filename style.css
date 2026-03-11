@@ -1458,6 +1458,145 @@ a {
   margin-top: auto;
 }
 
+/* ── Main image zoom hint ── */
+.modal-main-img-wrap {
+  cursor: zoom-in;
+}
+.modal-main-img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0,0,0,0.45) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3Cline x1='11' y1='8' x2='11' y2='14'/%3E%3Cline x1='8' y1='11' x2='14' y2='11'/%3E%3C/svg%3E") center/18px no-repeat;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 2;
+}
+.modal-main-img-wrap:hover::after { opacity: 1; }
+/* Always show hint on touch/mobile */
+@media (hover: none) {
+  .modal-main-img-wrap::after { opacity: 0.7; }
+}
+
+/* ==============================================
+   IMAGE LIGHTBOX
+   ============================================== */
+
+.img-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-lightbox[hidden] { display: none; }
+
+.img-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  cursor: zoom-out;
+}
+
+.img-lightbox-img-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-lightbox-img {
+  max-width: 92vw;
+  max-height: 90vh;
+  max-height: 90dvh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 8px 80px rgba(0,0,0,0.6);
+  display: block;
+  animation: lightboxIn 0.22s cubic-bezier(.4,0,.2,1);
+}
+@keyframes lightboxIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.img-lightbox-close {
+  position: fixed;
+  top: max(20px, env(safe-area-inset-top, 20px));
+  right: max(20px, env(safe-area-inset-right, 20px));
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.375rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  touch-action: manipulation;
+}
+.img-lightbox-close:hover { background: rgba(255,255,255,0.28); }
+
+.img-lightbox-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  touch-action: manipulation;
+}
+.img-lightbox-arrow:hover { background: rgba(255,255,255,0.28); }
+.img-lightbox-arrow[hidden] { display: none; }
+.img-lightbox-arrow--prev { left:  max(16px, env(safe-area-inset-left, 16px)); }
+.img-lightbox-arrow--next { right: max(16px, env(safe-area-inset-right, 16px)); }
+.img-lightbox-arrow svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.img-lightbox-counter {
+  position: fixed;
+  bottom: max(24px, env(safe-area-inset-bottom, 24px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 99px;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
 /* ==============================================
    QUIZ NUDGE STRIP
    ============================================== */
