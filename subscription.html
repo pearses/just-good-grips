@@ -568,6 +568,57 @@
     }
     .onetime-btn:hover { background: var(--black); color: var(--white); }
 
+    /* ── Weekly cost comparison block (inside featured tier card) ────────── */
+    .tier-weekly-comparison {
+      background: #f0f9f0;
+      border: 1.5px solid #c8e6c9;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+    }
+    .twc-col { display: flex; flex-direction: column; gap: 3px; }
+    .twc-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #999;
+    }
+    .twc-value {
+      font-size: 1.125rem;
+      font-weight: 900;
+      color: #1b5e20;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .twc-other {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #bbb;
+      text-decoration: line-through;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .twc-saving {
+      grid-column: 1 / -1;
+      padding-top: 10px;
+      border-top: 1px solid #c8e6c9;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #2e7d32;
+    }
+
+    /* ── Mini card per-week cost ──────────────────────────────────────────── */
+    .tier-mini-weekly {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-top: 4px;
+    }
+
     /* ── Retake ───────────────────────────────────────────────────────────── */
     .result-retake {
       text-align: center;
@@ -1168,13 +1219,27 @@
     }
 
     function tierPricePerMonth(tier) {
-      // Convert delivery price to a monthly equivalent
       return tierPricePerDelivery(tier) * (4 / tier.freqWeeks);
+    }
+
+    // Weekly cost helpers — used for the per-week comparison block
+    function tierPricePerWeek(tier) {
+      return tierPricePerDelivery(tier) / tier.freqWeeks;
+    }
+
+    function competitorPricePerWeek(tier) {
+      // Same grip count at mid-market competitor price ($5.50/grip)
+      return (tier.grips * COMPETITOR_MID) / tier.freqWeeks;
     }
 
     // ── Build recommended tier card (large featured card) ─────────────────
     function buildFeaturedCard(tier) {
-      const price    = tierPricePerDelivery(tier);
+      const price      = tierPricePerDelivery(tier);
+      const jggWeekly  = tierPricePerWeek(tier);
+      const compWeekly = competitorPricePerWeek(tier);
+      const saveWeekly = compWeekly - jggWeekly;
+      const saveAnnual = Math.round(saveWeekly * 52);
+
       const linkKey  = `${tier.grips}-${tier.freqWeeks}`;
       const subLink  = SUB_LINKS[linkKey] || '#';
       const isLive   = subLink !== '#';
@@ -1208,6 +1273,19 @@
               <p class="tcp-grip">$${SUB_PPG.toFixed(2)}/grip · save 10%</p>
             </div>
           </div>
+
+          <div class="tier-weekly-comparison">
+            <div class="twc-col">
+              <span class="twc-label">JGG Club / week</span>
+              <span class="twc-value">~$${jggWeekly.toFixed(2)}</span>
+            </div>
+            <div class="twc-col">
+              <span class="twc-label">Big brands / week</span>
+              <span class="twc-other">~$${compWeekly.toFixed(2)}</span>
+            </div>
+            <p class="twc-saving">You save ~$${saveWeekly.toFixed(2)}/week — that's ~$${saveAnnual} back in your pocket every year.</p>
+          </div>
+
           <ul class="tier-bullets">
             ${tier.bullets.map(b => `<li>${b}</li>`).join('')}
           </ul>
@@ -1221,7 +1299,8 @@
 
     // ── Build mini tier card (comparison grid) ─────────────────────────────
     function buildMiniCard(tier, isRecommended) {
-      const price = tierPricePerDelivery(tier);
+      const price     = tierPricePerDelivery(tier);
+      const weekly    = tierPricePerWeek(tier);
       const packCount = tier.grips / 12;
       const packLabel = packCount === 1 ? '12 grips · 1 pack' : `${tier.grips} grips · ${packCount} packs`;
 
@@ -1238,6 +1317,7 @@
           <p class="tier-mini-freq">${tier.freqLabel}</p>
           <p class="tier-mini-price">~$${price.toFixed(2)}</p>
           <p class="tier-mini-grip">$${SUB_PPG.toFixed(2)}/grip</p>
+          <p class="tier-mini-weekly">~$${weekly.toFixed(2)} / week</p>
         </div>
       `;
     }
