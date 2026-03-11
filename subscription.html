@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>JGG Club Membership — Find Your Grip Plan</title>
   <meta name="description" content="Never run out of overgrips again. Answer 4 quick questions and we'll match you to the right JGG Club membership — fresh grips delivered on autopilot.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -587,9 +587,36 @@
 
     /* ── Mobile tweaks ────────────────────────────────────────────────────── */
     @media (max-width: 480px) {
+      .club-hero { padding: 48px 20px 40px; }
+      .club-hero h1 { font-size: 2rem; }
+      .club-hero-sub { font-size: 0.9375rem; }
+      .club-hero-proof { gap: 10px; }
+      .club-hero-proof-item { font-size: 0.75rem; }
+
+      .quiz-wrap { padding: 28px 16px 60px; }
+
       .savings-bar { flex-direction: column; text-align: center; gap: 8px; }
+      .savings-bar-text { font-size: 0.875rem; }
+
+      .archetype-card { padding: 24px 20px; }
+      .archetype-name { font-size: 1.375rem; }
+
+      /* Stack the price next to detail on small screens */
       .tier-card-featured-row { flex-direction: column; gap: 8px; }
       .tier-card-featured-pricing { text-align: left; }
+      .tier-card-featured-body { padding: 18px 16px; }
+      .tier-card-featured-header { padding: 12px 16px; }
+
+      /* Tiers grid: 1 column on phones */
+      .tiers-grid { grid-template-columns: 1fr; }
+
+      .club-why { grid-template-columns: 1fr; gap: 10px; }
+
+      .onetime-btn { width: 100%; text-align: center; display: block; box-sizing: border-box; }
+
+      /* Quiz option cards: tighter padding */
+      .quiz-option label { padding: 12px 14px; gap: 10px; }
+      .quiz-options--2col { grid-template-columns: 1fr; }
     }
 
   </style>
