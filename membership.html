@@ -568,6 +568,57 @@
     }
     .onetime-btn:hover { background: var(--black); color: var(--white); }
 
+    /* ── Weekly cost comparison block (inside featured tier card) ────────── */
+    .tier-weekly-comparison {
+      background: #f0f9f0;
+      border: 1.5px solid #c8e6c9;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+    }
+    .twc-col { display: flex; flex-direction: column; gap: 3px; }
+    .twc-label {
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #999;
+    }
+    .twc-value {
+      font-size: 1.125rem;
+      font-weight: 900;
+      color: #1b5e20;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .twc-other {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #bbb;
+      text-decoration: line-through;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .twc-saving {
+      grid-column: 1 / -1;
+      padding-top: 10px;
+      border-top: 1px solid #c8e6c9;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #2e7d32;
+    }
+
+    /* ── Mini card per-week cost ──────────────────────────────────────────── */
+    .tier-mini-weekly {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-top: 4px;
+    }
+
     /* ── Retake ───────────────────────────────────────────────────────────── */
     .result-retake {
       text-align: center;
@@ -640,7 +691,7 @@
         <a href="index.html#features" class="nav-link">Why Just Good Grips</a>
         <a href="index.html#about"    class="nav-link">About</a>
         <a href="index.html#stores"   class="nav-link">Stores</a>
-        <a href="subscription.html" class="nav-link">Plans</a>
+        <a href="membership.html" class="nav-link">Membership</a>
       </nav>
       <div class="header-actions">
         <a href="index.html#products" class="btn btn-outline">Shop All</a>
@@ -662,11 +713,11 @@
   <div class="club-hero">
     <p class="club-hero-eyebrow">JGG Club Membership</p>
     <h1>Never run out of<br><em>overgrips</em> again.</h1>
-    <p class="club-hero-sub">Answer 4 quick questions. We'll match you to the right membership tier and deliver fresh grips to your door — on autopilot.</p>
+    <p class="club-hero-sub">4 questions. 30 seconds. We'll match you to the right tier — then deliver fresh grips before you even think to reorder.</p>
     <div class="club-hero-proof">
-      <span class="club-hero-proof-item">$2.25 per grip — less than half the pro shop price</span>
-      <span class="club-hero-proof-item">Delivered on your schedule</span>
-      <span class="club-hero-proof-item">Pause or cancel anytime</span>
+      <span class="club-hero-proof-item">Half the price of pro shop grips — delivered to you</span>
+      <span class="club-hero-proof-item">Your grips arrive before you run out</span>
+      <span class="club-hero-proof-item">No lock-in. Cancel in seconds.</span>
     </div>
   </div>
 
@@ -919,8 +970,8 @@
           <span class="savings-bar-icon">💸</span>
           <p class="savings-bar-text">
             At pro shop prices, you're spending <strong id="savingsBarProCost">—</strong>/year on overgrips.
-            With JGG Club: <strong id="savingsBarJggCost">—</strong>/year.
-            <strong>You save <span id="savingsBarSaving">—</span>/year.</strong>
+            As a JGG member: <strong id="savingsBarJggCost">—</strong>/year.
+            <strong>You save <span id="savingsBarSaving">—</span>/year — for doing nothing differently.</strong>
           </p>
         </div>
 
@@ -934,18 +985,18 @@
         <div class="club-why">
           <div class="club-why-item">
             <span class="club-why-item-icon">📦</span>
-            <strong>Delivered to your door.</strong>
-            No more last-minute runs to the pro shop mid-season.
+            <strong>Always stocked, zero effort.</strong>
+            Fresh grips land at your door before you run out. Never scramble before a match again.
           </div>
           <div class="club-why-item">
             <span class="club-why-item-icon">💸</span>
             <strong>Less than half the pro shop price.</strong>
-            $2.25 per grip vs $5–$6 for the big brands.
+            $2.25 per grip vs $5–$6 for the big brands. Honestly, why are people still paying pro shop prices?
           </div>
           <div class="club-why-item">
             <span class="club-why-item-icon">⚡</span>
             <strong>No lock-in, ever.</strong>
-            Pause, skip a delivery, or cancel anytime. No fuss.
+            Pause, skip a delivery, or cancel in seconds. There's nothing to lose — except a bad grip.
           </div>
         </div>
 
@@ -957,7 +1008,7 @@
 
         <!-- One-time fallback -->
         <div class="onetime-section">
-          <p class="onetime-label">Not quite ready to commit? No worries — try us first.</p>
+          <p class="onetime-label">Want to try before you commit? Fair enough — but once you feel the difference, you'll be back.</p>
           <a href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01" class="onetime-btn" id="buyOneTimeBtn" target="_blank" rel="noopener">
             Buy Once — 12-Pack White · $29.99
           </a>
@@ -996,7 +1047,7 @@
         <h4>Company</h4>
         <a href="index.html#about">About</a>
         <a href="index.html#stores">Find a Store</a>
-        <a href="subscription.html">JGG Club</a>
+        <a href="membership.html">JGG Club</a>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
@@ -1019,8 +1070,8 @@
     // ── Pricing ────────────────────────────────────────────────────────────
     const ONE_TIME_PRICE_12 = 29.99;           // $29.99 for 12 grips
     const PRICE_PER_GRIP    = ONE_TIME_PRICE_12 / 12;  // ~$2.4992
-    const SUB_DISCOUNT      = 0.10;            // 10% membership discount
-    const SUB_PPG           = PRICE_PER_GRIP * (1 - SUB_DISCOUNT); // ~$2.25/grip
+    const MEMBERSHIP_DISCOUNT = 0.10;          // 10% membership discount
+    const MEMBERSHIP_PPG      = PRICE_PER_GRIP * (1 - MEMBERSHIP_DISCOUNT); // ~$2.25/grip
 
     const COMPETITOR_MID = 5.50;              // midpoint of $5–$6 competitor price
 
@@ -1085,10 +1136,10 @@
       },
     ];
 
-    // ── Stripe subscription links ──────────────────────────────────────────
-    // NOTE FOR OWNER: Add Stripe Payment Link URLs here when subscriptions go live.
+    // ── Stripe membership links ────────────────────────────────────────────
+    // NOTE FOR OWNER: Add Stripe Payment Link URLs here when memberships go live.
     // Key format: "{grips}-{freqWeeks}"
-    const SUB_LINKS = {
+    const MEMBERSHIP_LINKS = {
       '12-2':  'https://buy.stripe.com/00wcN73WL46Z0rfgpk83C06',   // Starter fortnightly (every 2 weeks)
       '12-4':  'https://buy.stripe.com/4gM9AV50P46Zgqdehc83C05',   // Regular — monthly (every 4 weeks)
       '12-12': 'https://buy.stripe.com/dRm14p9h5fPH8XL6OK83C0a',   // Starter — quarterly (every 12 weeks)
@@ -1164,20 +1215,34 @@
 
     // ── Tier price helpers ─────────────────────────────────────────────────
     function tierPricePerDelivery(tier) {
-      return tier.grips * PRICE_PER_GRIP * (1 - SUB_DISCOUNT);
+      return tier.grips * PRICE_PER_GRIP * (1 - MEMBERSHIP_DISCOUNT);
     }
 
     function tierPricePerMonth(tier) {
-      // Convert delivery price to a monthly equivalent
       return tierPricePerDelivery(tier) * (4 / tier.freqWeeks);
+    }
+
+    // Weekly cost helpers — used for the per-week comparison block
+    function tierPricePerWeek(tier) {
+      return tierPricePerDelivery(tier) / tier.freqWeeks;
+    }
+
+    function competitorPricePerWeek(tier) {
+      // Same grip count at mid-market competitor price ($5.50/grip)
+      return (tier.grips * COMPETITOR_MID) / tier.freqWeeks;
     }
 
     // ── Build recommended tier card (large featured card) ─────────────────
     function buildFeaturedCard(tier) {
-      const price    = tierPricePerDelivery(tier);
+      const price      = tierPricePerDelivery(tier);
+      const jggWeekly  = tierPricePerWeek(tier);
+      const compWeekly = competitorPricePerWeek(tier);
+      const saveWeekly = compWeekly - jggWeekly;
+      const saveAnnual = Math.round(saveWeekly * 52);
+
       const linkKey  = `${tier.grips}-${tier.freqWeeks}`;
-      const subLink  = SUB_LINKS[linkKey] || '#';
-      const isLive   = subLink !== '#';
+      const membershipLink = MEMBERSHIP_LINKS[linkKey] || '#';
+      const isLive   = membershipLink !== '#';
 
       const packCount = tier.grips / 12;
       const packLabel = packCount === 1
@@ -1205,14 +1270,27 @@
             <div class="tier-card-featured-pricing">
               <p class="tcp-price">~$${price.toFixed(2)}</p>
               <p class="tcp-sub">per delivery</p>
-              <p class="tcp-grip">$${SUB_PPG.toFixed(2)}/grip · save 10%</p>
+              <p class="tcp-grip">$${MEMBERSHIP_PPG.toFixed(2)}/grip · save 10%</p>
             </div>
           </div>
+
+          <div class="tier-weekly-comparison">
+            <div class="twc-col">
+              <span class="twc-label">JGG Club / week</span>
+              <span class="twc-value">~$${jggWeekly.toFixed(2)}</span>
+            </div>
+            <div class="twc-col">
+              <span class="twc-label">Big brands / week</span>
+              <span class="twc-other">~$${compWeekly.toFixed(2)}</span>
+            </div>
+            <p class="twc-saving">You save ~$${saveWeekly.toFixed(2)}/week — that's ~$${saveAnnual} back in your pocket every year. Most members wonder why they didn't join sooner.</p>
+          </div>
+
           <ul class="tier-bullets">
             ${tier.bullets.map(b => `<li>${b}</li>`).join('')}
           </ul>
           ${isLive
-            ? `<a href="${subLink}" class="tier-cta tier-cta--green" target="_blank" rel="noopener">${ctaText}</a>`
+            ? `<a href="${membershipLink}" class="tier-cta tier-cta--green" target="_blank" rel="noopener">${ctaText}</a>`
             : `<span class="tier-cta tier-cta--disabled">${ctaText}</span>`
           }
         </div>
@@ -1221,7 +1299,8 @@
 
     // ── Build mini tier card (comparison grid) ─────────────────────────────
     function buildMiniCard(tier, isRecommended) {
-      const price = tierPricePerDelivery(tier);
+      const price     = tierPricePerDelivery(tier);
+      const weekly    = tierPricePerWeek(tier);
       const packCount = tier.grips / 12;
       const packLabel = packCount === 1 ? '12 grips · 1 pack' : `${tier.grips} grips · ${packCount} packs`;
 
@@ -1237,7 +1316,8 @@
           <p class="tier-mini-qty">${packLabel}</p>
           <p class="tier-mini-freq">${tier.freqLabel}</p>
           <p class="tier-mini-price">~$${price.toFixed(2)}</p>
-          <p class="tier-mini-grip">$${SUB_PPG.toFixed(2)}/grip</p>
+          <p class="tier-mini-grip">$${MEMBERSHIP_PPG.toFixed(2)}/grip</p>
+          <p class="tier-mini-weekly">~$${weekly.toFixed(2)} / week</p>
         </div>
       `;
     }
@@ -1272,7 +1352,7 @@
 
       // ── Savings vs pro shop ──────────────────────────────────────────────
       const annualCostPro    = annualGrips * COMPETITOR_MID;
-      const annualCostJgg    = annualGrips * SUB_PPG;
+      const annualCostJgg    = annualGrips * MEMBERSHIP_PPG;
       const annualSaving     = annualCostPro - annualCostJgg;
 
       document.getElementById('savingsBarProCost').textContent = `$${Math.round(annualCostPro)}`;
