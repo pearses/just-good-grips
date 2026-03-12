@@ -642,6 +642,22 @@ We believe every player should have the freedom to change grips as often as they
     </div>
   </div>
 
+  <!-- ===================== IMAGE LIGHTBOX ===================== -->
+  <div class="img-lightbox" id="imgLightbox" hidden role="dialog" aria-modal="true" aria-label="Image zoom">
+    <div class="img-lightbox-backdrop" id="lightboxBackdrop"></div>
+    <button class="img-lightbox-close" id="lightboxClose" aria-label="Close zoom view">&#x2715;</button>
+    <button class="img-lightbox-arrow img-lightbox-arrow--prev" id="lightboxPrev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="img-lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="" class="img-lightbox-img">
+    </div>
+    <button class="img-lightbox-arrow img-lightbox-arrow--next" id="lightboxNext" aria-label="Next image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="img-lightbox-counter" id="lightboxCounter">1 / 3</div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
