@@ -355,7 +355,7 @@ a {
 
 .hero-heading {
   font-size: clamp(2.8rem, 7vw, 5.5rem);
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 1.0;
   margin-bottom: 24px;
@@ -363,7 +363,7 @@ a {
 }
 
 .hero-body {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 400;
   color: rgba(255,255,255,0.65);
   line-height: 1.65;

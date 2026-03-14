@@ -378,6 +378,11 @@
       letter-spacing: -0.03em;
       line-height: 1;
     }
+    .tier-card-featured-pricing .tcp-price-unit {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
     .tier-card-featured-pricing .tcp-sub {
       font-size: 0.75rem;
       color: #666;
@@ -611,18 +616,126 @@
       color: #2e7d32;
     }
 
-    /* ── Mini card per-week cost ──────────────────────────────────────────── */
+    /* ── Mini card per-delivery cost (secondary) ─────────────────────────── */
     .tier-mini-weekly {
       font-size: 0.6875rem;
-      font-weight: 700;
-      color: #2e7d32;
+      font-weight: 600;
+      color: #888;
       margin-top: 4px;
     }
+
+    /* ── Tiers view (default landing state) ──────────────────────────────── */
+    .tiers-view {
+      background: var(--white);
+      padding: 52px 24px 64px;
+    }
+    .tiers-view-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .tiers-view-eyebrow {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--green);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .tiers-view-heading {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+    .tiers-view-sub {
+      font-size: 0.9375rem;
+      color: #666;
+      margin-bottom: 28px;
+    }
+    .tier-mini-join {
+      display: block;
+      margin-top: 14px;
+      padding: 10px 0;
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+    .tier-mini-join:hover { background: #333; }
+    .tier-mini-join--disabled {
+      display: block;
+      margin-top: 14px;
+      padding: 10px 0;
+      background: #f0f0f0;
+      color: #aaa;
+      text-align: center;
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+    }
+    /* ── Quiz entry CTA (inside tiers view) ──────────────────────────────── */
+    .quiz-entry-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px 0 4px;
+      flex-wrap: wrap;
+    }
+    .quiz-entry-cta p {
+      font-size: 0.9375rem;
+      color: #777;
+      margin: 0;
+    }
+    .quiz-entry-cta button {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--black);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      padding: 0;
+    }
+    .quiz-entry-cta button:hover { opacity: 0.7; }
+    /* ── Back link inside quiz section ───────────────────────────────────── */
+    .quiz-back-tiers {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .quiz-back-tiers button {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.875rem;
+      color: #aaa;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .quiz-back-tiers button:hover { color: var(--black); }
 
     /* ── Retake ───────────────────────────────────────────────────────────── */
     .result-retake {
       text-align: center;
       margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
     .result-retake button {
       background: none;
@@ -713,7 +826,7 @@
   <div class="club-hero">
     <p class="club-hero-eyebrow">JGG Club Membership</p>
     <h1>Never run out of<br><em>overgrips</em> again.</h1>
-    <p class="club-hero-sub">4 questions. 30 seconds. We'll match you to the right tier — then deliver fresh grips before you even think to reorder.</p>
+    <p class="club-hero-sub">Pick your tier below and lock in your price. Fresh grips delivered on autopilot — half the cost of pro shop grips, no lock-in.</p>
     <div class="club-hero-proof">
       <span class="club-hero-proof-item">Half the price of pro shop grips — delivered to you</span>
       <span class="club-hero-proof-item">Your grips arrive before you run out</span>
@@ -721,9 +834,34 @@
     </div>
   </div>
 
+  <!-- ===================== TIERS VIEW (default) ===================== -->
+  <section id="tiersView" class="tiers-view">
+    <div class="tiers-view-inner">
+      <p class="tiers-view-eyebrow">JGG Club Membership</p>
+      <h2 class="tiers-view-heading">Choose your plan</h2>
+      <p class="tiers-view-sub">10% off every delivery · Free shipping · Pause or cancel any time.</p>
+      <div class="tiers-grid" id="tiersViewGrid">
+        <!-- Populated by JS on load -->
+      </div>
+      <div class="quiz-entry-cta">
+        <p>Not sure which tier suits you?</p>
+        <button onclick="showQuiz()">Take our 30-second quiz →</button>
+      </div>
+      <div class="onetime-section">
+        <p class="onetime-label">Want to try before you commit? Fair enough — but once you feel the difference, you'll be back.</p>
+        <a href="https://buy.stripe.com/8x214pfFt5b30rfehc83C01" class="onetime-btn" target="_blank" rel="noopener">
+          Buy Once — 12-Pack White · $29.99
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== QUIZ ===================== -->
   <main>
-    <div class="quiz-wrap">
+    <div class="quiz-wrap" id="quizSection" style="display:none">
+      <div class="quiz-back-tiers">
+        <button onclick="showTiersView()">← Back to all tiers</button>
+      </div>
 
       <!-- Progress bar -->
       <div class="quiz-progress" id="quizProgress">
@@ -1015,6 +1153,7 @@
         </div>
 
         <div class="result-retake">
+          <button onclick="showTiersView()">← Back to all tiers</button>
           <button onclick="retakeQuiz()">Retake the quiz</button>
         </div>
 
@@ -1268,8 +1407,8 @@
               <p class="tcd-freq">${tier.freqLabel}</p>
             </div>
             <div class="tier-card-featured-pricing">
-              <p class="tcp-price">~$${price.toFixed(2)}</p>
-              <p class="tcp-sub">per delivery</p>
+              <p class="tcp-price">~$${jggWeekly.toFixed(2)}<span class="tcp-price-unit">/wk</span></p>
+              <p class="tcp-sub">~$${price.toFixed(2)} per delivery</p>
               <p class="tcp-grip">$${MEMBERSHIP_PPG.toFixed(2)}/grip · save 10%</p>
             </div>
           </div>
@@ -1298,11 +1437,21 @@
     }
 
     // ── Build mini tier card (comparison grid) ─────────────────────────────
-    function buildMiniCard(tier, isRecommended) {
+    function buildMiniCard(tier, isRecommended, showCta = false) {
       const price     = tierPricePerDelivery(tier);
       const weekly    = tierPricePerWeek(tier);
       const packCount = tier.grips / 12;
       const packLabel = packCount === 1 ? '12 grips · 1 pack' : `${tier.grips} grips · ${packCount} packs`;
+
+      const linkKey        = `${tier.grips}-${tier.freqWeeks}`;
+      const membershipLink = MEMBERSHIP_LINKS[linkKey] || '#';
+      const isLive         = membershipLink !== '#';
+
+      const ctaHtml = showCta
+        ? (isLive
+            ? `<a href="${membershipLink}" class="tier-mini-join" target="_blank" rel="noopener">Join — ${tier.name}</a>`
+            : `<span class="tier-mini-join tier-mini-join--disabled">Coming Soon</span>`)
+        : '';
 
       return `
         <div class="tier-mini-card${isRecommended ? ' is-recommended' : ''}">
@@ -1315,9 +1464,10 @@
           </div>
           <p class="tier-mini-qty">${packLabel}</p>
           <p class="tier-mini-freq">${tier.freqLabel}</p>
-          <p class="tier-mini-price">~$${price.toFixed(2)}</p>
+          <p class="tier-mini-price">~$${weekly.toFixed(2)}<span style="font-size:0.75em;font-weight:700">/wk</span></p>
           <p class="tier-mini-grip">$${MEMBERSHIP_PPG.toFixed(2)}/grip</p>
-          <p class="tier-mini-weekly">~$${weekly.toFixed(2)} / week</p>
+          <p class="tier-mini-weekly">~$${price.toFixed(2)} per delivery</p>
+          ${ctaHtml}
         </div>
       `;
     }
@@ -1339,7 +1489,7 @@
       document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('is-active'));
       document.getElementById('quizProgress').style.display = 'none';
       document.getElementById('quizResult').classList.add('is-active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       const playerType    = getRadioVal('playerType');
       const sessionsPerWk = parseFloat(getRadioVal('frequency'));
@@ -1382,7 +1532,29 @@
       document.getElementById('quizResult').classList.remove('is-active');
       document.getElementById('quizProgress').style.display = '';
       showStep(1);
+      document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
+
+    window.showQuiz = function () {
+      document.getElementById('tiersView').style.display = 'none';
+      document.getElementById('quizSection').style.display = '';
+      document.getElementById('quizProgress').style.display = '';
+      showStep(1);
+      document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    window.showTiersView = function () {
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      document.getElementById('quizResult').classList.remove('is-active');
+      document.getElementById('quizSection').style.display = 'none';
+      document.getElementById('tiersView').style.display = '';
+      document.getElementById('tiersView').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // ── Populate tiers view on load ────────────────────────────────────────
+    document.getElementById('tiersViewGrid').innerHTML = TIERS
+      .map(t => buildMiniCard(t, false, true))
+      .join('');
 
   })();
   </script>
