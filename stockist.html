@@ -206,7 +206,7 @@
           <form
             class="stockist-form"
             id="enquiryForm"
-            action="https://formspree.io/f/YOUR_FORM_ID"
+            action="https://formspree.io/f/xbdzakae"
             method="POST"
           >
             <div class="form-field">
@@ -283,7 +283,7 @@
     const form = document.getElementById('enquiryForm');
     if (form) {
       form.addEventListener('submit', async function (e) {
-        if (form.action.includes('YOUR_FORM_ID')) return; // fallback if not set up yet
+        if (!form.action.includes('formspree.io')) return;
         e.preventDefault();
         const data = new FormData(form);
         const res = await fetch(form.action, {

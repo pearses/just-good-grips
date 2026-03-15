@@ -1961,6 +1961,10 @@ a {
     aspect-ratio: 4 / 3;
   }
 
+  .about-visual-img {
+    object-position: center center;
+  }
+
   .stores-layout {
     grid-template-columns: 1fr;
   }
