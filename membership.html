@@ -93,6 +93,7 @@
       max-width: 660px;
       margin: 0 auto;
       padding: 44px 24px 80px;
+      scroll-margin-top: 110px;
     }
 
     /* ── Progress ─────────────────────────────────────────────────────────── */
@@ -649,6 +650,7 @@
     .tiers-view {
       background: var(--white);
       padding: 52px 24px 64px;
+      scroll-margin-top: 110px;
     }
     .tiers-view-inner {
       max-width: 700px;
@@ -1360,7 +1362,7 @@
       const el = document.getElementById('step' + n);
       if (el) el.classList.add('is-active');
       updateProgress(n);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     // ── Membership recommendation ──────────────────────────────────────────
