@@ -15,7 +15,7 @@
     .club-hero {
       background: var(--black);
       color: var(--white);
-      padding: 72px 24px 60px;
+      padding: 88px 24px 72px;
       text-align: center;
     }
     .club-hero-eyebrow {
@@ -28,14 +28,14 @@
       background: var(--green);
       padding: 5px 14px;
       border-radius: 99px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .club-hero h1 {
       font-size: clamp(2.25rem, 6vw, 3.75rem);
       font-weight: 900;
       letter-spacing: -0.04em;
-      line-height: 1.0;
-      margin-bottom: 20px;
+      line-height: 1.05;
+      margin-bottom: 28px;
     }
     .club-hero h1 em {
       font-style: normal;
@@ -43,15 +43,26 @@
     }
     .club-hero-sub {
       font-size: 1.0625rem;
-      color: rgba(255,255,255,0.6);
-      max-width: 480px;
-      margin: 0 auto 32px;
-      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+      max-width: 520px;
+      margin: 0 auto 12px;
+      line-height: 1.7;
+    }
+    .club-hero-sub--solution {
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+    .club-hero-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 28px auto;
     }
     .club-hero-proof {
       display: flex;
       justify-content: center;
-      gap: 24px;
+      gap: 32px;
       flex-wrap: wrap;
     }
     .club-hero-proof-item {
@@ -59,7 +70,7 @@
       color: rgba(255,255,255,0.5);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
     }
     .club-hero-proof-item::before {
       content: '✓';
@@ -751,10 +762,10 @@
 
     /* ── Mobile tweaks ────────────────────────────────────────────────────── */
     @media (max-width: 480px) {
-      .club-hero { padding: 48px 20px 40px; }
+      .club-hero { padding: 56px 20px 48px; }
       .club-hero h1 { font-size: 2rem; }
       .club-hero-sub { font-size: 0.9375rem; }
-      .club-hero-proof { gap: 10px; }
+      .club-hero-proof { gap: 14px; }
       .club-hero-proof-item { font-size: 0.75rem; }
 
       .quiz-wrap { padding: 28px 16px 60px; }
@@ -826,11 +837,13 @@
   <div class="club-hero">
     <p class="club-hero-eyebrow">JGG Club Membership</p>
     <h1>Never run out of<br><em>overgrips</em> again.</h1>
-    <p class="club-hero-sub">Pick your tier below and lock in your price. Fresh grips delivered on autopilot — half the cost of pro shop grips, no lock-in.</p>
+    <p class="club-hero-sub">No more last-minute panic buys on the way to the court.<br>No more bulk packs gathering dust in the cupboard.</p>
+    <p class="club-hero-sub club-hero-sub--solution">Just the right amount, right when you need them — delivered to your door.</p>
+    <div class="club-hero-divider"></div>
     <div class="club-hero-proof">
-      <span class="club-hero-proof-item">Half the price of pro shop grips — delivered to you</span>
-      <span class="club-hero-proof-item">Your grips arrive before you run out</span>
-      <span class="club-hero-proof-item">No lock-in. Cancel in seconds.</span>
+      <span class="club-hero-proof-item">Arrives before you run out</span>
+      <span class="club-hero-proof-item">No bulk commitment</span>
+      <span class="club-hero-proof-item">Pause or cancel anytime</span>
     </div>
   </div>
 
@@ -838,13 +851,13 @@
   <section id="tiersView" class="tiers-view">
     <div class="tiers-view-inner">
       <p class="tiers-view-eyebrow">JGG Club Membership</p>
-      <h2 class="tiers-view-heading">Choose your plan</h2>
+      <h2 class="tiers-view-heading">Choose your membership</h2>
       <p class="tiers-view-sub">Grips on autopilot · Free shipping · Pause or cancel any time.</p>
       <div class="tiers-grid" id="tiersViewGrid">
         <!-- Populated by JS on load -->
       </div>
       <div class="quiz-entry-cta">
-        <p>Not sure which tier suits you?</p>
+        <p>Not sure which membership suits you?</p>
         <button onclick="showQuiz()">Take our 30-second quiz →</button>
       </div>
       <div class="onetime-section">
@@ -860,7 +873,7 @@
   <main>
     <div class="quiz-wrap" id="quizSection" style="display:none">
       <div class="quiz-back-tiers">
-        <button onclick="showTiersView()">← Back to all tiers</button>
+        <button onclick="showTiersView()">← Back to memberships</button>
       </div>
 
       <!-- Progress bar -->
@@ -901,8 +914,8 @@
             <label for="pt-club">
               <span class="quiz-option-icon">🎾</span>
               <span class="quiz-option-text">
-                <strong>Club &amp; Pennant Competitor</strong>
-                <span>I play fixtures, take my tennis seriously, and love match play.</span>
+                <strong>Club &amp; Club Competitor</strong>
+                <span>You play regularly and you play to win. Club matches, league nights, competitive sets — you take your tennis seriously. When the pressure moments arrive, the last thing you want is a slippery grip.</span>
               </span>
             </label>
           </div>
@@ -922,7 +935,7 @@
               <span class="quiz-option-icon">📋</span>
               <span class="quiz-option-text">
                 <strong>Coach or Full-Time Player</strong>
-                <span>Tennis is my job or near-daily pursuit. I go through gear fast.</span>
+                <span>Tennis is my job or daily pursuit. I go through gear fast.</span>
               </span>
             </label>
           </div>
@@ -1153,7 +1166,7 @@
         </div>
 
         <div class="result-retake">
-          <button onclick="showTiersView()">← Back to all tiers</button>
+          <button onclick="showTiersView()">← Back to memberships</button>
           <button onclick="retakeQuiz()">Retake the quiz</button>
         </div>
 
@@ -1197,12 +1210,11 @@
     // ── Pricing ────────────────────────────────────────────────────────────
     const ONE_TIME_PRICE_12 = 29.99;           // $29.99 for 12 grips
     const PRICE_PER_GRIP    = ONE_TIME_PRICE_12 / 12;  // ~$2.4992
-    const MEMBERSHIP_DISCOUNT = 0;
-    const MEMBERSHIP_PPG      = PRICE_PER_GRIP; // ~$2.50/grip
+    const MEMBERSHIP_PPG = PRICE_PER_GRIP; // $2.50/grip
 
     const COMPETITOR_MID = 5.50;              // midpoint of $5–$6 competitor price
 
-    // ── Membership tiers ───────────────────────────────────────────────────
+    // ── Memberships ────────────────────────────────────────────────────────
     // grips: grips per delivery  |  freqWeeks: delivery interval in weeks
     const TIERS = [
       {
@@ -1267,15 +1279,15 @@
     // NOTE FOR OWNER: Add Stripe Payment Link URLs here when memberships go live.
     // Key format: "{grips}-{freqWeeks}"
     const MEMBERSHIP_LINKS = {
-      '12-2':  'https://buy.stripe.com/00wcN73WL46Z0rfgpk83C06',   // Starter fortnightly (every 2 weeks)
-      '12-4':  'https://buy.stripe.com/4gM9AV50P46Zgqdehc83C05',   // Regular — monthly (every 4 weeks)
-      '12-12': 'https://buy.stripe.com/dRm14p9h5fPH8XL6OK83C0a',   // Starter — quarterly (every 12 weeks)
-      '24-2':  'https://buy.stripe.com/6oUbJ3bpdavn7THa0W83C09',   // Competitor fortnightly
-      '24-4':  'https://buy.stripe.com/8x214pbpd32V2zn2yu83C08',   // Competitor — monthly
-      '24-12': 'https://buy.stripe.com/eVqaEZ3WLeLD5Lz4GC83C07',   // Competitor quarterly
-      '36-2':  'https://buy.stripe.com/28E5kF64TdHzc9Xgpk83C03',   // Elite fortnightly
-      '36-4':  'https://buy.stripe.com/eVqbJ31OD8nfb5T4GC83C04',   // Elite — monthly
-      '36-12': 'https://buy.stripe.com/bJe7sN1OD46Z4Hv0qm83C02',   // Elite quarterly
+      '12-2':  'https://buy.stripe.com/6oU28t8d17jb6PD6OK83C0f',   // Starter fortnightly (every 2 weeks)
+      '12-4':  'https://buy.stripe.com/00weVf78Xavnfm95KG83C0e',   // Regular — monthly (every 4 weeks)
+      '12-12': 'https://buy.stripe.com/8x28wR0KzgTL2zn7SO83C0j',   // Starter — quarterly (every 12 weeks)
+      '24-2':  'https://buy.stripe.com/aFa9AVeBpgTL5Lz8WS83C0i',   // Competitor fortnightly
+      '24-4':  'https://buy.stripe.com/28E4gBeBp8nf4Hvgpk83C0h',   // Competitor — monthly
+      '24-12': 'https://buy.stripe.com/fZu3cxeBpcDv6PD2yu83C0g',   // Competitor quarterly
+      '36-2':  'https://buy.stripe.com/aFa9AV0Kz9rja1Pb5083C0c',   // Elite fortnightly
+      '36-4':  'https://buy.stripe.com/cNibJ3fFt0UNa1P8WS83C0d',   // Elite — monthly
+      '36-12': 'https://buy.stripe.com/3cI8wR3WL5b3ei5gpk83C0b',   // Elite quarterly
       '60-4':  '#',   // 60 grips, monthly  (60-pack not yet live)
       '60-12': '#',   // 60 grips, quarterly
     };
@@ -1295,12 +1307,12 @@
         desc: 'You show up consistently and compete with intent. Your gear needs to match your commitment — a fresh grip can be the difference between a clutch hold and a slip at the wrong moment.',
       },
       competitive: {
-        icon: '🏆', name: 'The Match Player',
+        icon: '🏆', name: 'The Tournament Player',
         desc: 'You train hard, you compete harder. Every edge matters — racquet head speed, footwork, and yes, grip feel. You\'re the type who notices when something\'s even slightly off.',
       },
       coach: {
         icon: '📋', name: 'The Court Commander',
-        desc: 'Tennis is your world. You go through grips faster than anyone, and you know it. Stocking up at an honest price isn\'t a luxury — it\'s just smart.',
+        desc: 'Youre on court constantly — coaching, training, competing, or all three. Grips disappear quickly when tennis is your everyday life. You need a steady supply without paying pro shop prices.',
       },
     };
 
@@ -1328,7 +1340,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ── Tier recommendation ────────────────────────────────────────────────
+    // ── Membership recommendation ──────────────────────────────────────────
     // Coaches always get Elite. Competitive players get at least Competitor.
     // Everyone else is matched by raw grips/month.
     function recommendTierId(gripsPerMonth, playerType) {
@@ -1340,9 +1352,9 @@
       return 'elite';
     }
 
-    // ── Tier price helpers ─────────────────────────────────────────────────
+    // ── Membership price helpers ───────────────────────────────────────────
     function tierPricePerDelivery(tier) {
-      return tier.grips * PRICE_PER_GRIP * (1 - MEMBERSHIP_DISCOUNT);
+      return tier.grips * PRICE_PER_GRIP;
     }
 
     function tierPricePerMonth(tier) {
@@ -1386,7 +1398,7 @@
             <span class="tier-card-featured-icon">${tier.icon}</span>
             <span class="tier-card-featured-name">${tier.name} Membership</span>
           </div>
-          <span class="tier-card-featured-badge">Your Tier</span>
+          <span class="tier-card-featured-badge">Your Membership</span>
         </div>
         <div class="tier-card-featured-body">
           <div class="tier-card-featured-row">
@@ -1448,7 +1460,7 @@
               <span class="tier-mini-icon">${tier.icon}</span>
               ${tier.name}
             </span>
-            ${isRecommended ? '<span class="tier-mini-tag">Your Tier</span>' : ''}
+            ${isRecommended ? '<span class="tier-mini-tag">Recommended</span>' : ''}
           </div>
           <p class="tier-mini-qty">${packLabel}</p>
           <p class="tier-mini-freq">${tier.freqLabel}</p>
@@ -1503,13 +1515,13 @@
       document.getElementById('resultArchetypeName').textContent = arch.name;
       document.getElementById('resultArchetypeDesc').textContent = arch.desc;
 
-      // ── Recommended tier ─────────────────────────────────────────────────
+      // ── Recommended membership ────────────────────────────────────────────
       const recommendedId = recommendTierId(gripsPerMonth, playerType);
       const recommended   = TIERS.find(t => t.id === recommendedId);
 
       document.getElementById('recommendedTierCard').innerHTML = buildFeaturedCard(recommended);
 
-      // ── All tiers grid ───────────────────────────────────────────────────
+      // ── All memberships grid ─────────────────────────────────────────────
       document.getElementById('tiersGrid').innerHTML = TIERS
         .map(t => buildMiniCard(t, t.id === recommendedId))
         .join('');
