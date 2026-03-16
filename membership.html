@@ -45,8 +45,8 @@
       font-size: 1.0625rem;
       color: rgba(255,255,255,0.55);
       max-width: 520px;
-      margin: 0 auto 12px;
-      line-height: 1.7;
+      margin: 0 auto 8px;
+      line-height: 1.6;
     }
     .club-hero-sub--solution {
       color: rgba(255,255,255,0.85);
@@ -57,7 +57,17 @@
       width: 40px;
       height: 1px;
       background: rgba(255,255,255,0.15);
-      margin: 28px auto;
+      margin: 24px auto;
+    }
+    @media (max-width: 480px) {
+      .club-hero-sub {
+        font-size: 0.9375rem;
+        margin-bottom: 6px;
+        line-height: 1.55;
+      }
+      .club-hero-divider {
+        margin: 18px auto;
+      }
     }
     .club-hero-proof {
       display: flex;
@@ -837,7 +847,8 @@
   <div class="club-hero">
     <p class="club-hero-eyebrow">JGG Club Membership</p>
     <h1>Never run out of<br><em>overgrips</em> again.</h1>
-    <p class="club-hero-sub">No more last-minute panic buys on the way to the court.<br>No more bulk packs gathering dust in the cupboard.</p>
+    <p class="club-hero-sub">No more last-minute panic buys on the way to the court.</p>
+    <p class="club-hero-sub">No more bulk packs gathering dust in the cupboard.</p>
     <p class="club-hero-sub club-hero-sub--solution">Just the right amount, right when you need them — delivered to your door.</p>
     <div class="club-hero-divider"></div>
     <div class="club-hero-proof">
