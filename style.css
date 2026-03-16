@@ -763,11 +763,7 @@ a {
    ============================================== */
 .stores-section {
   padding: 80px 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.90), rgba(255,255,255,0.90)),
-    url('images/grip-single.jpg');
-  background-size: cover;
-  background-position: center;
+  background: var(--grey-50);
   border-top: 1px solid var(--grey-100);
   border-bottom: 1px solid var(--grey-100);
 }
@@ -1223,8 +1219,8 @@ a {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 32px;
   padding-bottom: 64px;
 }
 
@@ -1248,7 +1244,6 @@ a {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 20px;
 }
 
 .social-link {
@@ -1948,6 +1943,7 @@ a {
 
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
 
   .footer-brand {
@@ -2123,7 +2119,7 @@ a {
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 16px;
   }
 
   .footer-bottom-inner {
