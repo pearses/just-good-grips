@@ -1,5 +1,17 @@
 /* Just Good Grips — site JS */
 
+// ── Announcement bar copy button ───────────────────────────────────────────
+function copyCode(btn) {
+  navigator.clipboard.writeText('FREESHIP26').then(function () {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function () {
+      btn.textContent = 'FREESHIP26';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
 (function () {
   'use strict';
 
@@ -105,6 +117,92 @@
 
     // initialise first thumb as active
     if (thumbBtns.length) activateThumb(thumbBtns[0]);
+
+    // ── IMAGE LIGHTBOX ───────────────────────────────────────────────────────
+    const lightbox        = document.getElementById('imgLightbox');
+    const lightboxImg     = document.getElementById('lightboxImg');
+    const lightboxClose   = document.getElementById('lightboxClose');
+    const lightboxBackdrop = document.getElementById('lightboxBackdrop');
+    const lightboxPrev    = document.getElementById('lightboxPrev');
+    const lightboxNext    = document.getElementById('lightboxNext');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+    const mainImgWrap     = mainImg.closest('.modal-main-img-wrap');
+
+    // Only show arrows if there are multiple images
+    let lightboxIndex = 0;
+
+    function getLightboxSrcs() {
+      return thumbBtns
+        .filter(b => b.dataset.src)
+        .map(b => ({ src: b.dataset.src, alt: b.dataset.alt || '' }));
+    }
+
+    function openLightbox(index) {
+      const srcs = getLightboxSrcs();
+      if (!srcs.length) return;
+      lightboxIndex = ((index % srcs.length) + srcs.length) % srcs.length;
+      lightboxImg.src = srcs[lightboxIndex].src;
+      lightboxImg.alt = srcs[lightboxIndex].alt;
+      lightboxCounter.textContent = `${lightboxIndex + 1} / ${srcs.length}`;
+      // Hide arrows when only one image
+      const multi = srcs.length > 1;
+      lightboxPrev.hidden = !multi;
+      lightboxNext.hidden = !multi;
+      lightboxCounter.hidden = !multi;
+      lightbox.hidden = false;
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      mainImg.focus();
+    }
+
+    function lightboxNavigate(dir) {
+      const srcs = getLightboxSrcs();
+      lightboxIndex = ((lightboxIndex + dir) + srcs.length) % srcs.length;
+      // Animate out then swap
+      lightboxImg.style.animation = 'none';
+      lightboxImg.src = srcs[lightboxIndex].src;
+      lightboxImg.alt = srcs[lightboxIndex].alt;
+      // Force reflow to restart animation
+      void lightboxImg.offsetWidth;
+      lightboxImg.style.animation = '';
+      lightboxCounter.textContent = `${lightboxIndex + 1} / ${srcs.length}`;
+      // Sync the modal thumbnail highlight
+      const activeThumb = thumbBtns.filter(b => b.dataset.src)[lightboxIndex];
+      if (activeThumb) activateThumb(activeThumb);
+    }
+
+    // Open lightbox on main image click
+    mainImgWrap.addEventListener('click', () => {
+      const srcs = getLightboxSrcs();
+      const currentSrc = mainImg.src;
+      const idx = srcs.findIndex(s => currentSrc.includes(s.src.split('/').pop()));
+      openLightbox(idx >= 0 ? idx : 0);
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxBackdrop.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', () => lightboxNavigate(-1));
+    lightboxNext.addEventListener('click', () => lightboxNavigate(1));
+
+    document.addEventListener('keydown', e => {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  lightboxNavigate(-1);
+      if (e.key === 'ArrowRight') lightboxNavigate(1);
+    });
+
+    // Swipe to navigate on touch devices
+    let lbTouchX = 0;
+    lightbox.addEventListener('touchstart', e => {
+      lbTouchX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - lbTouchX;
+      if (Math.abs(dx) > 40) lightboxNavigate(dx < 0 ? 1 : -1);
+    }, { passive: true });
   }
 
   // ── REVIEW CAROUSEL ───────────────────────────────────────────────────────
