@@ -7,7 +7,7 @@
   <meta name="description" content="High-performance tennis overgrips engineered for feel, control and durability. Shipped directly from our warehouse closest to your location ">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
         <a href="#reviews"  class="nav-link">Reviews</a>
         <a href="#features" class="nav-link">Why Just Good Grips</a>
         <a href="#about"    class="nav-link">About</a>
-        <a href="#club"     class="nav-link">Club</a>
+        <a href="membership.html" class="nav-link">Club</a>
         <a href="#stores"   class="nav-link">Stores</a>
       </nav>
 
@@ -47,7 +47,7 @@
       <a href="#reviews"  class="mobile-nav-link">Reviews</a>
       <a href="#features" class="mobile-nav-link">Why Just Good Grips</a>
       <a href="#about"    class="mobile-nav-link">About</a>
-      <a href="#club"     class="mobile-nav-link">Club</a>
+      <a href="membership.html" class="mobile-nav-link">Club</a>
       <a href="#stores"   class="mobile-nav-link">Stores</a>
     </div>
   </header>
@@ -67,7 +67,7 @@
         </p>
         <div class="hero-actions">
           <a href="#products" class="btn btn-primary">Shop All Grips</a>
-          <a href="subscription.html" class="btn btn-ghost">Join the Club ↓</a>
+          <a href="membership.html" class="btn btn-ghost">Join the Club ↓</a>
         </div>
       </div>
       <div class="hero-badge">
@@ -76,15 +76,14 @@
       </div>
     </section>
 
-<!-- ===================== QUIZ NUDGE ===================== -->
+    <!-- ===================== QUIZ NUDGE ===================== -->
     <div class="quiz-nudge-strip">
       <div class="quiz-nudge-inner">
-        <span class="quiz-nudge-text">🎾 Buy once or subscribe and save — not sure which plan fits your game?</span>
-        <a href="subscription.html" class="quiz-nudge-link">Find my tier →</a>
+        <span class="quiz-nudge-text">🎾 Members never run out — grips on autopilot. Which membership is yours?</span>
+        <a href="membership.html" class="quiz-nudge-link">Find my membership →</a>
       </div>
     </div>
 
-<!-- TODO, ADD FREE SHIPPING CODE people can grab and put on checkout-->
     <!-- ===================== PRODUCTS ===================== -->
     <section class="products-section" id="products">
       <div class="container">
@@ -93,7 +92,6 @@
             <h2 class="section-title">Shop Grips</h2>
             <p class="section-sub">All prices in AUD. Secure checkout via Stripe.</p>
           </div>
-          <div class="product-count">4 products · 1 available now</div>
         </div>
 
         <div class="product-grid">
@@ -149,132 +147,12 @@
               </div>
             </div>
             <!-- Stripe trust note -->
-        <div class="checkout-trust">
-          <svg class="trust-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 1L2 5v5c0 4.418 3.134 8.553 8 9.5C17.866 18.553 21 14.418 21 10V5l-8-4z" stroke="#999" stroke-width="1.4" stroke-linejoin="round"/>
-            <path d="M7 10l2 2 4-4" stroke="#999" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>Secure checkout powered by <strong>Stripe</strong>. Your payment details are never stored on our servers.</span>
-        </div>
-          </article>
-          <!-- ─── 12 Pack – Light Blue (Coming Soon) ─── -->
-          <article class="product-card product-card--coming-soon">
-            <div class="product-image-wrap">
-              <div class="product-image-inner">
-                <img
-                  src="images/grip-pack-12-light-blue.png"
-                  alt="Just Good Grips – 12 Pack Light Blue"
-                  class="product-image"
-                  loading="lazy"
-                  onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
-                >
-                <div class="product-image-placeholder" aria-hidden="true">
-                  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="120" height="80" fill="#F0F0F0"/>
-                    <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
-                    <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
-                  </svg>
-                </div>
-              </div>
-              <span class="product-badge product-badge--coming-soon">Coming Soon</span>
-            </div>
-            <div class="product-body">
-              <div class="product-colour-row">
-                <span class="colour-dot colour-dot--blue"></span>
-                <span class="product-colour-label">Light Blue</span>
-              </div>
-              <h3 class="product-name">Overgrip 12 Pack</h3>
-              <p class="product-desc">
-                The same great grip in a fresh light blue colourway.
-                Dropping soon — stay tuned.
-              </p>
-              <div class="product-footer">
-                <div class="product-pricing">
-                  <span class="product-price">$29.99</span>
-                  <span class="product-currency">AUD</span>
-                  <span class="product-unit">($2.49 / grip)</span>
-                </div>
-                <button class="btn btn-coming-soon" disabled>Coming Soon</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- ─── 12 Pack – Light Pink (Coming Soon) ─── -->
-          <article class="product-card product-card--coming-soon">
-            <div class="product-image-wrap">
-              <div class="product-image-inner">
-                <img
-                  src="images/grip-pack-12-light-pink.png"
-                  alt="Just Good Grips – 12 Pack Light Pink"
-                  class="product-image"
-                  loading="lazy"
-                  onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
-                >
-                <div class="product-image-placeholder" aria-hidden="true">
-                  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="120" height="80" fill="#F0F0F0"/>
-                    <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
-                    <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
-                  </svg>
-                </div>
-              </div>
-              <span class="product-badge product-badge--coming-soon">Coming Soon</span>
-            </div>
-            <div class="product-body">
-              <div class="product-colour-row">
-                <span class="colour-dot colour-dot--pink"></span>
-                <span class="product-colour-label">Light Pink</span>
-              </div>
-              <h3 class="product-name">Overgrip 12 Pack</h3>
-              <p class="product-desc">
-                A soft pink colourway for those who like a splash of colour on court.
-                Dropping soon — stay tuned.
-              </p>
-              <div class="product-footer">
-                <div class="product-pricing">
-                  <span class="product-price">$29.99</span>
-                  <span class="product-currency">AUD</span>
-                  <span class="product-unit">($2.49 / grip)</span>
-                </div>
-                <button class="btn btn-coming-soon" disabled>Coming Soon</button>
-              </div>
-            </div>
-          </article>
-
-          <!-- ─── 60 Pack (Coming Soon) ─── -->
-          <article class="product-card product-card--coming-soon">
-            <div class="product-image-wrap">
-              <div class="product-image-inner">
-                <img
-                  src="images/grip-pack-60.jpg"
-                  alt="Just Good Grips – 60 Pack"
-                  class="product-image"
-                  loading="lazy"
-                  onerror="this.closest('.product-image-inner').classList.add('img-fallback')"
-                >
-                <div class="product-image-placeholder" aria-hidden="true">
-                  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="120" height="80" fill="#F0F0F0"/>
-                    <circle cx="60" cy="34" r="16" fill="#D0D0D0"/>
-                    <path d="M26 68c0-18.778 15.222-34 34-34s34 15.222 34 34" fill="#D0D0D0"/>
-                  </svg>
-                </div>
-              </div>
-              <span class="product-badge product-badge--coming-soon">Coming Soon</span>
-            </div>
-            <div class="product-body">
-              <h3 class="product-name">Overgrip 60 Pack</h3>
-              <p class="product-desc">
-                For clubs, coaches and high-volume players. The ultimate bulk option —
-                enough grips to last an entire season.
-              </p>
-              <div class="product-footer">
-                <div class="product-pricing">
-                  <span class="product-price">TBA</span>
-                  <span class="product-currency">AUD</span>
-                </div>
-                <button class="btn btn-coming-soon" disabled>Coming Soon</button>
-              </div>
+            <div class="checkout-trust">
+              <svg class="trust-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 1L2 5v5c0 4.418 3.134 8.553 8 9.5C17.866 18.553 21 14.418 21 10V5l-8-4z" stroke="#999" stroke-width="1.4" stroke-linejoin="round"/>
+                <path d="M7 10l2 2 4-4" stroke="#999" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Secure checkout powered by <strong>Stripe</strong>. Your payment details are never stored on our servers.</span>
             </div>
           </article>
 
@@ -287,7 +165,7 @@
       <div class="container">
         <div class="section-header section-header--center">
           <h2 class="section-title">Why Just Good Grips?</h2>
-          <p class="section-sub">Our mission is simple: deliver high quality tennis grips at a price that lets players perform at their best, without breaking the bank. 
+          <p class="section-sub">Our mission is simple: deliver high quality tennis grips at a price that lets players perform at their best, without breaking the bank.
 
 We believe every player should have the freedom to change grips as often as they like without worrying about the cost. Just Good Grips is here to give you confidence on the court, with the grips you deserve at a price you'll love.</p>
         </div>
@@ -325,8 +203,8 @@ We believe every player should have the freedom to change grips as often as they
                 <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" fill="currentColor"/>
               </svg>
             </div>
-            <h4 class="feature-title">Shipping to Australia, Germany and Japan!</h4>
-            <p class="feature-desc">Dispatched within 1-2 business days. Delivered in 6-10 business days.</p>
+            <h4 class="feature-title">Fast International Shipping</h4>
+            <p class="feature-desc">Delivered to Australia, Germany &amp; Japan. Dispatched within 1–2 business days.</p>
           </div>
         </div>
       </div>
@@ -381,7 +259,6 @@ We believe every player should have the freedom to change grips as often as they
                 <p class="review-author">Priya L. — Competitive Club Player, Adelaide</p>
                 <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
               </div>
-
             </div>
           </div>
 
@@ -400,42 +277,42 @@ We believe every player should have the freedom to change grips as often as they
       <div class="container">
         <p class="club-section-eyebrow">JGG Club Membership</p>
         <h2 class="club-section-heading">Grips. Delivered.<br>Never run out again.</h2>
-        <p class="club-section-sub">Pick your tier. We deliver fresh overgrips straight to your door on autopilot — so you can focus on your game, not your stock levels.</p>
+        <p class="club-section-sub">Pick your membership. We deliver fresh overgrips straight to your door on autopilot — so you can focus on your game, not your stock levels.</p>
 
         <div class="club-tiers-preview">
           <div class="club-tier-card">
             <span class="club-tier-icon">🌱</span>
             <p class="club-tier-name">Starter</p>
             <p class="club-tier-detail">12 grips<br>Every 3 months</p>
-            <p class="club-tier-price">~$27 / quarter</p>
+            <p class="club-tier-price">~$2.50/wk</p>
           </div>
           <div class="club-tier-card">
             <span class="club-tier-icon">☀️</span>
             <p class="club-tier-name">Regular</p>
             <p class="club-tier-detail">12 grips<br>Every month</p>
-            <p class="club-tier-price">~$27 / month</p>
+            <p class="club-tier-price">~$7.50/wk</p>
           </div>
           <div class="club-tier-card">
             <span class="club-tier-icon">🎾</span>
             <p class="club-tier-name">Competitor</p>
             <p class="club-tier-detail">24 grips<br>Every month</p>
-            <p class="club-tier-price">~$54 / month</p>
+            <p class="club-tier-price">~$15.00/wk</p>
           </div>
           <div class="club-tier-card">
             <span class="club-tier-icon">🏆</span>
             <p class="club-tier-name">Elite</p>
             <p class="club-tier-detail">36 grips<br>Every month</p>
-            <p class="club-tier-price">~$81 / month</p>
+            <p class="club-tier-price">~$22.49/wk</p>
           </div>
         </div>
 
         <div class="club-section-ctas">
-          <a href="subscription.html" class="btn btn-primary">Take the Quiz — Find My Tier</a>
-          <a href="subscription.html" class="btn-ghost-white">Browse All Memberships →</a>
+          <a href="membership.html" class="btn btn-primary">Take the Quiz — Find My Membership</a>
+          <a href="membership.html" class="btn-ghost-white">Browse All Memberships →</a>
         </div>
 
         <div class="club-proof-strip">
-          <span>$2.25 per grip</span>
+          <span>$2.50 per grip</span>
           <span class="club-proof-dot">·</span>
           <span>Delivered to your door</span>
           <span class="club-proof-dot">·</span>
@@ -449,7 +326,7 @@ We believe every player should have the freedom to change grips as often as they
       <div class="container about-grid">
         <div class="about-visual">
           <div class="about-visual-box">
-            <img src="images/photo-scott.jpg" alt="Scott Pearse, Founder" class="about-visual-img">
+            <img src="images/bendigo-win.jpg" alt="Scott Pearse, Founder" class="about-visual-img">
           </div>
         </div>
         <div class="about-copy">
@@ -480,16 +357,6 @@ We believe every player should have the freedom to change grips as often as they
         </div>
         <div class="stores-layout">
           <div class="stores-list">
-            <!-- 
-            <div class="store-card">
-              <p class="store-name">Store Name</p>
-              <p class="store-address">123 Example St, Sydney NSW 2000</p>
-            </div>
-            <div class="store-card">
-              <p class="store-name">Store Name</p>
-              <p class="store-address">456 Example Ave, Melbourne VIC 3000</p>
-            </div>
-            -->   
             <div class="store-card">
               <p class="store-name">Anything Tennis - Trinity Gardens Tennis Club</p>
               <p class="store-address">35 Albermarle Avenue
@@ -499,9 +366,6 @@ We believe every player should have the freedom to change grips as often as they
             </div>
           </div>
           <div class="stores-map">
-            <!-- Replace the src value with your Google Maps embed URL.
-                 To get one: go to maps.google.com, search for a location or address,
-                 click Share > Embed a map, then copy the src value from the iframe snippet. -->
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3271.805007868657!2d138.6480255!3d-34.9113426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ab0cbdac520b3ab%3A0xa3d1bc042e66c73a!2sTrinity%20Gardens%20Tennis%20Club!5e0!3m2!1sen!2sau!4v1772835086313!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
@@ -509,12 +373,65 @@ We believe every player should have the freedom to change grips as often as they
     </section>
 
   </main>
+  <!-- ===================== COMING SOON ===================== -->
+  <section class="coming-soon-section" id="coming-soon">
+    <div class="container">
+      <div class="coming-soon-header">
+        <div>
+          <p class="coming-soon-eyebrow">More colours · Bigger packs</p>
+          <h2 class="coming-soon-title">Coming Online Soon</h2>
+          <p class="coming-soon-sub">Already available at your <a href="#stores" class="instore-link">local retailer or tennis club</a> — online ordering on the way.</p>
+        </div>
+      </div>
+      <div class="coming-soon-grid">
+
+        <div class="coming-soon-card">
+          <div class="coming-soon-colour-row">
+            <span class="colour-dot colour-dot--blue"></span>
+            <span class="coming-soon-colour-label">Light Blue</span>
+          </div>
+          <p class="coming-soon-name">Overgrip 12 Pack</p>
+          <p class="coming-soon-price">$29.99 AUD</p>
+        </div>
+
+        <div class="coming-soon-card">
+          <div class="coming-soon-colour-row">
+            <span class="colour-dot colour-dot--pink"></span>
+            <span class="coming-soon-colour-label">Light Pink</span>
+          </div>
+          <p class="coming-soon-name">Overgrip 12 Pack</p>
+          <p class="coming-soon-price">$29.99 AUD</p>
+        </div>
+
+        <div class="coming-soon-card">
+          <div class="coming-soon-colour-row">
+            <span class="colour-dot colour-dot--white"></span>
+            <span class="coming-soon-colour-label">White</span>
+          </div>
+          <p class="coming-soon-name">Overgrip 60 Pack</p>
+          <p class="coming-soon-price">$139.99 AUD</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STOCKIST CTA ===================== -->
+  <section class="stockist-cta-section">
+    <div class="container stockist-cta-inner">
+      <div class="stockist-cta-copy">
+        <p class="stockist-cta-eyebrow">Clubs &amp; Retailers</p>
+        <h2 class="stockist-cta-heading">Interested in stocking Just Good Grips?</h2>
+        <p class="stockist-cta-sub">Whether you run a tennis club pro shop or a retail store, we'd love to get you set up. Get in touch and we'll be in contact shortly.</p>
+      </div>
+      <a href="stockist.html" class="btn btn-primary stockist-cta-btn">Get in Touch →</a>
+    </div>
+  </section>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer" id="contact">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <p class="footer-tagline">Premium tennis overgrips.<br>Shipped directly from our warehouse closest to your location</p>
         <div class="footer-socials">
           <a href="https://www.instagram.com/justgoodgrips/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Just Good Grips on Instagram">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -545,7 +462,7 @@ We believe every player should have the freedom to change grips as often as they
         <h5 class="footer-col-title">Company</h5>
         <a href="#about" class="footer-link">About</a>
         <a href="#features" class="footer-link">Why Just Good Grips ?</a>
-        <a href="subscription.html" class="footer-link">JGG Club — Find Your Tier</a>
+        <a href="membership.html" class="footer-link">JGG Club — Find Your Membership</a>
       </div>
 
       <div class="footer-col">

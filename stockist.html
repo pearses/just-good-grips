@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Stockist Enquiry — Just Good Grips</title>
+  <meta name="description" content="Interested in stocking Just Good Grips at your tennis club or retail store? Get in touch and we'll get you set up.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .stockist-page {
+      min-height: 100vh;
+      background: var(--grey-50);
+      padding: 80px 24px 100px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .stockist-form-wrap {
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .stockist-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--grey-500);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: color 0.15s;
+    }
+
+    .stockist-back:hover {
+      color: var(--grey-900);
+    }
+
+    .stockist-form-heading {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--grey-900);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .stockist-form-sub {
+      font-size: 0.95rem;
+      color: var(--grey-500);
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .stockist-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--grey-700);
+      letter-spacing: 0.02em;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--grey-900);
+      background: #fff;
+      border: 1.5px solid var(--grey-200);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      transition: border-color 0.15s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--grey-900);
+    }
+
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .form-submit {
+      margin-top: 8px;
+    }
+
+    .form-submit .btn-primary {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 24px;
+      font-size: 1rem;
+    }
+
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--grey-400);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* Success state */
+    .stockist-success {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+    }
+
+    .stockist-success-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .stockist-success h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--grey-900);
+      margin-bottom: 10px;
+    }
+
+    .stockist-success p {
+      font-size: 0.95rem;
+      color: var(--grey-500);
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 640px) {
+      .stockist-page {
+        padding: 60px 16px 80px;
+      }
+
+      .stockist-form-heading {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== ANNOUNCEMENT BAR ===================== -->
+  <div class="announce-bar">
+    <p>🎾 Free Shipping on All Orders — Use code <button class="announce-copy-btn" onclick="copyCode(this)" aria-label="Copy code FREESHIP26">FREESHIP26</button></p>
+  </div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo-black.svg" alt="Just Good Grips" class="logo-img">
+      </a>
+      <div class="header-actions">
+        <a href="index.html#products" class="btn btn-outline">Shop</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="stockist-page">
+      <div class="stockist-form-wrap">
+
+        <a href="index.html" class="stockist-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to site
+        </a>
+
+        <div id="stockistForm">
+          <h1 class="stockist-form-heading">Stock Just Good Grips</h1>
+          <p class="stockist-form-sub">Running a tennis club, pro shop, or retail store? Fill in your details below and we'll be in touch to get you set up.</p>
+
+          <!--
+            Formspree handles form submission and emails it to justgoodgrips@gmail.com.
+            Setup steps:
+              1. Go to https://formspree.io and sign up (free)
+              2. Create a new form, set the email to justgoodgrips@gmail.com
+              3. Replace YOUR_FORM_ID below with the ID Formspree gives you
+                 e.g. https://formspree.io/f/abcd1234
+          -->
+          <form
+            class="stockist-form"
+            id="enquiryForm"
+            action="https://formspree.io/f/xbdzakae"
+            method="POST"
+          >
+            <div class="form-field">
+              <label class="form-label" for="name">Your Name</label>
+              <input class="form-input" type="text" id="name" name="name" placeholder="Jane Smith" required>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="email">Email Address</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="jane@yourclub.com.au" required>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="phone">Phone Number <span style="font-weight:400;color:var(--grey-400)">(optional)</span></label>
+              <input class="form-input" type="tel" id="phone" name="phone" placeholder="+61 4XX XXX XXX">
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="business">Business / Club Name</label>
+              <input class="form-input" type="text" id="business" name="business" placeholder="Trinity Gardens Tennis Club" required>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="type">Type of Business</label>
+              <select class="form-select" id="type" name="type" required>
+                <option value="" disabled selected>Select one…</option>
+                <option value="Tennis Club">Tennis Club</option>
+                <option value="Pro Shop">Pro Shop</option>
+                <option value="Retail Store">Retail Store</option>
+                <option value="Sporting Goods">Sporting Goods Store</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="location">Location (City / State)</label>
+              <input class="form-input" type="text" id="location" name="location" placeholder="Adelaide, SA" required>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="message">Anything else you'd like us to know? <span style="font-weight:400;color:var(--grey-400)">(optional)</span></label>
+              <textarea class="form-textarea" id="message" name="message" placeholder="Expected volume, questions, etc."></textarea>
+            </div>
+
+            <input type="hidden" name="_subject" value="New Stockist Enquiry — Just Good Grips">
+
+            <div class="form-submit">
+              <button type="submit" class="btn btn-primary">Send Enquiry →</button>
+            </div>
+
+            <p class="form-note">We'll get back to you within 1–2 business days.</p>
+          </form>
+        </div>
+
+        <div class="stockist-success" id="successMessage">
+          <div class="stockist-success-icon">🎾</div>
+          <h2>Thanks — we'll be in touch!</h2>
+          <p>We've received your enquiry and will get back to you within 1–2 business days.</p>
+          <a href="index.html" class="btn btn-primary">Back to Just Good Grips</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Show success message after Formspree redirects back with ?success
+    if (window.location.search.includes('success')) {
+      document.getElementById('stockistForm').style.display = 'none';
+      document.getElementById('successMessage').style.display = 'block';
+    }
+
+    // Smooth success UX without page reload (Formspree AJAX)
+    const form = document.getElementById('enquiryForm');
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        if (!form.action.includes('formspree.io')) return;
+        e.preventDefault();
+        const data = new FormData(form);
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          document.getElementById('stockistForm').style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          alert('Something went wrong — please email us directly at justgoodgrips@gmail.com');
+        }
+      });
+    }
+
+    // Announcement bar copy button (reuse from main site)
+    function copyCode(btn) {
+      navigator.clipboard.writeText('FREESHIP26').then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = orig, 2000);
+      });
+    }
+
+    // Sticky header shadow
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('header--scrolled', window.scrollY > 10);
+    });
+  </script>
+</body>
+</html>

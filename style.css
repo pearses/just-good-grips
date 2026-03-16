@@ -355,7 +355,7 @@ a {
 
 .hero-heading {
   font-size: clamp(2.8rem, 7vw, 5.5rem);
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 1.0;
   margin-bottom: 24px;
@@ -363,7 +363,7 @@ a {
 }
 
 .hero-body {
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 400;
   color: rgba(255,255,255,0.65);
   line-height: 1.65;
@@ -535,12 +535,15 @@ a {
   background: var(--grey-50);
   overflow: hidden;
   position: relative;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .product-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   transition: transform 0.5s ease;
 }
 
@@ -706,16 +709,36 @@ a {
 
 /* ── Coming soon card & button ── */
 .product-card--coming-soon {
-  opacity: 0.7;
+  opacity: 0.82;
 }
 
 .product-card--coming-soon:hover {
-  opacity: 0.85;
+  opacity: 1;
 }
 
 .product-badge--coming-soon {
-  background: var(--grey-200);
+  background: #111;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+.product-instore-note {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
   color: var(--grey-600);
+  margin-bottom: 12px;
+}
+
+.instore-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.instore-link:hover {
+  color: #111;
 }
 
 .btn-coming-soon {
@@ -726,12 +749,13 @@ a {
   font-size: 0.875rem;
   font-weight: 600;
   padding: 10px 20px;
-  border: 2px solid var(--grey-200);
+  border: 2px solid #111;
   border-radius: var(--radius-sm);
-  background: var(--grey-100);
-  color: var(--grey-400);
+  background: #111;
+  color: #fff;
   cursor: not-allowed;
   white-space: nowrap;
+  opacity: 0.45;
 }
 
 /* ==============================================
@@ -739,11 +763,7 @@ a {
    ============================================== */
 .stores-section {
   padding: 80px 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.90), rgba(255,255,255,0.90)),
-    url('images/grip-single.jpg');
-  background-size: cover;
-  background-position: center;
+  background: var(--grey-50);
   border-top: 1px solid var(--grey-100);
   border-bottom: 1px solid var(--grey-100);
 }
@@ -1054,6 +1074,141 @@ a {
 }
 
 /* ==============================================
+   STOCKIST CTA
+   ============================================== */
+.stockist-cta-section {
+  background: var(--black);
+  color: var(--white);
+  padding: 56px 0;
+}
+
+.stockist-cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.stockist-cta-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.stockist-cta-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.stockist-cta-sub {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.55);
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+.stockist-cta-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .stockist-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stockist-cta-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ==============================================
+   COMING SOON
+   ============================================== */
+.coming-soon-section {
+  padding: 64px 0;
+  background: var(--grey-100);
+  border-top: 1px solid var(--grey-200);
+}
+
+.coming-soon-header {
+  margin-bottom: 32px;
+}
+
+.coming-soon-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-400);
+  margin-bottom: 6px;
+}
+
+.coming-soon-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--grey-900);
+  margin-bottom: 6px;
+}
+
+.coming-soon-sub {
+  font-size: 0.9rem;
+  color: var(--grey-500);
+}
+
+.coming-soon-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.coming-soon-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--grey-200);
+  border-radius: var(--radius-sm);
+  flex: 1 1 220px;
+}
+
+.coming-soon-colour-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.coming-soon-colour-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--grey-500);
+  white-space: nowrap;
+}
+
+.coming-soon-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--grey-800);
+  flex: 1;
+}
+
+.coming-soon-price {
+  font-size: 0.82rem;
+  color: var(--grey-400);
+  white-space: nowrap;
+}
+
+/* ==============================================
    FOOTER
    ============================================== */
 .footer {
@@ -1064,8 +1219,8 @@ a {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 32px;
   padding-bottom: 64px;
 }
 
@@ -1089,7 +1244,6 @@ a {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 20px;
 }
 
 .social-link {
@@ -1789,6 +1943,7 @@ a {
 
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
 
   .footer-brand {
@@ -1801,7 +1956,12 @@ a {
   }
 
   .about-visual {
-    display: none;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .about-visual-img {
+    object-position: center center;
   }
 
   .stores-layout {
@@ -1959,7 +2119,7 @@ a {
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 16px;
   }
 
   .footer-bottom-inner {
