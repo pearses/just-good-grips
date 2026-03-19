@@ -20,22 +20,38 @@ Just Good Grips is a static single-page e-commerce site for an Australian tennis
 
 Open `index.html` directly in a browser — no server or build step required. For local development with live reload, any static file server works (e.g. `npx serve .` or VS Code's Live Server extension).
 
+## Two Repos — Important
+
+| Repo | Remote alias | Purpose |
+|------|-------------|---------|
+| `github.com/pearses/just-good-grips` | `origin` | **Production** — live site at justgoodgrips.com |
+| `github.com/pearses/jgg-dev` | `dev` | Dev/test — push here first, then apply to production |
+
+**Always push production changes to `origin` (just-good-grips), not `dev`.** Because the two repos have diverged git histories, never attempt a plain `git pull` or `git merge` between them — apply changes manually or via a `prod-update` branch off `origin/main`.
+
 ## Architecture
 
-Three files make up the entire site:
+The site spans multiple files/pages:
 
-- **`index.html`** — Single-page layout with sections: Announcement Bar → Header → Hero → Products → Features → Testimonials → About → Stores → Footer
-- **`style.css`** — All styles. CSS custom properties (tokens) are defined at the top in `:root`. The design is Wilson-inspired, minimal, black/white with tennis-ball green (`#c8e617`) as the accent.
+- **`index.html`** — Main single-page layout: Header → Hero → Products → Features → Testimonials → About → Stores → Club → Footer
+- **`membership/index.html`** — JGG Club membership page (quiz + tier selection). Accessible at `/membership`
+- **`contact/index.html`** — Stockist/retailer enquiry form. Accessible at `/contact`
+- **`poster.html`** — Print price list poster (internal use)
+- **`style.css`** — All styles shared across pages. CSS custom properties (tokens) are defined at the top in `:root`. The design is Wilson-inspired, minimal, black/white with tennis-ball green (`#c8e617`) as the accent.
 - **`script.js`** — Vanilla JS: sticky header shadow on scroll, mobile nav toggle, smooth-scroll, product modal gallery, review carousel.
+
+**Clean URL structure** (GitHub Pages folder trick — each page is a `folder/index.html`):
+- `/` → `index.html`
+- `/membership` → `membership/index.html`
+- `/contact` → `contact/index.html`
+
+Asset paths inside `membership/` and `contact/` use `../` prefix (e.g. `../style.css`, `../images/`).
 
 ## Page Section Order
 
-The announcement bar sits **before** `<header>` in the DOM so it appears above the sticky header (Shopify-style). The header uses `top: 37px` to clear the announcement bar height when sticking.
+The announcement bar has been **removed** from all pages. Free shipping is included by default and is no longer highlighted as a promotion.
 
-```html
-<div class="announcement-bar">...</div>  <!-- sticky, z-index: 201 -->
-<header id="header">...</header>          <!-- sticky, top: 37px, z-index: 200 -->
-```
+The header is sticky at `top: 0` with no offset needed.
 
 ## Products
 
@@ -105,6 +121,10 @@ Instagram and Facebook SVG icon links in the footer:
 ## Stripe Integration
 
 Checkout is handled by **Stripe Payment Links** (no backend). Only the white 12-pack currently has a live link. The 60-pack and colour variants show "Coming Soon" buttons.
+
+Current live Stripe link for 12-pack white (single purchase): `https://buy.stripe.com/3cI5kF50PcDv6PDehc83C0k`
+
+Membership subscription links are in `membership/index.html` in the `STRIPE_LINKS` JS object.
 
 ## Images
 
