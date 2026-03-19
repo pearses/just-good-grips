@@ -120,11 +120,46 @@ Instagram and Facebook SVG icon links in the footer:
 
 ## Stripe Integration
 
-Checkout is handled by **Stripe Payment Links** (no backend). Only the white 12-pack currently has a live link. The 60-pack and colour variants show "Coming Soon" buttons.
+Checkout is handled by **Stripe Payment Links** (no backend). Stripe product ID: `prod_U9rVH1KwQGqfif`.
 
-Current live Stripe link for 12-pack white (single purchase): `https://buy.stripe.com/3cI5kF50PcDv6PDehc83C0k`
+### Pricing (updated 2026-03-19)
 
-Membership subscription links are in `membership/index.html` in the `STRIPE_LINKS` JS object.
+All prices include a $2.99 handling fee baked in:
+
+| Product | Price | Per grip |
+|---------|-------|----------|
+| 12-pack (one-time) | $32.98 AUD | $2.75 |
+| 24-pack subscription | $62.97 AUD | $2.62 |
+| 36-pack subscription | $92.96 AUD | $2.58 |
+
+### Active Payment Links
+
+**One-time (12-pack white):**
+`https://buy.stripe.com/cNi00l1OD8nf3Drgpk83C0w`
+
+**Membership subscriptions** (in `membership.html` `MEMBERSHIP_LINKS` JS object):
+
+| Key | Interval | Link |
+|-----|----------|------|
+| `12-2` | 12 grips / 2 weeks | `https://buy.stripe.com/eVq4gBeBpgTLgqd4GC83C0l` |
+| `12-4` | 12 grips / 4 weeks | `https://buy.stripe.com/bJe8wRcth7jb4Hva0W83C0m` |
+| `12-12` | 12 grips / 12 weeks | `https://buy.stripe.com/aFafZj8d15b32zn8WS83C0n` |
+| `24-2` | 24 grips / 2 weeks | `https://buy.stripe.com/dRm5kF0Kz0UNa1P3Cy83C0o` |
+| `24-4` | 24 grips / 4 weeks | `https://buy.stripe.com/dRm8wRal9bzr5Lz6OK83C0p` |
+| `24-12` | 24 grips / 12 weeks | `https://buy.stripe.com/28EcN7dxlcDv8XL3Cy83C0q` |
+| `36-2` | 36 grips / 2 weeks | `https://buy.stripe.com/6oU4gBdxleLDa1P8WS83C0r` |
+| `36-4` | 36 grips / 4 weeks | `https://buy.stripe.com/eVq28t3WL9rjfm97SO83C0s` |
+| `36-12` | 36 grips / 12 weeks | `https://buy.stripe.com/dRmaEZ3WLeLD1vjehc83C0t` |
+
+### Payment Link Config (all links)
+
+All active payment links are configured with:
+- ✅ Promotion codes enabled
+- ✅ Tax ID collection (business customers)
+- ✅ Phone number required
+- ✅ Billing address required (also collects customer name)
+- ✅ Shipping address restricted to AU, DE, JP
+- ✅ Standard Shipping — Free, 6–10 business days (one-time link only; Stripe doesn't support shipping options on subscription payment links)
 
 ## Images
 
