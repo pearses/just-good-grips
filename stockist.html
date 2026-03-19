@@ -167,7 +167,7 @@
 
   <!-- ===================== ANNOUNCEMENT BAR ===================== -->
   <div class="announce-bar">
-    <p>🎾 Free Shipping on All Orders — Use code <button class="announce-copy-btn" onclick="copyCode(this)" aria-label="Copy code FREESHIP26">FREESHIP26</button></p>
+    <p>🎾 Free shipping when you join — <a href="membership.html" style="color:inherit;font-weight:600;">Learn more</a></p>
   </div>
 
   <!-- ===================== HEADER ===================== -->
@@ -301,14 +301,6 @@
       });
     }
 
-    // Announcement bar copy button (reuse from main site)
-    function copyCode(btn) {
-      navigator.clipboard.writeText('FREESHIP26').then(() => {
-        const orig = btn.textContent;
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = orig, 2000);
-      });
-    }
 
     // Sticky header shadow
     window.addEventListener('scroll', () => {

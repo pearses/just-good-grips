@@ -153,8 +153,7 @@ a {
    ============================================== */
 .header {
   position: sticky;
-  /* Matches announce-bar height (37px) + safe-area-inset-top on notched iPhones */
-  top: calc(37px + env(safe-area-inset-top, 0px));
+  top: 0;
   z-index: 200;
   background: var(--white);
   border-bottom: 1px solid var(--grey-200);
@@ -395,8 +394,7 @@ a {
    ANNOUNCEMENT BAR
    ============================================== */
 .announce-bar {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 201;
   background: var(--green);
   color: var(--black);
