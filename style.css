@@ -314,7 +314,7 @@ a {
 .hero {
   position: relative;
   background: var(--black);
-  background-image: url('images/hero-bg.jpg');
+  background-image: url('images/hero-bg.webp');
   background-size: cover;
   background-position: center 25%;
   color: var(--white);
