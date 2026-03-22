@@ -1029,6 +1029,7 @@ a {
 .review-submit-link:hover { color: var(--green); }
 
 /* ── Review submission modal ────────────────────────────────────────────── */
+.review-modal[hidden] { display: none; }
 .review-modal {
   position: fixed;
   inset: 0;
