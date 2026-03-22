@@ -317,13 +317,13 @@ initReviewCarousel();
   if (!reviewModal || !openBtn) return;
 
   function openReviewModal() {
-    reviewModal.hidden = false;
+    reviewModal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
     reviewClose.focus();
   }
 
   function closeReviewModal() {
-    reviewModal.hidden = true;
+    reviewModal.classList.remove('is-open');
     document.body.style.overflow = '';
     openBtn.focus();
   }

@@ -1029,16 +1029,16 @@ a {
 .review-submit-link:hover { color: var(--green); }
 
 /* ── Review submission modal ────────────────────────────────────────────── */
-.review-modal[hidden] { display: none; }
 .review-modal {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 300;
-  display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
+.review-modal.is-open { display: flex; }
 .review-modal-backdrop {
   position: absolute;
   inset: 0;
