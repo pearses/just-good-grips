@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Reviews — Just Good Grips</title>
+  <meta name="description" content="Read what players across Australia, Germany and Japan are saying about Just Good Grips overgrips.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .reviews-page { padding: 64px 0 96px; background: var(--white); min-height: 100vh; }
+    .reviews-page-header {
+      text-align: center;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 48px;
+    }
+    .reviews-page-eyebrow {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 12px;
+    }
+    .reviews-page-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+    .reviews-page-agg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .reviews-page-score {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--black);
+      line-height: 1;
+    }
+    .reviews-page-agg-right { text-align: left; }
+    .reviews-page-agg-right .stars { font-size: 1.2rem; letter-spacing: 3px; }
+    .reviews-page-count { font-size: 0.875rem; color: var(--mid); margin-top: 2px; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .reviews-grid-card {
+      background: #fafafa;
+      border: 1px solid #efefef;
+      border-radius: var(--radius-md);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .reviews-grid-card .stars { font-size: 0.95rem; letter-spacing: 2px; }
+    .reviews-grid-title {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+    .reviews-grid-text {
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.65;
+      font-style: italic;
+      flex: 1;
+    }
+    .reviews-grid-author {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--mid);
+      margin-top: 4px;
+    }
+    .reviews-page-cta {
+      text-align: center;
+      margin-top: 56px;
+      padding-top: 48px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .reviews-page-cta p { color: var(--mid); font-size: 0.9375rem; margin-bottom: 16px; }
+    @media (max-width: 960px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .reviews-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo" style="text-decoration:none;">
+        <img src="../images/logo-black.svg" alt="Just Good Grips" class="logo-img">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="/#products" class="nav-link">Shop</a>
+        <a href="/#reviews"  class="nav-link">Reviews</a>
+        <a href="/#features" class="nav-link">Why Just Good Grips</a>
+        <a href="/#about"    class="nav-link">About</a>
+        <a href="/membership" class="nav-link">Club</a>
+        <a href="/#stores"   class="nav-link">Stores</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/#products" class="btn btn-outline">Shop All</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="/#products" class="mobile-nav-link">Shop</a>
+      <a href="/#reviews"  class="mobile-nav-link">Reviews</a>
+      <a href="/#features" class="mobile-nav-link">Why Just Good Grips</a>
+      <a href="/#about"    class="mobile-nav-link">About</a>
+      <a href="/membership" class="mobile-nav-link">Club</a>
+      <a href="/#stores"   class="mobile-nav-link">Stores</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="reviews-page">
+      <div class="container">
+
+        <div class="reviews-page-header">
+          <p class="reviews-page-eyebrow">Player Reviews</p>
+          <h1 class="reviews-page-title">What players are saying</h1>
+          <div class="reviews-page-agg">
+            <span class="reviews-page-score">5.0</span>
+            <div class="reviews-page-agg-right">
+              <div class="stars">★★★★★</div>
+              <p class="reviews-page-count" id="reviewCount">— reviews</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews-grid" id="reviewsGrid">
+          <!-- populated by JS -->
+        </div>
+
+        <div class="reviews-page-cta">
+          <p>Tried Just Good Grips? We'd love to hear from you.</p>
+          <a href="/" class="btn btn-primary">Leave a Review →</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/justgoodgrips/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Just Good Grips on Instagram">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            <span>@justgoodgrips</span>
+          </a>
+          <a href="https://www.facebook.com/justgoodgrips" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Just Good Grips on Facebook">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Just Good Grips</span>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Shop</h5>
+        <a href="/#products" class="footer-link">Overgrip 12 Pack — White</a>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <a href="/#about" class="footer-link">About</a>
+        <a href="/membership" class="footer-link">JGG Club</a>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Contact</h5>
+        <a href="mailto:justgoodgrips@gmail.com" class="footer-link">justgoodgrips@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    fetch('../reviews.json')
+      .then(r => r.json())
+      .then(reviews => {
+        document.getElementById('reviewCount').textContent = `${reviews.length} review${reviews.length !== 1 ? 's' : ''}`;
+        document.getElementById('reviewsGrid').innerHTML = reviews.map(r => `
+          <div class="reviews-grid-card">
+            <div class="stars">${'★'.repeat(r.stars || 5)}</div>
+            <p class="reviews-grid-title">${r.title}</p>
+            <p class="reviews-grid-text">"${r.text}"</p>
+            <p class="reviews-grid-author">${r.author}</p>
+          </div>
+        `).join('');
+      });
+  </script>
+</body>
+</html>

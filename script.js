@@ -229,8 +229,9 @@ async function initReviewCarousel() {
     return;
   }
 
-  // Build cards
-  track.innerHTML = reviews.map(r => `
+  // Build cards — cap at 5 random, then a "+" card linking to /reviews
+  const shown = reviews.slice(0, 5);
+  track.innerHTML = shown.map(r => `
     <div class="review-card">
       <div class="stars">${'★'.repeat(r.stars || 5)}</div>
       <p class="review-title">${r.title}</p>
@@ -238,7 +239,14 @@ async function initReviewCarousel() {
       <p class="review-author">${r.author}</p>
       <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
     </div>
-  `).join('');
+  `).join('') + `
+    <div class="review-card review-card--more">
+      <a href="/reviews" class="review-more-link" aria-label="See all reviews">
+        <span class="review-more-plus">+</span>
+        <span class="review-more-label">See all reviews</span>
+      </a>
+    </div>
+  `;
 
   const cards     = Array.from(track.querySelectorAll('.review-card'));
   const total     = cards.length;
