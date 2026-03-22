@@ -221,48 +221,7 @@ We believe every player should have the freedom to change grips as often as they
           </button>
 
           <div class="carousel-viewport">
-            <div class="carousel-track" id="reviewTrack">
-
-              <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-title">Game-changer for my serve</p>
-                <p class="review-text">"The tack on these is unreal. I've tried every brand and nothing comes close for the price. Ordered the 12 pack and won't go back."</p>
-                <p class="review-author">Alex M. — Club Player, Sydney 🇦🇺</p>
-                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-              </div>
-
-              <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-title">Lasts way longer than name brands</p>
-                <p class="review-text">"Great tack out of the bag. Lasts way longer than the branded ones and costs half as much. My whole squad switched over."</p>
-                <p class="review-author">Sarah K. — Recreational Player, Melbourne 🇦🇺</p>
-                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-              </div>
-
-              <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-title">The 12 pack is incredible value</p>
-                <p class="review-text">"Ordered twice already. My students go through grips fast and this is the only brand I recommend now. Fast delivery too."</p>
-                <p class="review-author">James T. — Tennis Coach, Brisbane 🇦🇺</p>
-                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-              </div>
-
-              <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-title">I've used for about 3 hours of play so far, </p>
-                <p class="review-text">"Sweaty hands in summer used to ruin my game. These are the best I've used for moisture absorption. A total must-buy."</p>
-                <p class="review-author">Priya L. — Competitive Club Player, Adelaide 🇦🇺</p>
-                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-              </div>
-
-              <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-title">No slip, all swing!</p>
-                <p class="review-text">"Loved it right away. No slip at all and gives me the confidence to swing freely. Also lasts a long time. I'm sticking with this!"</p>
-                <p class="review-author">Shotaro H. — Club Player, Japan 🇯🇵</p>
-                <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
-              </div>
-            </div>
+            <div class="carousel-track" id="reviewTrack"></div>
           </div>
 
           <button class="carousel-arrow carousel-arrow--next" id="reviewNext" aria-label="Next review">
@@ -270,6 +229,7 @@ We believe every player should have the freedom to change grips as often as they
           </button>
 
           <div class="carousel-dots" id="reviewDots"></div>
+          <p class="review-submit-cta">Tried Just Good Grips? <button class="review-submit-link" id="openReviewModal">Share your experience →</button></p>
         </div>
 
       </div>
@@ -576,6 +536,36 @@ We believe every player should have the freedom to change grips as often as they
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
     <div class="img-lightbox-counter" id="lightboxCounter">1 / 3</div>
+  </div>
+
+  <!-- ===================== REVIEW SUBMISSION MODAL ===================== -->
+  <div class="review-modal" id="reviewModal" hidden role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+    <div class="review-modal-backdrop" id="reviewModalBackdrop"></div>
+    <div class="review-modal-panel">
+      <button class="review-modal-close" id="reviewModalClose" aria-label="Close">&#x2715;</button>
+      <h2 class="review-modal-title" id="reviewModalTitle">Share your experience</h2>
+      <p class="review-modal-sub">Loved your grips? We'd love to hear about it.</p>
+      <form class="review-form" id="reviewForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="review-form-row">
+          <label class="review-form-label" for="reviewName">Name</label>
+          <input class="review-form-input" type="text" id="reviewName" name="name" placeholder="e.g. Alex M." required>
+        </div>
+        <div class="review-form-row">
+          <label class="review-form-label" for="reviewLocation">Location</label>
+          <input class="review-form-input" type="text" id="reviewLocation" name="location" placeholder="e.g. Sydney, Australia" required>
+        </div>
+        <div class="review-form-row">
+          <label class="review-form-label" for="reviewTitle">Review title</label>
+          <input class="review-form-input" type="text" id="reviewTitle" name="title" placeholder="e.g. Game-changer for my serve" required>
+        </div>
+        <div class="review-form-row">
+          <label class="review-form-label" for="reviewText">Your review</label>
+          <textarea class="review-form-input review-form-textarea" id="reviewText" name="review" placeholder="Tell us about your experience..." rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary review-form-submit">Submit Review</button>
+      </form>
+      <p class="review-form-success" id="reviewFormSuccess" hidden>Thanks! We'll read your review shortly. 🎾</p>
+    </div>
   </div>
 
   <script src="script.js"></script>

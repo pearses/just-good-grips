@@ -205,13 +205,40 @@ function copyCode(btn) {
     }, { passive: true });
   }
 
-  // ── REVIEW CAROUSEL ───────────────────────────────────────────────────────
+})();
+
+// ── REVIEW CAROUSEL ───────────────────────────────────────────────────────
+async function initReviewCarousel() {
   const track    = document.getElementById('reviewTrack');
   const dotsWrap = document.getElementById('reviewDots');
   const prevBtn  = document.getElementById('reviewPrev');
   const nextBtn  = document.getElementById('reviewNext');
 
   if (!track) return;
+
+  // Load and shuffle reviews
+  let reviews = [];
+  try {
+    const res = await fetch('reviews.json');
+    reviews = await res.json();
+    for (let i = reviews.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [reviews[i], reviews[j]] = [reviews[j], reviews[i]];
+    }
+  } catch (e) {
+    return;
+  }
+
+  // Build cards
+  track.innerHTML = reviews.map(r => `
+    <div class="review-card">
+      <div class="stars">${'★'.repeat(r.stars || 5)}</div>
+      <p class="review-title">${r.title}</p>
+      <p class="review-text">"${r.text}"</p>
+      <p class="review-author">${r.author}</p>
+      <img src="images/grip-pack-12-white.webp" alt="12 Pack" class="review-thumb" onerror="this.style.display='none'">
+    </div>
+  `).join('');
 
   const cards     = Array.from(track.querySelectorAll('.review-card'));
   const total     = cards.length;
@@ -274,5 +301,54 @@ function copyCode(btn) {
   });
 
   startAuto();
+}
 
+initReviewCarousel();
+
+// ── REVIEW SUBMISSION MODAL ───────────────────────────────────────────────
+(function () {
+  const reviewModal    = document.getElementById('reviewModal');
+  const reviewBackdrop = document.getElementById('reviewModalBackdrop');
+  const reviewClose    = document.getElementById('reviewModalClose');
+  const openBtn        = document.getElementById('openReviewModal');
+  const reviewForm     = document.getElementById('reviewForm');
+  const successMsg     = document.getElementById('reviewFormSuccess');
+
+  if (!reviewModal || !openBtn) return;
+
+  function openReviewModal() {
+    reviewModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    reviewClose.focus();
+  }
+
+  function closeReviewModal() {
+    reviewModal.hidden = true;
+    document.body.style.overflow = '';
+    openBtn.focus();
+  }
+
+  openBtn.addEventListener('click', openReviewModal);
+  reviewClose.addEventListener('click', closeReviewModal);
+  reviewBackdrop.addEventListener('click', closeReviewModal);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !reviewModal.hidden) closeReviewModal();
+  });
+
+  reviewForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    try {
+      const res = await fetch(reviewForm.action, {
+        method: 'POST',
+        body: new FormData(reviewForm),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        reviewForm.hidden = true;
+        successMsg.hidden = false;
+      }
+    } catch (err) {
+      reviewForm.submit();
+    }
+  });
 })();
