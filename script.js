@@ -345,18 +345,16 @@ initReviewCarousel();
 
   reviewForm.addEventListener('submit', async e => {
     e.preventDefault();
-    try {
-      const res = await fetch(reviewForm.action, {
-        method: 'POST',
-        body: new FormData(reviewForm),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        reviewForm.hidden = true;
-        successMsg.hidden = false;
-      }
-    } catch (err) {
-      reviewForm.submit();
+    const res = await fetch(reviewForm.action, {
+      method: 'POST',
+      body: new FormData(reviewForm),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      reviewForm.hidden = true;
+      successMsg.hidden = false;
+    } else {
+      alert('Something went wrong — please email us directly at contact@justgoodgrips.com');
     }
   });
 })();
