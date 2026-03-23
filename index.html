@@ -553,7 +553,17 @@ We believe every player should have the freedom to change grips as often as they
         </div>
         <div class="review-form-row">
           <label class="review-form-label" for="reviewLocation">Location</label>
-          <input class="review-form-input" type="text" id="reviewLocation" name="location" placeholder="e.g. Sydney, Australia" required>
+          <input class="review-form-input" type="text" id="reviewLocation" name="location" placeholder="e.g. Sydney" required>
+        </div>
+        <div class="review-form-row">
+          <label class="review-form-label" for="reviewCountry">Country</label>
+          <select class="review-form-input" id="reviewCountry" name="country" required>
+            <option value="" disabled selected>Select your country</option>
+            <option value="Australia 🇦🇺">Australia 🇦🇺</option>
+            <option value="Germany 🇩🇪">Germany 🇩🇪</option>
+            <option value="Japan 🇯🇵">Japan 🇯🇵</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div class="review-form-row">
           <label class="review-form-label" for="reviewTitle">Review title</label>
