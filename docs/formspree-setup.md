@@ -1,11 +1,11 @@
 # Formspree Setup — Stockist Enquiry Form
 
-Formspree handles form submission and emails responses to `justgoodgrips@gmail.com` — no backend required.
+Formspree handles form submission and emails responses to `contact@justgoodgrips.com` — no backend required.
 
 ## Steps
 
 1. Go to [formspree.io](https://formspree.io) and sign up (free tier is fine)
-2. Click **New Form**, give it a name (e.g. "Stockist Enquiry"), and set the destination email to `justgoodgrips@gmail.com`
+2. Click **New Form**, give it a name (e.g. "Stockist Enquiry"), and set the destination email to `contact@justgoodgrips.com`
 3. Formspree will give you a form endpoint URL like: `https://formspree.io/f/abcd1234`
 4. Open `stockist.html` and find this line (~line 130):
 
@@ -19,7 +19,7 @@ Formspree handles form submission and emails responses to `justgoodgrips@gmail.c
    action="https://formspree.io/f/abcd1234"
    ```
 
-5. Save and deploy. Test by submitting the form — you should receive an email at `justgoodgrips@gmail.com` within a minute.
+5. Save and deploy. Test by submitting the form — you should receive an email at `contact@justgoodgrips.com` within a minute.
 
 ## How it works
 
