@@ -1,0 +1,28 @@
+name: Broken Link Checker
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links with Lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --accept 200,206,301,302,307,308
+            --exclude "^https://buy\.stripe\.com"
+            --exclude "^https://www\.instagram\.com"
+            --exclude "^https://www\.facebook\.com"
+            --exclude "^mailto:"
+            --exclude "^tel:"
+            ./**/*.html
+          fail: true
+          jobSummary: true

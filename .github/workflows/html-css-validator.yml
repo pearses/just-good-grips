@@ -1,0 +1,52 @@
+name: HTML / CSS Validator
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HTML (Nu HTML Checker)
+        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        with:
+          root: .
+          # Exclude generated/internal files
+          extra: "--ignore-re 'Trailing slash on void elements' --skip-non-html"
+          css: false
+
+  validate-css:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Stylelint
+        run: npm install --save-dev stylelint stylelint-config-standard
+
+      - name: Write Stylelint config
+        run: |
+          cat > .stylelintrc.json <<'EOF'
+          {
+            "extends": "stylelint-config-standard",
+            "rules": {
+              "no-descending-specificity": null,
+              "alpha-value-notation": null,
+              "color-function-notation": null,
+              "selector-class-pattern": null,
+              "custom-property-pattern": null,
+              "keyframes-name-pattern": null
+            }
+          }
+          EOF
+
+      - name: Run Stylelint
+        run: npx stylelint "style.css" --formatter compact

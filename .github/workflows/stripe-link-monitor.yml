@@ -1,0 +1,61 @@
+name: Stripe Link Monitor
+
+on:
+  schedule:
+    # Runs daily at 08:00 UTC (6pm ACST)
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+jobs:
+  check-stripe-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all Stripe payment links
+        run: |
+          FAILED=0
+          RESULTS=""
+
+          check_link() {
+            local label="$1"
+            local url="$2"
+            local status
+            status=$(curl -o /dev/null -s -w "%{http_code}" -L \
+              --max-time 15 \
+              --user-agent "Mozilla/5.0 (GitHub Actions link monitor)" \
+              "$url")
+            if [ "$status" -ge 200 ] && [ "$status" -lt 400 ]; then
+              RESULTS="${RESULTS}\n✅ ${label}: HTTP ${status}"
+            else
+              RESULTS="${RESULTS}\n❌ ${label}: HTTP ${status} — FAILED"
+              FAILED=1
+            fi
+          }
+
+          # One-time purchase link (index.html)
+          check_link "12-pack one-time (index)"       "https://buy.stripe.com/cNi00l1OD8nf3Drgpk83C0w"
+          check_link "12-pack one-time (membership)"  "https://buy.stripe.com/7sYdRb3WL7jb8XL6OK83C0u"
+
+          # Membership subscription links
+          check_link "12 grips / 2 weeks (Starter fortnightly)"    "https://buy.stripe.com/eVq4gBeBpgTLgqd4GC83C0l"
+          check_link "12 grips / 4 weeks (Starter monthly)"        "https://buy.stripe.com/bJe8wRcth7jb4Hva0W83C0m"
+          check_link "12 grips / 12 weeks (Starter quarterly)"     "https://buy.stripe.com/aFafZj8d15b32zn8WS83C0n"
+          check_link "24 grips / 2 weeks (Competitor fortnightly)" "https://buy.stripe.com/dRm5kF0Kz0UNa1P3Cy83C0o"
+          check_link "24 grips / 4 weeks (Competitor monthly)"     "https://buy.stripe.com/dRm8wRal9bzr5Lz6OK83C0p"
+          check_link "24 grips / 12 weeks (Competitor quarterly)"  "https://buy.stripe.com/28EcN7dxlcDv8XL3Cy83C0q"
+          check_link "36 grips / 2 weeks (Elite fortnightly)"      "https://buy.stripe.com/6oU4gBdxleLDa1P8WS83C0r"
+          check_link "36 grips / 4 weeks (Elite monthly)"          "https://buy.stripe.com/eVq28t3WL9rjfm97SO83C0s"
+          check_link "36 grips / 12 weeks (Elite quarterly)"       "https://buy.stripe.com/dRmaEZ3WLeLD1vjehc83C0t"
+
+          echo -e "$RESULTS"
+
+          echo "## Stripe Link Monitor" >> $GITHUB_STEP_SUMMARY
+          echo -e "$RESULTS" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$FAILED" -eq 1 ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**⚠️ One or more Stripe links returned an error. Check the links above.**" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          else
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**All Stripe links are healthy.**" >> $GITHUB_STEP_SUMMARY
+          fi
