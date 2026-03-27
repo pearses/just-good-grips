@@ -30,21 +30,13 @@ jobs:
           node-version: "20"
 
       - name: Install Stylelint
-        run: npm install --save-dev stylelint stylelint-config-standard
+        run: npm install --save-dev stylelint stylelint-config-recommended
 
       - name: Write Stylelint config
         run: |
           cat > .stylelintrc.json <<'EOF'
           {
-            "extends": "stylelint-config-standard",
-            "rules": {
-              "no-descending-specificity": null,
-              "alpha-value-notation": null,
-              "color-function-notation": null,
-              "selector-class-pattern": null,
-              "custom-property-pattern": null,
-              "keyframes-name-pattern": null
-            }
+            "extends": "stylelint-config-recommended"
           }
           EOF
 

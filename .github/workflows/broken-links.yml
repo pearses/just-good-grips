@@ -17,6 +17,7 @@ jobs:
           args: >
             --verbose
             --no-progress
+            --base https://www.justgoodgrips.com
             --accept 200,206,301,302,307,308
             --exclude "^https://buy\.stripe\.com"
             --exclude "^https://www\.instagram\.com"
