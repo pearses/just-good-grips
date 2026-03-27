@@ -1,0 +1,67 @@
+name: Add Review
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Name (e.g. Jano S.)"
+        required: true
+      location:
+        description: "City / region (e.g. Adelaide, leave blank if submitter only gave country)"
+        required: false
+        default: ""
+      country:
+        description: "Country"
+        required: true
+        type: choice
+        options:
+          - "Australia 🇦🇺"
+          - "Germany 🇩🇪"
+          - "Japan 🇯🇵"
+          - "United States 🇺🇸"
+          - "United Kingdom 🇬🇧"
+          - "Other"
+      title:
+        description: "Review title"
+        required: true
+      review:
+        description: "Review text"
+        required: true
+
+jobs:
+  add-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build author string
+        id: author
+        run: |
+          NAME="${{ inputs.name }}"
+          LOCATION="${{ inputs.location }}"
+          COUNTRY="${{ inputs.country }}"
+
+          if [ -n "$LOCATION" ]; then
+            AUTHOR="${NAME} — ${LOCATION}, ${COUNTRY}"
+          else
+            AUTHOR="${NAME} — ${COUNTRY}"
+          fi
+
+          echo "value=$AUTHOR" >> $GITHUB_OUTPUT
+
+      - name: Append review to reviews.json
+        run: |
+          jq --arg title "${{ inputs.title }}" \
+             --arg text  "${{ inputs.review }}" \
+             --arg author "${{ steps.author.outputs.value }}" \
+             '. += [{"title": $title, "text": $text, "author": $author, "stars": 5}]' \
+             reviews.json > reviews.tmp.json
+          mv reviews.tmp.json reviews.json
+
+      - name: Commit and push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reviews.json
+          git commit -m "feat: add review from ${{ inputs.name }}"
+          git push
