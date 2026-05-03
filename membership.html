@@ -868,7 +868,7 @@
       </div>
       <div class="onetime-section">
         <p class="onetime-label">Want to try before you commit?</p>
-        <a href="https://buy.stripe.com/cNi00l1OD8nf3Drgpk83C0w" class="onetime-btn" target="_blank" rel="noopener">
+        <a href="https://buy.stripe.com/7sYdRb3WL7jb8XL6OK83C0u" class="onetime-btn" target="_blank" rel="noopener">
           Buy Once — 12-Pack White
         </a>
       </div>
@@ -1148,7 +1148,7 @@
           <div class="club-why-item">
             <span class="club-why-item-icon">💸</span>
             <strong>Less than half the pro shop price.</strong>
-            As low as $2.25 per grip vs $5–$6 for the big brands. Honestly, why are people still paying pro shop prices?
+            $2.25 per grip vs $5–$6 for the big brands. Honestly, why are people still paying pro shop prices?
           </div>
           <div class="club-why-item">
             <span class="club-why-item-icon">⚡</span>
@@ -1166,7 +1166,7 @@
         <!-- One-time fallback -->
         <div class="onetime-section">
           <p class="onetime-label">Want to try before you commit? Fair enough — but once you feel the difference, you'll be back.</p>
-          <a href="https://buy.stripe.com/cNi00l1OD8nf3Drgpk83C0w" class="onetime-btn" id="buyOneTimeBtn" target="_blank" rel="noopener">
+          <a href="https://buy.stripe.com/7sYdRb3WL7jb8XL6OK83C0u" class="onetime-btn" id="buyOneTimeBtn" target="_blank" rel="noopener">
             Buy Once — 12-Pack White
           </a>
         </div>
@@ -1228,7 +1228,10 @@
     // ── Pricing ────────────────────────────────────────────────────────────
     const ONE_TIME_PRICE_12 = 32.98;           // $32.98 for 12 grips
     const PRICE_PER_GRIP    = ONE_TIME_PRICE_12 / 12;  // ~$2.75
-    const MEMBERSHIP_PPG = PRICE_PER_GRIP; // $2.75/grip
+    const MEMBERSHIP_PPG = PRICE_PER_GRIP; // $2.75/grip — used for general savings bar
+
+    // Actual Stripe subscription prices per delivery (not derived from 12-pack rate)
+    const SUBSCRIPTION_PRICE = { 12: 32.98, 24: 62.97, 36: 92.96 };
 
     const COMPETITOR_MID = 5.50;              // midpoint of $5–$6 competitor price
 
@@ -1301,10 +1304,10 @@
       '12-4':  'https://buy.stripe.com/bJe8wRcth7jb4Hva0W83C0m',   // Starter — monthly (every 4 weeks)
       '12-12': 'https://buy.stripe.com/aFafZj8d15b32zn8WS83C0n',   // Starter — quarterly (every 12 weeks)
       '24-2':  'https://buy.stripe.com/dRm5kF0Kz0UNa1P3Cy83C0o',   // Competitor fortnightly
-      '24-4':  'https://buy.stripe.com/dRm8wRal9bzr5Lz6OK83C0p',   // Competitor — monthly
+      '24-4':  'https://buy.stripe.com/bJe14p9h5dHz8XLdd883C0x',   // Competitor — monthly
       '24-12': 'https://buy.stripe.com/28EcN7dxlcDv8XL3Cy83C0q',   // Competitor quarterly
       '36-2':  'https://buy.stripe.com/6oU4gBdxleLDa1P8WS83C0r',   // Elite fortnightly
-      '36-4':  'https://buy.stripe.com/eVq28t3WL9rjfm97SO83C0s',   // Elite — monthly
+      '36-4':  'https://buy.stripe.com/6oU28t3WL0UNb5Tgpk83C0y',   // Elite — monthly
       '36-12': 'https://buy.stripe.com/dRmaEZ3WLeLD1vjehc83C0t',   // Elite quarterly
       '60-4':  '#',   // 60 grips, monthly  (60-pack not yet live)
       '60-12': '#',   // 60 grips, quarterly
@@ -1372,7 +1375,7 @@
 
     // ── Membership price helpers ───────────────────────────────────────────
     function tierPricePerDelivery(tier) {
-      return tier.grips * PRICE_PER_GRIP;
+      return SUBSCRIPTION_PRICE[tier.grips] ?? tier.grips * PRICE_PER_GRIP;
     }
 
     function tierPricePerMonth(tier) {
@@ -1392,6 +1395,7 @@
     // ── Build recommended tier card (large featured card) ─────────────────
     function buildFeaturedCard(tier) {
       const price      = tierPricePerDelivery(tier);
+      const ppg        = price / tier.grips;
       const jggWeekly  = tierPricePerWeek(tier);
       const compWeekly = competitorPricePerWeek(tier);
       const saveWeekly = compWeekly - jggWeekly;
@@ -1427,7 +1431,7 @@
             <div class="tier-card-featured-pricing">
               <p class="tcp-price">~$${jggWeekly.toFixed(2)}<span class="tcp-price-unit">/wk</span></p>
               <p class="tcp-sub">~$${price.toFixed(2)} per delivery</p>
-              <p class="tcp-grip">$${MEMBERSHIP_PPG.toFixed(2)}/grip</p>
+              <p class="tcp-grip">$${ppg.toFixed(2)}/grip</p>
             </div>
           </div>
 
@@ -1457,6 +1461,7 @@
     // ── Build mini tier card (comparison grid) ─────────────────────────────
     function buildMiniCard(tier, isRecommended, showCta = false) {
       const price     = tierPricePerDelivery(tier);
+      const ppg       = price / tier.grips;
       const weekly    = tierPricePerWeek(tier);
       const packCount = tier.grips / 12;
       const packLabel = packCount === 1 ? '12 grips · 1 pack' : `${tier.grips} grips · ${packCount} packs`;
@@ -1483,7 +1488,7 @@
           <p class="tier-mini-qty">${packLabel}</p>
           <p class="tier-mini-freq">${tier.freqLabel}</p>
           <p class="tier-mini-price">~$${weekly.toFixed(2)}<span style="font-size:0.75em;font-weight:700">/wk</span></p>
-          <p class="tier-mini-grip">$${MEMBERSHIP_PPG.toFixed(2)}/grip</p>
+          <p class="tier-mini-grip">$${ppg.toFixed(2)}/grip</p>
           <p class="tier-mini-weekly">~$${price.toFixed(2)} per delivery</p>
           ${ctaHtml}
         </div>
