@@ -146,7 +146,7 @@
 
         <div class="reviews-page-cta">
           <p>Tried Just Good Grips? We'd love to hear from you.</p>
-          <a href="/" class="btn btn-primary">Leave a Review →</a>
+          <a href="/create-review" class="btn btn-primary">Leave a Review →</a>
         </div>
 
       </div>
@@ -185,7 +185,7 @@
 
   <script src="../script.js"></script>
   <script>
-    fetch('../reviews.json')
+    fetch('../reviews.json', { cache: 'no-cache' })
       .then(r => r.json())
       .then(reviews => {
         document.getElementById('reviewCount').textContent = `${reviews.length} review${reviews.length !== 1 ? 's' : ''}`;
@@ -197,6 +197,9 @@
             <p class="reviews-grid-author">${r.author}</p>
           </div>
         `).join('');
+      })
+      .catch(() => {
+        document.getElementById('reviewsGrid').innerHTML = '<p style="color:var(--mid);grid-column:1/-1">Reviews couldn\'t be loaded. Please try again shortly.</p>';
       });
   </script>
 </body>

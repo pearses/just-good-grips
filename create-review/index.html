@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Leave a Review — Just Good Grips</title>
+  <meta name="description" content="Share your Just Good Grips experience. Takes less than a minute.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .review-page {
+      min-height: 100vh;
+      background: var(--white);
+      padding: 64px 24px 96px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .review-page-inner {
+      width: 100%;
+      max-width: 480px;
+    }
+    .review-page-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--mid);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: color var(--transition);
+    }
+    .review-page-back:hover { color: var(--black); }
+    .review-page-eyebrow {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 10px;
+    }
+    .review-page-title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .review-page-sub {
+      font-size: 0.9375rem;
+      color: var(--mid);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    .review-form-submit { width: 100%; margin-top: 8px; }
+    .review-page-success {
+      text-align: center;
+      padding: 48px 0;
+    }
+    .review-page-success-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    .review-page-success h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+    .review-page-success p {
+      font-size: 0.9375rem;
+      color: var(--mid);
+      margin-bottom: 28px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo" style="text-decoration:none;">
+        <img src="../images/logo-black.svg" alt="Just Good Grips" class="logo-img">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="/#products" class="nav-link">Shop</a>
+        <a href="/reviews"   class="nav-link">Reviews</a>
+        <a href="/#features" class="nav-link">Why Just Good Grips</a>
+        <a href="/#about"    class="nav-link">About</a>
+        <a href="/membership" class="nav-link">Club</a>
+        <a href="/#stores"   class="nav-link">Stores</a>
+      </nav>
+      <div class="header-actions">
+        <a href="/#products" class="btn btn-outline">Shop All</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="/#products" class="mobile-nav-link">Shop</a>
+      <a href="/reviews"   class="mobile-nav-link">Reviews</a>
+      <a href="/#features" class="mobile-nav-link">Why Just Good Grips</a>
+      <a href="/#about"    class="mobile-nav-link">About</a>
+      <a href="/membership" class="mobile-nav-link">Club</a>
+      <a href="/#stores"   class="mobile-nav-link">Stores</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="review-page">
+      <div class="review-page-inner">
+
+        <a href="/reviews" class="review-page-back">← Back to reviews</a>
+
+        <div id="reviewPageForm">
+          <p class="review-page-eyebrow">Player Reviews</p>
+          <h1 class="review-page-title">Share your experience</h1>
+          <p class="review-page-sub">Loved your grips? Takes less than a minute.</p>
+
+          <form id="reviewForm" action="https://formspree.io/f/xzdjljlp" method="POST">
+            <div class="review-form-row">
+              <label class="review-form-label" for="reviewName">Name</label>
+              <input class="review-form-input" type="text" id="reviewName" name="name" placeholder="e.g. Alex M." required>
+            </div>
+            <div class="review-form-row">
+              <label class="review-form-label" for="reviewLocation">Location</label>
+              <input class="review-form-input" type="text" id="reviewLocation" name="location" placeholder="e.g. Sydney" required>
+            </div>
+            <div class="review-form-row">
+              <label class="review-form-label" for="reviewCountry">Country</label>
+              <select class="review-form-input" id="reviewCountry" name="country" required>
+                <option value="" disabled selected>Select your country</option>
+                <option value="Australia 🇦🇺">Australia 🇦🇺</option>
+                <option value="Germany 🇩🇪">Germany 🇩🇪</option>
+                <option value="Japan 🇯🇵">Japan 🇯🇵</option>
+                <option value="United States 🇺🇸">United States 🇺🇸</option>
+                <option value="United Kingdom 🇬🇧">United Kingdom 🇬🇧</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="review-form-row">
+              <label class="review-form-label" for="reviewTitle">Review title</label>
+              <input class="review-form-input" type="text" id="reviewTitle" name="title" placeholder="e.g. Game-changer for my serve" required>
+            </div>
+            <div class="review-form-row">
+              <label class="review-form-label" for="reviewText">Your review</label>
+              <textarea class="review-form-input review-form-textarea" id="reviewText" name="review" placeholder="Tell us about your experience..." rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary review-form-submit">Submit Review</button>
+          </form>
+        </div>
+
+        <div id="reviewPageSuccess" class="review-page-success" hidden>
+          <div class="review-page-success-icon">🎾</div>
+          <h2>Thanks for your review!</h2>
+          <p>We'll read it shortly and add it to the page.</p>
+          <a href="/reviews" class="btn btn-primary">See all reviews →</a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/justgoodgrips/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Just Good Grips on Instagram">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            <span>@justgoodgrips</span>
+          </a>
+          <a href="https://www.facebook.com/justgoodgrips" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Just Good Grips on Facebook">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Just Good Grips</span>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Shop</h5>
+        <a href="/#products" class="footer-link">Overgrip 12 Pack — White</a>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Company</h5>
+        <a href="/#about" class="footer-link">About</a>
+        <a href="/membership" class="footer-link">JGG Club</a>
+      </div>
+      <div class="footer-col">
+        <h5 class="footer-col-title">Contact</h5>
+        <a href="mailto:contact@justgoodgrips.com" class="footer-link">contact@justgoodgrips.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    const form       = document.getElementById('reviewForm');
+    const formWrap   = document.getElementById('reviewPageForm');
+    const successWrap = document.getElementById('reviewPageSuccess');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = form.querySelector('[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (res.ok) {
+          formWrap.hidden = true;
+          successWrap.hidden = false;
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Submit Review';
+          alert('Something went wrong — please try again.');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Submit Review';
+        alert('Something went wrong — please try again.');
+      }
+    });
+  </script>
+</body>
+</html>
