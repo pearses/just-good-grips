@@ -244,3 +244,20 @@ After adding, restart Claude Code and complete the Canva OAuth flow when prompte
 - `logo-white.png` — white text on white bg won't work; **needs a design with a dark/black background** or use the thumbnail as a fallback
 
 **For product images:** The raw uploaded assets (`MAG53cRURO8`, `MAGdNIs2X4Y`) are the cleanest product shots. Export designs `DAG53DYhX5Q` or `DAG53hvHP-k` (Price List Poster) to extract product imagery, or ask the user to manually export/download the uploaded images from Canva at full resolution and place them in `images/`.
+
+## Planned: Sponsorship Enquiry Page
+
+A `/sponsorship` page is planned — a simple form page similar to `/create-review`. Players fill it out to enquire about a JGG sponsorship.
+
+**Form fields (in order):**
+1. What Tennis Club or School are you currently competing at?
+2. Winter division you're expecting to compete in (2026)?
+3. Any tournament experience?
+4. Do you have a favourite tennis court surface?
+5. Who is your current Tennis coach?
+
+**Implementation notes:**
+- Follow the same pattern as `/create-review/index.html` — standalone page with header/footer, Formspree submission, success screen
+- Route: `/sponsorship` → `sponsorship/index.html`
+- Use the existing Formspree form or create a new one for sponsorship enquiries
+- Keep the tone on-brand — approachable, not corporate

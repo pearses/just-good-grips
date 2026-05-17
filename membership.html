@@ -580,7 +580,7 @@
     }
     .onetime-btn {
       display: inline-block;
-      padding: 12px 24px;
+      padding: 14px 32px;
       border: 2px solid var(--black);
       border-radius: 8px;
       font-family: inherit;
@@ -681,13 +681,14 @@
     .tier-mini-join {
       display: block;
       margin-top: 14px;
-      padding: 10px 0;
+      padding: 12px 0;
       background: var(--black);
       color: var(--white);
       text-align: center;
       border-radius: 8px;
       font-size: 0.8125rem;
       font-weight: 700;
+      line-height: 1.3;
       text-decoration: none;
       letter-spacing: 0.01em;
       transition: background 0.15s;
@@ -797,11 +798,106 @@
 
       .club-why { grid-template-columns: 1fr; gap: 10px; }
 
-      .onetime-btn { width: 100%; text-align: center; display: block; box-sizing: border-box; }
+      .onetime-btn { width: 100%; text-align: center; display: block; }
 
       /* Quiz option cards: tighter padding */
       .quiz-option label { padding: 12px 14px; gap: 10px; }
       .quiz-options--2col { grid-template-columns: 1fr; }
+
+      /* Tier rows: stack pricing and CTA on mobile */
+      .tier-row-inner { flex-wrap: wrap; gap: 14px; }
+      .tier-row-pricing { text-align: left; }
+      .tier-row-cta-wrap { width: 100%; }
+      .tier-row-options { grid-template-columns: 1fr; }
+      .tier-row-option + .tier-row-option { border-left: none; border-top: 1px solid #f0f0f0; }
+      .tier-row-pair { grid-template-columns: 1fr; }
+    }
+
+    /* ── Starter / Regular pair ─────────────────────────────────────────── */
+    .tier-row-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .tier-card-compact {
+      border: 2px solid #e8e8e8;
+      border-radius: 14px;
+      background: #fff;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .tier-card-compact:hover { border-color: #ccc; box-shadow: 0 2px 14px rgba(0,0,0,0.07); }
+    .tier-card-compact .tier-row-ppg { margin-bottom: 16px; }
+    .tier-card-compact-cta { margin-top: auto; }
+    .tier-grip-badge {
+      display: inline-block;
+      background: #edfae1;
+      color: #2e7d32;
+      font-size: 0.875rem;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin: 10px 0 6px;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Tier rows (tiers view) ──────────────────────────────────────────── */
+    .tiers-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .tier-row {
+      border: 2px solid #e8e8e8;
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .tier-row:hover { border-color: #ccc; box-shadow: 0 2px 14px rgba(0,0,0,0.07); }
+    .tier-row-inner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 24px;
+    }
+    .tier-row-identity { flex: 1; min-width: 0; }
+    .tier-row-icon { font-size: 1.375rem; line-height: 1; display: block; margin-bottom: 6px; }
+    .tier-row-name {
+      font-size: 1.0625rem; font-weight: 800; color: var(--black);
+      letter-spacing: -0.02em; margin-bottom: 2px;
+    }
+    .tier-row-tagline { font-size: 0.8125rem; color: #777; margin-bottom: 4px; }
+    .tier-row-delivery { font-size: 0.75rem; color: #bbb; }
+    .tier-row-pricing { flex-shrink: 0; text-align: right; }
+    .tier-row-weekly {
+      font-size: 1.875rem; font-weight: 900; color: var(--black);
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .tier-row-weekly-unit { font-size: 0.9375rem; font-weight: 700; letter-spacing: 0; }
+    .tier-row-sub { font-size: 0.75rem; color: #888; margin-top: 4px; }
+    .tier-row-ppg { font-size: 0.6875rem; font-weight: 700; color: #2e7d32; margin-top: 2px; }
+    .tier-row-cta-wrap { flex-shrink: 0; }
+
+    /* ── Competitor split ────────────────────────────────────────────────── */
+    .tier-row-split-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .tier-row-split-icon { font-size: 1.375rem; line-height: 1; margin-bottom: 6px; }
+    .tier-row-options { display: grid; grid-template-columns: 1fr 1fr; }
+    .tier-row-option { padding: 16px 24px 20px; text-align: center; }
+    .tier-row-option + .tier-row-option { border-left: 1px solid #f0f0f0; }
+    .tier-option-label {
+      font-size: 0.625rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #bbb; margin-bottom: 6px;
     }
 
 </style>
@@ -859,7 +955,7 @@
       <p class="tiers-view-eyebrow">JGG Club Membership</p>
       <h2 class="tiers-view-heading">Choose your membership</h2>
       <p class="tiers-view-sub">Grips on autopilot · Free shipping · Pause or cancel any time.</p>
-      <div class="tiers-grid" id="tiersViewGrid">
+      <div class="tiers-rows" id="tiersViewGrid">
         <!-- Populated by JS on load -->
       </div>
       <div class="quiz-entry-cta">
@@ -868,8 +964,8 @@
       </div>
       <div class="onetime-section">
         <p class="onetime-label">Want to try before you commit?</p>
-        <a href="https://buy.stripe.com/7sYdRb3WL7jb8XL6OK83C0u" class="onetime-btn" target="_blank" rel="noopener">
-          Buy Once — 12-Pack White
+        <a href="https://buy.stripe.com/cNi00l1OD8nf3Drgpk83C0w" class="onetime-btn" target="_blank" rel="noopener">
+          <span style="display:block;">Buy Once</span><span style="display:block;font-size:0.8125rem;font-weight:500;opacity:0.65;">12-Pack White</span>
         </a>
       </div>
     </div>
@@ -952,58 +1048,48 @@
         </div>
       </div>
 
-      <!-- ── Q2: Training frequency ──────────────────────────────────────── -->
+      <!-- ── Q2: Actual grip usage ──────────────────────────────────────── -->
       <div class="quiz-step" id="step2">
-        <h2 class="quiz-step-heading">How many times a week are you on court?</h2>
-        <p class="quiz-step-sub">Count matches, training sessions, and social hits — all of them.</p>
+        <h2 class="quiz-step-heading">How often do you currently replace your overgrip?</h2>
+        <p class="quiz-step-sub">Be honest — this is how we dial in the right delivery quantity for you.</p>
         <div class="quiz-options quiz-options--2col">
           <div class="quiz-option">
-            <input type="radio" name="frequency" id="fr-1" value="1">
-            <label for="fr-1">
-              <span class="quiz-option-icon">1️⃣</span>
+            <input type="radio" name="actualGrips" id="ag-05" value="0.5">
+            <label for="ag-05">
+              <span class="quiz-option-icon">🌱</span>
               <span class="quiz-option-text">
-                <strong>Once a week</strong>
-                <span>Occasional hit</span>
+                <strong>0–1 per week</strong>
+                <span>I squeeze maximum life out of each grip</span>
               </span>
             </label>
           </div>
           <div class="quiz-option">
-            <input type="radio" name="frequency" id="fr-2" value="2">
-            <label for="fr-2">
-              <span class="quiz-option-icon">2️⃣</span>
+            <input type="radio" name="actualGrips" id="ag-2" value="2">
+            <label for="ag-2">
+              <span class="quiz-option-icon">🔄</span>
               <span class="quiz-option-text">
-                <strong>Twice a week</strong>
-                <span>Regular player</span>
+                <strong>About 2 per week</strong>
+                <span>When it starts slipping or losing tackiness</span>
               </span>
             </label>
           </div>
           <div class="quiz-option">
-            <input type="radio" name="frequency" id="fr-3" value="3">
-            <label for="fr-3">
-              <span class="quiz-option-icon">3️⃣</span>
+            <input type="radio" name="actualGrips" id="ag-3" value="3">
+            <label for="ag-3">
+              <span class="quiz-option-icon">✊</span>
               <span class="quiz-option-text">
-                <strong>3 times a week</strong>
-                <span>Committed player</span>
+                <strong>About 3 per week</strong>
+                <span>Fresh grip most sessions</span>
               </span>
             </label>
           </div>
           <div class="quiz-option">
-            <input type="radio" name="frequency" id="fr-45" value="4.5">
-            <label for="fr-45">
-              <span class="quiz-option-icon">4️⃣</span>
+            <input type="radio" name="actualGrips" id="ag-45" value="4.5">
+            <label for="ag-45">
+              <span class="quiz-option-icon">✨</span>
               <span class="quiz-option-text">
-                <strong>4–5 times a week</strong>
-                <span>High-performance</span>
-              </span>
-            </label>
-          </div>
-          <div class="quiz-option">
-            <input type="radio" name="frequency" id="fr-7" value="7">
-            <label for="fr-7">
-              <span class="quiz-option-icon">🔥</span>
-              <span class="quiz-option-text">
-                <strong>Daily (6–7 sessions)</strong>
-                <span>Full-time / coaching</span>
+                <strong>4+ per week</strong>
+                <span>Fresh grip every session — I won't settle for less</span>
               </span>
             </label>
           </div>
@@ -1015,38 +1101,48 @@
         </div>
       </div>
 
-      <!-- ── Q3: Grip habit ──────────────────────────────────────────────── -->
+      <!-- ── Q3: Ideal grip usage ────────────────────────────────────────── -->
       <div class="quiz-step" id="step3">
-        <h2 class="quiz-step-heading">When do you replace your overgrip?</h2>
-        <p class="quiz-step-sub">Be honest — no judgement. This is how we dial in your delivery timing.</p>
-        <div class="quiz-options">
+        <h2 class="quiz-step-heading">If price wasn't a factor, how many grips would you ideally use per week?</h2>
+        <p class="quiz-step-sub">Dream big — this helps us calculate how much you'd save as a member.</p>
+        <div class="quiz-options quiz-options--2col">
           <div class="quiz-option">
-            <input type="radio" name="gripHabit" id="gh-every" value="every">
-            <label for="gh-every">
-              <span class="quiz-option-icon">✨</span>
+            <input type="radio" name="idealGrips" id="ig-05" value="0.5">
+            <label for="ig-05">
+              <span class="quiz-option-icon">🌱</span>
               <span class="quiz-option-text">
-                <strong>Every single session</strong>
-                <span>Fresh grip = fresh confidence. I wouldn't have it any other way.</span>
+                <strong>0–1 per week</strong>
+                <span>I squeeze maximum life out of each grip</span>
               </span>
             </label>
           </div>
           <div class="quiz-option">
-            <input type="radio" name="gripHabit" id="gh-few" value="few">
-            <label for="gh-few">
+            <input type="radio" name="idealGrips" id="ig-2" value="2">
+            <label for="ig-2">
               <span class="quiz-option-icon">🔄</span>
               <span class="quiz-option-text">
-                <strong>Every 3–4 sessions</strong>
-                <span>When it starts to slip or lose its tackiness, it's time to change.</span>
+                <strong>About 2 per week</strong>
+                <span>When it starts slipping or losing tackiness</span>
               </span>
             </label>
           </div>
           <div class="quiz-option">
-            <input type="radio" name="gripHabit" id="gh-long" value="long">
-            <label for="gh-long">
-              <span class="quiz-option-icon">💪</span>
+            <input type="radio" name="idealGrips" id="ig-3" value="3">
+            <label for="ig-3">
+              <span class="quiz-option-icon">✊</span>
               <span class="quiz-option-text">
-                <strong>Only when it's really worn out</strong>
-                <span>I get maximum life out of each grip — usually 8+ sessions.</span>
+                <strong>About 3 per week</strong>
+                <span>Fresh grip most sessions</span>
+              </span>
+            </label>
+          </div>
+          <div class="quiz-option">
+            <input type="radio" name="idealGrips" id="ig-45" value="4.5">
+            <label for="ig-45">
+              <span class="quiz-option-icon">✨</span>
+              <span class="quiz-option-text">
+                <strong>4+ per week</strong>
+                <span>Fresh grip every session — I won't settle for less</span>
               </span>
             </label>
           </div>
@@ -1058,48 +1154,28 @@
         </div>
       </div>
 
-      <!-- ── Q4: What matters most ────────────────────────────────────────── -->
+      <!-- ── Q4: Buffer preference ──────────────────────────────────────── -->
       <div class="quiz-step" id="step4">
-        <h2 class="quiz-step-heading">What matters most to you in an overgrip?</h2>
-        <p class="quiz-step-sub">This rounds out your player profile.</p>
+        <h2 class="quiz-step-heading">When your grips arrive, do you prefer…</h2>
+        <p class="quiz-step-sub">There's no wrong answer — it's about what fits your lifestyle.</p>
         <div class="quiz-options">
           <div class="quiz-option">
-            <input type="radio" name="gripFeel" id="gf-tacky" value="tacky">
-            <label for="gf-tacky">
-              <span class="quiz-option-icon">🤌</span>
+            <input type="radio" name="bufferPref" id="bp-just-enough" value="just-enough">
+            <label for="bp-just-enough">
+              <span class="quiz-option-icon">📦</span>
               <span class="quiz-option-text">
-                <strong>Tackiness &amp; feel</strong>
-                <span>I want to feel connected to the racquet at all times.</span>
+                <strong>Just what I need, delivered regularly</strong>
+                <span>Smaller deliveries, more often — always fresh, never wasteful.</span>
               </span>
             </label>
           </div>
           <div class="quiz-option">
-            <input type="radio" name="gripFeel" id="gf-absorb" value="absorb">
-            <label for="gf-absorb">
-              <span class="quiz-option-icon">💧</span>
+            <input type="radio" name="bufferPref" id="bp-plenty" value="plenty">
+            <label for="bp-plenty">
+              <span class="quiz-option-icon">🗄️</span>
               <span class="quiz-option-text">
-                <strong>Sweat absorption</strong>
-                <span>My hands sweat — I need a grip that stays secure even when wet.</span>
-              </span>
-            </label>
-          </div>
-          <div class="quiz-option">
-            <input type="radio" name="gripFeel" id="gf-durable" value="durable">
-            <label for="gf-durable">
-              <span class="quiz-option-icon">🛡️</span>
-              <span class="quiz-option-text">
-                <strong>Durability &amp; longevity</strong>
-                <span>I'd rather change less frequently and get maximum life from each grip.</span>
-              </span>
-            </label>
-          </div>
-          <div class="quiz-option">
-            <input type="radio" name="gripFeel" id="gf-value" value="value">
-            <label for="gf-value">
-              <span class="quiz-option-icon">💚</span>
-              <span class="quiz-option-text">
-                <strong>Great quality at a fair price</strong>
-                <span>I don't want to overpay — I just need a reliable grip every time.</span>
+                <strong>I'd rather have a buffer — send more, less often</strong>
+                <span>Give me a stack to draw from. I like having extra on hand.</span>
               </span>
             </label>
           </div>
@@ -1126,9 +1202,9 @@
         <div class="savings-bar" id="resultSavingsBar">
           <span class="savings-bar-icon">💸</span>
           <p class="savings-bar-text">
-            At pro shop prices, you're spending <strong id="savingsBarProCost">—</strong>/year on overgrips.
-            As a JGG member: <strong id="savingsBarJggCost">—</strong>/year.
-            <strong>You save <span id="savingsBarSaving">—</span>/year — for doing nothing differently.</strong>
+            At pro shop prices, you'd spend <strong id="savingsBarProCost"></strong>/year on overgrips.
+            As a JGG member you'd pay <strong id="savingsBarJggCost"></strong>/year.
+            That's <strong><span id="savingsBarSaving"></span> back in your pocket, every year.</strong>
           </p>
         </div>
 
@@ -1166,8 +1242,9 @@
         <!-- One-time fallback -->
         <div class="onetime-section">
           <p class="onetime-label">Want to try before you commit? Fair enough — but once you feel the difference, you'll be back.</p>
-          <a href="https://buy.stripe.com/7sYdRb3WL7jb8XL6OK83C0u" class="onetime-btn" id="buyOneTimeBtn" target="_blank" rel="noopener">
-            Buy Once — 12-Pack White
+          <a href="https://buy.stripe.com/cNi00l1OD8nf3Drgpk83C0w" class="onetime-btn" id="buyOneTimeBtn" target="_blank" rel="noopener">
+            Buy Once
+            <span style="display:block;font-size:0.8125rem;font-weight:500;opacity:0.65;margin-top:2px;">12-Pack White</span>
           </a>
         </div>
 
@@ -1284,7 +1361,7 @@
         id:        'elite',
         icon:      '🏆',
         name:      'Elite',
-        tagline:   'For the competitive & coaching crowd',
+        tagline:   'For professional players & coaches',
         grips:     36,
         freqWeeks: 4,
         freqLabel: 'Monthly',
@@ -1305,6 +1382,7 @@
       '12-12': 'https://buy.stripe.com/aFafZj8d15b32zn8WS83C0n',   // Starter — quarterly (every 12 weeks)
       '24-2':  'https://buy.stripe.com/dRm5kF0Kz0UNa1P3Cy83C0o',   // Competitor fortnightly
       '24-4':  'https://buy.stripe.com/bJe14p9h5dHz8XLdd883C0x',   // Competitor — monthly
+      '24-8':  'https://buy.stripe.com/7sY9AVeBp5b38XL5KG83C0A',   // Regular buffer — every 8 weeks
       '24-12': 'https://buy.stripe.com/28EcN7dxlcDv8XL3Cy83C0q',   // Competitor quarterly
       '36-2':  'https://buy.stripe.com/6oU4gBdxleLDa1P8WS83C0r',   // Elite fortnightly
       '36-4':  'https://buy.stripe.com/6oU28t3WL0UNb5Tgpk83C0y',   // Elite — monthly
@@ -1337,8 +1415,21 @@
       },
     };
 
-    // ── Grip usage rates (grips per session) ──────────────────────────────
-    const GRIPS_PER_SESSION = { every: 1, few: 1 / 3.5, long: 1 / 8 };
+    // ── Buffer variant for Regular tier (24 grips, every 8 weeks) ────────
+    const TIER_REGULAR_PLUS = {
+      id:        'regular-plus',
+      icon:      '☀️',
+      name:      'Regular',
+      tagline:   'For the weekend warrior who likes a buffer',
+      grips:     24,
+      freqWeeks: 8,
+      freqLabel: 'Every 8 weeks',
+      bullets: [
+        '24 grips every 8 weeks — a solid buffer always on hand',
+        'Never scramble for a grip before a match',
+        'Pause or cancel anytime',
+      ],
+    };
 
     // ── Helpers ────────────────────────────────────────────────────────────
     function getRadioVal(name) {
@@ -1363,14 +1454,20 @@
 
     // ── Membership recommendation ──────────────────────────────────────────
     // Coaches always get Elite. Competitive players get at least Competitor.
-    // Everyone else is matched by raw grips/month.
-    function recommendTierId(gripsPerMonth, playerType) {
+    // Everyone else is matched directly by actual grips/week.
+    function recommendTierId(actualGripsPerWeek, playerType) {
       if (playerType === 'coach') return 'elite';
-      if (playerType === 'competitive' && gripsPerMonth < 7) return 'competitor';
-      if (gripsPerMonth < 3)  return 'starter';
-      if (gripsPerMonth < 7)  return 'regular';
-      if (gripsPerMonth < 16) return 'competitor';
-      return 'elite';
+
+      let tierId;
+      if (actualGripsPerWeek <= 1)      tierId = 'starter';
+      else if (actualGripsPerWeek <= 3) tierId = 'regular';
+      else                              tierId = 'competitor';
+
+      if (playerType === 'competitive' && (tierId === 'starter' || tierId === 'regular')) {
+        tierId = 'competitor';
+      }
+
+      return tierId;
     }
 
     // ── Membership price helpers ───────────────────────────────────────────
@@ -1444,7 +1541,7 @@
               <span class="twc-label">Big brands / week</span>
               <span class="twc-other">~$${compWeekly.toFixed(2)}</span>
             </div>
-            <p class="twc-saving">You save ~$${saveWeekly.toFixed(2)}/week — that's ~$${saveAnnual} back in your pocket every year. Most members wonder why they didn't join sooner.</p>
+            <p class="twc-saving">You save ~$${saveWeekly.toFixed(2)}/week. That's ~$${saveAnnual} back in your pocket every year.</p>
           </div>
 
           <ul class="tier-bullets">
@@ -1495,9 +1592,156 @@
       `;
     }
 
+    // ── Tier row (tiers view — row layout) ───────────────────────────────
+    function buildStandardRow(tier) {
+      const price   = tierPricePerDelivery(tier);
+      const ppg     = price / tier.grips;
+      const weekly  = tierPricePerWeek(tier);
+      const linkKey = `${tier.grips}-${tier.freqWeeks}`;
+      const link    = MEMBERSHIP_LINKS[linkKey] || '#';
+      const isLive  = link !== '#';
+      const packs   = tier.grips / 12;
+      const deliveryLabel = `${tier.grips} grips (${packs} pack${packs > 1 ? 's' : ''}) · ${tier.freqLabel}`;
+
+      return `
+        <div class="tier-row">
+          <div class="tier-row-inner">
+            <div class="tier-row-identity">
+              <span class="tier-row-icon">${tier.icon}</span>
+              <p class="tier-row-name">${tier.name}</p>
+              <p class="tier-row-tagline">${tier.tagline}</p>
+              <p class="tier-row-delivery">${deliveryLabel}</p>
+            </div>
+            <div class="tier-row-pricing">
+              <p class="tier-row-weekly">~$${weekly.toFixed(2)}<span class="tier-row-weekly-unit">/wk</span></p>
+              <p class="tier-row-sub">$${price.toFixed(2)} per delivery</p>
+              <p class="tier-row-ppg">$${ppg.toFixed(2)}/grip</p>
+            </div>
+            <div class="tier-row-cta-wrap">
+              ${isLive
+                ? `<a href="${link}" class="tier-mini-join" target="_blank" rel="noopener">Join — ${tier.name}</a>`
+                : `<span class="tier-mini-join tier-mini-join--disabled">Coming Soon</span>`}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildCompactCard(tier) {
+      const price   = tierPricePerDelivery(tier);
+      const ppg     = price / tier.grips;
+      const weekly  = tierPricePerWeek(tier);
+      const linkKey = `${tier.grips}-${tier.freqWeeks}`;
+      const link    = MEMBERSHIP_LINKS[linkKey] || '#';
+      const isLive  = link !== '#';
+      const packs = tier.grips / 12;
+
+      return `
+        <div class="tier-card-compact">
+          <span class="tier-row-icon">${tier.icon}</span>
+          <p class="tier-row-name">${tier.name}</p>
+          <p class="tier-row-tagline">${tier.tagline}</p>
+          <span class="tier-grip-badge">${tier.grips} grips per delivery</span>
+          <p class="tier-row-delivery">${tier.freqLabel}</p>
+          <p class="tier-row-weekly">~$${weekly.toFixed(2)}<span class="tier-row-weekly-unit">/wk</span></p>
+          <p class="tier-row-sub">$${price.toFixed(2)} per delivery</p>
+          <p class="tier-row-ppg">$${ppg.toFixed(2)}/grip</p>
+          <div class="tier-card-compact-cta">
+            ${isLive
+              ? `<a href="${link}" class="tier-mini-join" target="_blank" rel="noopener"><span style="display:block;">Join</span><span style="display:block;font-size:0.75rem;font-weight:500;opacity:0.75;">${tier.name}</span></a>`
+              : `<span class="tier-mini-join tier-mini-join--disabled">Coming Soon</span>`}
+          </div>
+        </div>
+      `;
+    }
+
+    function buildEliteRow() {
+      const grips = 36;
+      const price = SUBSCRIPTION_PRICE[grips];
+      const ppg   = (price / grips).toFixed(2);
+
+      const opts = [
+        { freqWeeks: 4, label: 'Monthly' },
+        { freqWeeks: 8, label: 'Every 8 weeks' },
+      ];
+
+      const optHtml = opts.map(o => {
+        const weekly = (price / o.freqWeeks).toFixed(2);
+        const link   = MEMBERSHIP_LINKS[`${grips}-${o.freqWeeks}`] || '#';
+        const isLive = link !== '#';
+        return `
+          <div class="tier-row-option">
+            <p class="tier-option-label">${o.label}</p>
+            <p class="tier-row-weekly">~$${weekly}<span class="tier-row-weekly-unit">/wk</span></p>
+            <p class="tier-row-sub">$${price.toFixed(2)} per delivery</p>
+            <p class="tier-row-ppg">$${ppg}/grip</p>
+            ${isLive
+              ? `<a href="${link}" class="tier-mini-join" style="margin-top:12px;" target="_blank" rel="noopener"><span style="display:block;">Join</span><span style="display:block;font-size:0.75rem;font-weight:500;opacity:0.75;">${o.label}</span></a>`
+              : `<span class="tier-mini-join tier-mini-join--disabled" style="margin-top:12px;">Coming Soon</span>`}
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="tier-row">
+          <div class="tier-row-split-header">
+            <span class="tier-row-split-icon">🏆</span>
+            <div>
+              <p class="tier-row-name">Elite</p>
+              <p class="tier-row-tagline">For professional players &amp; coaches</p>
+              <span class="tier-grip-badge">36 grips per delivery</span>
+            </div>
+          </div>
+          <div class="tier-row-options">${optHtml}</div>
+        </div>
+      `;
+    }
+
+    function buildCompetitorRow() {
+      const grips = 24;
+      const price = SUBSCRIPTION_PRICE[grips];
+      const ppg   = (price / grips).toFixed(2);
+
+      const opts = [
+        { freqWeeks: 4, label: 'Monthly' },
+        { freqWeeks: 8, label: 'Every 8 weeks' },
+      ];
+
+      const optHtml = opts.map(o => {
+        const weekly = (price / o.freqWeeks).toFixed(2);
+        const link   = MEMBERSHIP_LINKS[`${grips}-${o.freqWeeks}`] || '#';
+        const isLive = link !== '#';
+        return `
+          <div class="tier-row-option">
+            <p class="tier-option-label">${o.label}</p>
+            <p class="tier-row-weekly">~$${weekly}<span class="tier-row-weekly-unit">/wk</span></p>
+            <p class="tier-row-sub">$${price.toFixed(2)} per delivery</p>
+            <p class="tier-row-ppg">$${ppg}/grip</p>
+            ${isLive
+              ? `<a href="${link}" class="tier-mini-join" style="margin-top:12px;" target="_blank" rel="noopener"><span style="display:block;">Join</span><span style="display:block;font-size:0.75rem;font-weight:500;opacity:0.75;">${o.label}</span></a>`
+              : `<span class="tier-mini-join tier-mini-join--disabled" style="margin-top:12px;">Coming Soon</span>`}
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="tier-row">
+          <div class="tier-row-split-header">
+            <span class="tier-row-split-icon">🎾</span>
+            <div>
+              <p class="tier-row-name">Competitor</p>
+              <p class="tier-row-tagline">For the serious club player</p>
+              <span class="tier-grip-badge">24 grips per delivery</span>
+            </div>
+          </div>
+          <div class="tier-row-options">${optHtml}</div>
+        </div>
+      `;
+    }
+
     // ── Quiz navigation ────────────────────────────────────────────────────
     window.nextStep = function (from) {
-      const radioNames = ['playerType', 'frequency', 'gripHabit', 'gripFeel'];
+      const radioNames = ['playerType', 'actualGrips', 'idealGrips', 'bufferPref'];
       if (!getRadioVal(radioNames[from - 1])) {
         document.getElementById('err' + from).classList.add('is-visible');
         return;
@@ -1514,19 +1758,16 @@
       document.getElementById('quizResult').classList.add('is-active');
       document.getElementById('quizSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-      const playerType    = getRadioVal('playerType');
-      const sessionsPerWk = parseFloat(getRadioVal('frequency'));
-      const gripHabit     = getRadioVal('gripHabit');
+      const playerType         = getRadioVal('playerType');
+      const actualGripsPerWeek = parseFloat(getRadioVal('actualGrips'));
+      const idealGripsPerWeek  = parseFloat(getRadioVal('idealGrips'));
+      const bufferPref         = getRadioVal('bufferPref');
 
-      // ── Usage calculation ────────────────────────────────────────────────
-      const gripsPerWeek     = GRIPS_PER_SESSION[gripHabit] * sessionsPerWk;
-      const gripsPerMonth    = gripsPerWeek * (52 / 12);
-      const annualGrips      = gripsPerMonth * 12;
-
-      // ── Savings vs pro shop ──────────────────────────────────────────────
-      const annualCostPro    = annualGrips * COMPETITOR_MID;
-      const annualCostJgg    = annualGrips * MEMBERSHIP_PPG;
-      const annualSaving     = annualCostPro - annualCostJgg;
+      // ── Savings vs pro shop (based on ideal usage from Q3) ───────────────
+      const annualGrips   = idealGripsPerWeek * 52;
+      const annualCostPro = annualGrips * COMPETITOR_MID;
+      const annualCostJgg = annualGrips * MEMBERSHIP_PPG;
+      const annualSaving  = annualCostPro - annualCostJgg;
 
       document.getElementById('savingsBarProCost').textContent = `$${Math.round(annualCostPro)}`;
       document.getElementById('savingsBarJggCost').textContent = `$${Math.round(annualCostJgg)}`;
@@ -1539,10 +1780,16 @@
       document.getElementById('resultArchetypeDesc').textContent = arch.desc;
 
       // ── Recommended membership ────────────────────────────────────────────
-      const recommendedId = recommendTierId(gripsPerMonth, playerType);
+      const recommendedId = recommendTierId(actualGripsPerWeek, playerType);
       const recommended   = TIERS.find(t => t.id === recommendedId);
 
-      document.getElementById('recommendedTierCard').innerHTML = buildFeaturedCard(recommended);
+      // Buffer preference: Regular + plenty → 24-8 variant
+      let displayTier = recommended;
+      if (bufferPref === 'plenty' && recommendedId === 'regular') {
+        displayTier = TIER_REGULAR_PLUS;
+      }
+
+      document.getElementById('recommendedTierCard').innerHTML = buildFeaturedCard(displayTier);
 
       // ── All memberships grid ─────────────────────────────────────────────
       document.getElementById('tiersGrid').innerHTML = TIERS
@@ -1575,9 +1822,11 @@
     };
 
     // ── Populate tiers view on load ────────────────────────────────────────
-    document.getElementById('tiersViewGrid').innerHTML = TIERS
-      .map(t => buildMiniCard(t, false, true))
-      .join('');
+    document.getElementById('tiersViewGrid').innerHTML = [
+      `<div class="tier-row-pair">${buildCompactCard(TIERS[0])}${buildCompactCard(TIERS[1])}</div>`,
+      buildCompetitorRow(),
+      buildEliteRow(),
+    ].join('');
 
   })();
   </script>
