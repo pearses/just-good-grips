@@ -12,6 +12,11 @@ All conversations in this repository are in the context of **Just Good Grips**, 
 
 Founder: Scott Pearse, Adelaide, SA. Brand story: high-quality tennis grips at an affordable price. Competitor overgrips retail at $4–$7 each; JGG retails at ~$2 each.
 
+## Copy & Tone Rules
+
+- **No em dashes.** Never use em dashes (—) in any website copy, form text, button labels, or generated content. They read as AI-generated and feel templated. Rewrite sentences to flow naturally without them.
+- **Avoid naming Scott directly** in public-facing copy. Use "our team", "we", or "Just Good Grips" instead. Scott can be referenced in internal documents and sponsorship agreements but not on the website itself.
+
 ## Project Overview
 
 Just Good Grips is a static single-page e-commerce site for an Australian tennis overgrip brand. No build tools, no frameworks, no package manager — it's plain HTML, CSS, and vanilla JS served directly in a browser.
