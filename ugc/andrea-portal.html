@@ -83,10 +83,12 @@
     }
     .report-frame iframe {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      top: 50%;
+      left: 50%;
+      width: 440px;
+      height: 430px;
       border: 0;
+      transform-origin: center center;
     }
 
     @media (max-width: 640px) {
@@ -136,6 +138,23 @@
     </div>
   </div>
   <script>
+    const REPORT_NATIVE_WIDTH = 440;
+    const REPORT_NATIVE_HEIGHT = 430;
+
+    function fitReport() {
+      const frame = document.querySelector('.report-frame');
+      const iframe = frame.querySelector('iframe');
+      const scale = Math.min(
+        frame.clientWidth / REPORT_NATIVE_WIDTH,
+        frame.clientHeight / REPORT_NATIVE_HEIGHT
+      );
+      iframe.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    }
+    window.addEventListener('load', fitReport);
+    window.addEventListener('resize', fitReport);
+    window.addEventListener('orientationchange', fitReport);
+    fitReport();
+
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code') || 'ANDREA10';
     document.getElementById('code').textContent = code;
