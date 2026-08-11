@@ -90,6 +90,7 @@
     }
 
     @media (max-width: 640px) {
+      html, body { overflow: hidden; }
       body { padding: 0; }
       .card {
         max-width: 100%;
@@ -100,8 +101,12 @@
       }
       .report-frame {
         flex: 1 1 auto;
+        min-height: 0;
         padding-top: 0;
         border-radius: 8px 8px 0 0;
+      }
+      .code-card {
+        flex-shrink: 0;
       }
     }
   </style>
