@@ -86,7 +86,7 @@
       top: 50%;
       left: 50%;
       width: 440px;
-      height: 460px;
+      height: 520px;
       border: 0;
       transform-origin: center center;
     }
@@ -139,7 +139,8 @@
   </div>
   <script>
     const REPORT_NATIVE_WIDTH = 440;
-    const REPORT_NATIVE_HEIGHT = 460;
+    const REPORT_NATIVE_HEIGHT = 520;
+    const REPORT_MARGIN_FACTOR = 0.96;
 
     function fitReport() {
       const frame = document.querySelector('.report-frame');
@@ -147,7 +148,7 @@
       const scale = Math.min(
         frame.clientWidth / REPORT_NATIVE_WIDTH,
         frame.clientHeight / REPORT_NATIVE_HEIGHT
-      );
+      ) * REPORT_MARGIN_FACTOR;
       iframe.style.transform = `translate(-50%, -50%) scale(${scale})`;
     }
     window.addEventListener('load', fitReport);
