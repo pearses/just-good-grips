@@ -140,7 +140,7 @@ All prices include a $2.99 handling fee baked in:
 ### Active Payment Links
 
 **One-time (12-pack white):**
-`https://buy.stripe.com/cNi00l1OD8nf3Drgpk83C0w`
+`https://buy.stripe.com/3cI5kF50PcDv6PDehc83C0k`
 
 **Membership subscriptions** (in `membership.html` `MEMBERSHIP_LINKS` JS object):
 
