@@ -112,10 +112,13 @@ A full-screen modal (`#productModal`) opens when the user clicks "View Details" 
 
 ## Store Locations Section
 
-Sits between About and Footer. One confirmed real stockist:
-- **Anything Tennis** — Trinity Gardens Tennis Club, 1 Maryvale Ave, Trinity Gardens SA 5068
+Sits between About and Footer. Confirmed stockists (in display order):
+- **Anything Tennis - Trinity Gardens Tennis Club** (same place; Anything Tennis operates at the club), 35 Albermarle Avenue, Trinity Gardens SA 5068
+- **Peake Gardens Riverside Tennis Club**, 6/24 Bice Street, Marleston SA 5033 (pro shop or canteen)
+- **Seacliff Tennis Club**, Kauri Community and Sports Centre, Lipson Avenue, Seacliff SA 5049 (canteen)
+- **Reade Park Lawn Tennis Club**, Reade Park Reserve, Hereford Place, Colonel Light Gardens SA 5041 (canteen)
 
-Uses a Google Maps `<iframe>` embed. Section background: `url('images/grip-single.jpg')` with a white overlay for legibility.
+Layout: compact `.store-card` buttons on the left (first one `.active` by default), a map panel on the right (`#storeMapPanel`) with the selected club's title, address and "Open in Google Maps" link above a single Google Maps `<iframe>`. Each card carries `data-store-name`, `data-store-address`, `data-map-src` and `data-map-link`; `script.js` swaps the panel contents on click. To add a stockist, add another card with those data attributes.
 
 ## Social Links (Footer)
 
