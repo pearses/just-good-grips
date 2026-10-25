@@ -886,7 +886,7 @@ a {
    FEATURES
    ============================================== */
 .features-section {
-  background: var(--grey-50);
+  background: var(--white);
   border-top: 1px solid var(--grey-100);
   border-bottom: 1px solid var(--grey-100);
   padding: 80px 0;
