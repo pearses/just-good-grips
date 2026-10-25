@@ -42,9 +42,9 @@ jobs:
           COUNTRY="${{ inputs.country }}"
 
           if [ -n "$LOCATION" ]; then
-            AUTHOR="${NAME} — ${LOCATION}, ${COUNTRY}"
+            AUTHOR="${NAME} · ${LOCATION}, ${COUNTRY}"
           else
-            AUTHOR="${NAME} — ${COUNTRY}"
+            AUTHOR="${NAME} · ${COUNTRY}"
           fi
 
           echo "value=$AUTHOR" >> $GITHUB_OUTPUT
