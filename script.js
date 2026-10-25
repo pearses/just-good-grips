@@ -205,6 +205,40 @@ function copyCode(btn) {
     }, { passive: true });
   }
 
+  // ── Store locations: switch map between clubs ─────────────────────────────
+  const storeCards = document.querySelectorAll('.stores-list .store-card');
+  const storeMapPanel = document.getElementById('storeMapPanel');
+  const storeMapFrame = document.getElementById('storeMapFrame');
+  const storeMapTitle = document.getElementById('storeMapTitle');
+  const storeMapAddress = document.getElementById('storeMapAddress');
+  const storeMapLink = document.getElementById('storeMapLink');
+
+  if (storeCards.length && storeMapFrame) {
+    const selectStore = card => {
+      storeCards.forEach(c => {
+        const isActive = c === card;
+        c.classList.toggle('active', isActive);
+        c.setAttribute('aria-selected', String(isActive));
+      });
+      const name = card.dataset.storeName;
+      storeMapTitle.textContent = name;
+      storeMapAddress.textContent = card.dataset.storeAddress;
+      storeMapLink.href = card.dataset.mapLink;
+      storeMapFrame.title = 'Map of ' + name;
+      if (storeMapFrame.src !== card.dataset.mapSrc) storeMapFrame.src = card.dataset.mapSrc;
+    };
+
+    storeCards.forEach(card => {
+      card.addEventListener('click', () => {
+        selectStore(card);
+        // When stacked (tablet/mobile) the map sits below the list, so bring it into view
+        if (window.matchMedia('(max-width: 960px)').matches) {
+          storeMapPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
 })();
 
 // ── REVIEW CAROUSEL ───────────────────────────────────────────────────────

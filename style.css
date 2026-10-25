@@ -771,7 +771,7 @@ a {
   grid-template-columns: 1fr 2fr;
   gap: 40px;
   margin-top: 40px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .stores-list {
@@ -783,12 +783,33 @@ a {
 .store-card {
   background: var(--white);
   border: 1px solid var(--grey-200);
+  border-left: 4px solid transparent;
   border-radius: var(--radius-md);
-  padding: 16px 20px;
+  padding: 14px 18px;
   display: flex;
   flex-direction: column;
   gap: 3px;
   box-shadow: var(--shadow-card);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.store-card:hover {
+  border-color: var(--grey-400);
+  border-left-color: var(--grey-400);
+}
+
+.store-card:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 2px;
+}
+
+.store-card.active {
+  border-color: var(--black);
+  border-left-color: var(--green);
+  box-shadow: var(--shadow-hover);
 }
 
 .store-name {
@@ -797,23 +818,67 @@ a {
   color: var(--black);
 }
 
+.store-note {
+  font-size: 0.75rem;
+  color: var(--grey-400);
+  font-style: italic;
+}
+
 .store-address {
   font-size: 0.8125rem;
   color: var(--grey-600);
   line-height: 1.5;
 }
 
+.store-map-link {
+  font-size: 0.8125rem;
+  color: var(--grey-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.store-map-link:hover {
+  color: var(--black);
+}
+
 .stores-map {
+  display: flex;
+  scroll-margin-top: 88px;
+  flex-direction: column;
+  background: var(--white);
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--grey-200);
   box-shadow: var(--shadow-card);
 }
 
+.stores-map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--grey-200);
+}
+
+.stores-map-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.stores-map-address {
+  font-size: 0.8125rem;
+  color: var(--grey-600);
+}
+
 .stores-map iframe {
   display: block;
+  flex: 1;
   width: 100%;
-  height: 420px;
+  height: auto;
+  min-height: 360px;
   border: none;
 }
 
@@ -2248,7 +2313,13 @@ a {
   }
 
   .stores-map iframe {
-    height: 300px;
+    min-height: 300px;
+  }
+
+  .stores-map-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 
   .club-tiers-preview {
