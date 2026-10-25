@@ -1,0 +1,6 @@
+# GitHub Pages: keep internal docs and scripts off the public site
+exclude:
+  - CLAUDE.md
+  - README.md
+  - docs/
+  - apps-script/

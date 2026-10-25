@@ -5,7 +5,8 @@
 //
 // After deploying, paste the /exec URL into sponsorship/index.html as APPS_SCRIPT_URL.
 
-var NOTIFY_EMAIL = 'scottptraining@gmail.com';
+// Set to the inbox that should receive enquiries (kept out of the public repo).
+var NOTIFY_EMAIL = 'YOUR_NOTIFY_EMAIL';
 
 function doPost(e) {
   var p = e.parameter;
