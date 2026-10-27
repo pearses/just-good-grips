@@ -22,6 +22,7 @@ jobs:
             --exclude "^https://buy\.stripe\.com"
             --exclude "^https://www\.instagram\.com"
             --exclude "^https://www\.facebook\.com"
+            --exclude "^https://formspree\.io"
             --exclude "^mailto:"
             --exclude "^tel:"
             ./**/*.html
